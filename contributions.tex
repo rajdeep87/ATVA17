@@ -1,0 +1,38 @@
+\paragraph{Contributions}
+In this paper, we make the following technical contributions.
+%
+\begin{compactenum}
+\item We present a novel program analysis technique called {\em Abstract 
+Conflict Driven Learning for Programs} (ACDLP) that lifts the CDCL algorithm 
+over template polyhedra abstract domains for safety verification of C programs.  
+%We have implemented our analyzer ACDLP for safety verification of C programs. 
+We compare the performance of ACDLP compared to a precise model checker CBMC and a 
+commercial abstract interpreter Ast{\'r}ee.  Our tool is available 
+online\footnote{http://www.cprover.org/acdcl/}. 
+
+\Omit{  
+We present a generic implementation framework for model search, conflict analysis, 
+learning and backjumping phase that can be instantiated over any arbitrary 
+abstract domains, thus making our tool easily extendable to domain specific decision, 
+propagation and learning heuristics.  
+}
+\item We present an abstract model search algorithm that strictly 
+generalises the Boolean Constraint Propagation (BCP) procedure. We 
+propose several domain specific propagation and decision heuristics 
+that infers abstract domain elements over the template polyhedra domain.   
+\Omit{
+We propose a domain-specific decision heuristics that exploit the 
+expressivity of the underlying abstract domain to make effective decisions. 
+}
+\item We sketch an abstract conflict analysis procedure that operates on an 
+abstract conflict graph to learn a generalised reason for conflicts.  
+ 
+\item  Experiments indicate a two order of magnitude reduction 
+in the number of decisions, propagations, and conflicts compared 
+to a SAT solver while being more precise than an abstract interpreter.  
+\Omit {
+set of benchmarks drawn from the bitvector regression category in 
+SV-COMP, bit-precise software models auto-generated from hardware 
+circuits domain and some hand crafted example show that 
+}
+\end{compactenum}

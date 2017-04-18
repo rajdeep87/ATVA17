@@ -1,0 +1,281 @@
+%%% Standard text acronyms
+
+% TOO MANY VARIANTS if we INTRODUCE THIS.
+\newcommand{\para}[1]{
+  \subsubsection*{#1}}
+ 
+%\noindent
+%\textbf{#1~}}
+
+\newcommand{\cnf}{\textsc{cnf}\xspace}
+\newcommand{\sat}{\textsc{sat}\xspace}
+\newcommand{\smt}{\textsc{smt}\xspace}
+\newcommand{\dpll}{\textsc{dpll}\xspace}
+\newcommand{\fpdpll}{\textsc{fdpll}\xspace}
+\newcommand{\cfg}{\textsc{cfg}\xspace}
+\newcommand{\cfgs}{\textsc{cfg}s\xspace}
+\newcommand{\acfg}{\textsc{acfg}\xspace}
+\newcommand{\smpp}{\textsc{smpp}\xspace}
+\newcommand{\cegar}{\textsc{cegar}\xspace}
+\newcommand{\cdfl}{\textsc{cdfl}\xspace}
+\newcommand{\cdflitv}{\textsc{cdfl}$(\itvdom)$\xspace}
+\newcommand{\cdcl}{\textsc{cdcl}\xspace}
+\newcommand{\cbmc}{\textsc{cbmc}\xspace}
+\newcommand{\bmc}{\textsc{bmc}\xspace}
+\newcommand{\cdflalgo}{\textsc{\textsf{cdfl}}\xspace}
+\newcommand{\ieeefp}{\textsc{\textsf{IEEE 754}}\xspace}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%% Mathematical Symbols %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\renewcommand{\vec}[1]{{\boldsymbol #1}}
+\newcommand{\vecv}[2]{{\left(\begin{array}{@{}c@{}} #1 \\ #2\end{array}\right)}}
+\newcommand{\qmat}[4]{{\left(\begin{array}{@{}cc@{}} #1 & #2 \\  #3 & #4\end{array}\right)}}
+\newcommand{\mat}[1]{{\boldsymbol #1}}
+
+%%% Sets and functions
+
+\newcommand{\powerset}{\ensuremath{\wp}}
+\newcommand{\set}[1]{\ensuremath{\left\{#1\right\}}}
+\newcommand{\setneg}[1]{\overline{#1}}
+\newcommand{\setsep}{\ensuremath{~|~}}
+\newcommand{\tuple}[1]{\ensuremath{(#1)}}
+
+\newcommand{\bnf}{\ensuremath{\mathrel{\mathop{::}}=}}
+\newcommand{\bnfsep}{~\mid~}
+
+\newcommand{\true}{\mathsf{true}}
+\newcommand{\false}{\mathsf{false}}
+
+%%% Lattices
+\newcommand{\sle}{\ensuremath{\sqsubseteq}}
+\newcommand{\sles}{\ensuremath{\sqsubset}}
+\newcommand{\sge}{\ensuremath{\sqsupseteq}}
+\newcommand{\sges}{\ensuremath{\sqsupset}}
+\newcommand{\join}{\ensuremath{\sqcup}}
+\newcommand{\bigjoin}{\ensuremath{\bigsqcup}}
+\newcommand{\meet}{\ensuremath{\sqcap}}
+\newcommand{\bigmeet}{\ensuremath{\bigsqcap}}
+
+
+%%% Program model
+
+\newcommand{\program}{\mathit{Prog}}
+\newcommand{\assertions}{\mathit{Assn}}
+\newcommand{\assertion}{\mathit{a}}
+\newcommand{\constraints}{\Sigma}
+\newcommand{\constraint}{\sigma}
+\newcommand{\formula}{\varphi}
+
+\newcommand{\vars}{\mathit{Vars}}
+\newcommand{\subvars}{\mathit{V}}
+\newcommand{\boolvars}{\mathit{BVars}}
+\newcommand{\numvars}{\mathit{NVars}}
+
+\newcommand{\booldomain}{\mathcal{B}}
+\newcommand{\reldomain}{\mathcal{TP}}
+
+\newcommand{\numvar}{x}
+\newcommand{\numconcval}{\mathit{X}}
+\newcommand{\numabsval}{d}
+\newcommand{\decisionvar}{\mathit{q}}
+\newcommand{\conflictset}{\mathit{C}}
+\newcommand{\exclude}{\mathit{exclude}}
+
+\newcommand{\abstrans}[2]{\llbracket #2 \rrbracket_{#1}}
+\newcommand{\abdgen}[3]{abdgen_{#1,#2}^{#3}}
+\newcommand{\abd}[2]{abd_{#1}^{#2}}
+\newcommand{\uabd}[3]{uabd_{#1,#2}^{#3}}
+\newcommand{\ded}[2]{ded_{#1}^{#2}}
+\newcommand{\genabs}{\phi_{g}}
+\newcommand{\dedresult}{\phi}
+\newcommand{\abstransset}{\mathcal{A}}
+\newcommand{\abstransel}[1]{\mathit{ded}^{#1}}
+\newcommand{\domain}{\mathit{D}}
+\newcommand{\subdomain}{\mathit{L}}
+\newcommand{\var}{\mathit{s}}
+\newcommand{\val}{\mathit{u}}
+\newcommand{\concval}{\mathit{concVal}}
+\newcommand{\absval}{\mathit{a}}
+\newcommand{\allval}{\mathit{A}}
+\newcommand{\newdeductions}{\mathit{v}}
+\newcommand{\intervals}{\mathit{Itvs}}
+\newcommand{\octagons}{\mathit{Octs}}
+\newcommand{\onlynew}{\mathit{onlyNew}}
+\newcommand{\aunit}{\mathit{AUnit}}
+
+\newcommand{\abs}{\mathit{abs}}
+\newcommand{\trail}{\mathcal{T}}
+\newcommand{\reasons}{\mathcal{R}}
+\newcommand{\worklist}{\mathit{worklist}}
+\newcommand{\initworklist}{\mathit{initWorklist}}
+\newcommand{\updateworklist}{\mathit{updateWorklist}}
+\newcommand{\makesubdomain}{\mathit{MakeL}}
+
+\newcommand{\decide}{\mathit{decide}}
+\newcommand{\deduce}{\mathit{deduce}}
+\newcommand{\analyzeconflict}{\mathit{analyzeConflict}}
+
+\newcommand{\propheur}{\mathit{H_P}}
+\newcommand{\decheur}{\mathit{H_D}}
+\newcommand{\confheur}{\mathit{H_C}}
+
+
+\newcommand{\cvars}{\mathit{CVar}}
+\newcommand{\vals}{\mathit{Val}}
+\newcommand{\exps}{\mathit{Exp}}
+\newcommand{\expr}{\mathit{exp}}
+\newcommand{\bexps}{\mathit{B\!Exp}}
+\newcommand{\envs}{\mathit{Env}}
+\newcommand{\env}{\varepsilon}
+\newcommand{\aenv}{\hat{\varepsilon}}
+\newcommand{\assg}{\ensuremath{\mathrel{\mathop:}=}}
+\newcommand{\cond}[1]{\ensuremath{[#1]}}
+\newcommand{\choice}[1]{\ensuremath{\mathit{choose}\{#1\}}}
+\newcommand{\loopstmt}[1]{\ensuremath{\mathit{loop}\{#1\}}}
+\newcommand{\nondetstmt}[1]{\ensuremath{\mathit{nondet}\{#1\}}}
+\newcommand{\lfp}{\mathsf{lfp}}
+\newcommand{\gfp}{\mathsf{gfp}}
+
+\newcommand{\locs}{\mathit{Loc}}
+\newcommand{\stmt}{\ensuremath{\mathit{stmt}}}
+\newcommand{\err}{\ensuremath{\lightning}}
+\newcommand{\init}{\ensuremath{\mathit{init}}}
+\newcommand{\reach}{\mathit{Reach}}
+\newcommand{\loopfree}{\mathit{Loop-Free}}
+
+\newcommand{\badprog}{\ensuremath{\mathit{Err}}}
+\newcommand{\progexec}{\ensuremath{\mathit{Exec}}}
+\newcommand{\absbadprog}{\ensuremath{\hat{\mathit{Err}}}}
+% \newcommand{\inv}{\ensuremath{\mathit{Inv}}}
+\newcommand{\absinv}{\ensuremath{\hat{\mathit{Inv}}}}
+\newcommand{\safe}{\ensuremath{\mathit{Safe}}}
+\newcommand{\abssafe}{\ensuremath{\hat{\mathit{Safe}}}}
+
+%%% Standard Abstract interpretation 
+%%%
+\newcommand{\aenvs}{\mathit{A\!Env}}
+\newcommand{\post}{\mathit{post}}
+\newcommand{\lpost}[1]{\mathit{post}_{#1}}
+\newcommand{\abspost}{\mathit{\hat{post}}}
+\newcommand{\abslpost}[1]{\mathit{\hat{post}}_{#1}}
+
+\newcommand{\absuawp}{\mathit{\breve{wp}}}
+
+
+%%% Fixedpoint-DPLL
+%%%
+\newcommand{\cvals}{\mathit{CVals}}
+\newcommand{\avals}{\mathit{AVals}}
+
+\newcommand{\aval}{\hat{\mathit{v}}}
+\newcommand{\sem}[2]{\ensuremath{\llbracket #1 \rrbracket_{#2}}}
+\newcommand{\rsem}[3]{\ensuremath{\llbracket #1 \rrbracket_{#2}^{#3}}}
+\newcommand{\asem}[2]{\ensuremath{\|#1 \|_{#2}}}
+
+\newcommand{\comps}{\mathit{Comp}}
+%%\newcommand{\ccomp}[1]{\tilde{#1}}
+\newcommand{\ccomp}[1]{\mathord{\sim}{#1}}
+\newcommand{\rest}{R}
+\newcommand{\makerest}[1]{\mathit{res}(#1)}
+\newcommand{\restrictions}{\mathit{Res}}
+\newcommand{\lrestrictions}{\mathit{LRes}}
+\newcommand{\restrict}[2]{\ensuremath{#1\mathord{\downharpoonright_{#2}}}}
+\newcommand{\implabel}{\mathit{st}}
+\newcommand{\gimplabel}{\mathit{stg}}
+
+\newcommand{\decs}{\mathit{Dec}}
+\newcommand{\dec}{\mathsf{d}}
+\newcommand{\imp}{\mathsf{i}}
+\newcommand{\emptystack}{\epsilon}
+
+\newcommand{\lit}{\ell}
+\newcommand{\lits}{\mathit{Lit}}
+\newcommand{\litseq}{L}
+\newcommand{\stackres}[1]{\lfloor #1\rfloor}
+\newcommand{\litrest}[1]{\langle#1\rangle}
+\newcommand{\litres}{\mathit{lit}}
+
+\newcommand{\solver}[2]{#1 ~\|~ #2}
+
+%%% Pseudocode
+\newcommand{\pdeduce}{\mathsf{deduce}}
+\newcommand{\pdecide}{\mathsf{decide}}
+\newcommand{\pmaximal}{\mathsf{maximal}}
+\newcommand{\plearn}{\mathsf{learn}}
+\newcommand{\pbacktrack}{\mathsf{backtrack}}
+\newcommand{\pfail}{\mathsf{fail}}
+\newcommand{\psafe}{\mathsf{safe}}
+
+ \newcommand{\fpfont}[1]{\textbf{\sffamily{#1}}}
+ \newcommand{\fpfn}[1]{\sffamily{#1}}
+ \SetKwSty{fpfont}
+ \SetFuncSty{fpfn}
+
+ \SetKwFunction{Decide}{decide}
+ \SetKwFunction{TransProp}{tprop}
+ \SetKwFunction{UnitProp}{uprop}
+ \SetKwFunction{Refines}{refines}
+ \SetKwFunction{Deduce}{deduce}
+ \SetKwFunction{IsUnit}{is\_unit}
+ \SetKwFunction{Propagate}{propagate}
+ \SetKwFunction{Invariant}{invariant}
+ \SetKwFunction{Atomic}{atomic}
+ \SetKwFunction{Learn}{learn}
+ \SetKwFunction{Backtrack}{backtrack}
+ \SetKwFunction{Clausegen}{clauseGen}
+ \SetKwFunction{Invariantgen}{invariantGen}
+
+ \SetKw{Let}{let}
+
+%%% Generalization
+\SetKwFunction{Asserting}{asserting}
+\SetKwFunction{Cutheur}{cutheur}
+\SetKwFunction{Generalise}{generalise}
+\SetKwFunction{Analyse}{analyse}
+\SetKwFunction{ClauseGeneralise}{clauseGeneralise}
+\SetKwFunction{WpGeneralise}{wpGeneralise}
+\SetKw{MyCase}{case}
+\SetKwFunction{SetReason}{setReason}
+\SetKwFunction{PickAssertingCut}{assertingCut}
+\newcommand{\implicationgraph}{\mathit{implicationGraph}}
+
+%%% Operators
+\newcommand{\wrt}{w.r.t.\ }
+% \newcommand{\inp}{\mathit{input}}
+\newcommand{\M}{{\cal M}}
+\newcommand{\Tr}{{\mathit{tr}}}
+\newcommand{\clip}{{\mathit{clip}}}
+\newcommand{\decomp}{{\mathit{decomp}}}
+\newcommand{\form}{{\mathit{Form}}}
+\newcommand{\clausecompl}{\mathit{clcomp}}
+\newcommand{\covers}{{\mathit{covers}}}
+\newcommand{\cfgdecomps}{{\cal D}_{\mathit{CFG}}}
+\newcommand{\cfgrefine}{{\cal R}_{\mathit{CFG}}}
+\newcommand{\literals}{{\cal L}}
+\newcommand{\clauses}{{\cal C}}
+\newcommand{\proofstate}{\mathit{proof}}
+\newcommand{\literaldecomp}[1]{\mathit{lits(}#1\mathit{)}}
+\newcommand{\transded}{\mathit{trans}}
+\newcommand{\unitded}{\mathit{unit}}
+
+\newcommand{\prog}{P}
+
+\renewcommand{\min}{\mathit{min}}
+\renewcommand{\max}{\mathit{max}}
+\newcommand{\itvdom}{{\mathit{IEnv}}}
+\newcommand{\atoms}{\mathit{Atoms}}
+
+\newcommand{\irred}{\mathit{Irred}_\meet}
+
+\newcommand{\implsu}{I_\mathsf{u}}
+\newcommand{\implst}{I_\mathsf{t}}
+
+\newcommand{\predec}{\mathit{predec}}
+\newcommand{\conflictnode}{\mathit{conflict}}
+
+\newcommand{\dred}[1]{\textcolor{red!60!black}{#1}}
+\newcommand{\dgreen}[1]{\textcolor{green!40!black}{#1}}
+

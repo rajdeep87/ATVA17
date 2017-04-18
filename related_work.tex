@@ -1,0 +1,49 @@
+\section{Related Work}
+The work of~\cite{sas13,DBLP:journals/fmsd/BrainDGHK14} presents an
+instantiation of ACDCL as a decision procedure for floating-point
+arithmetic that uses interval constraint propagation.  The work 
+in ~\cite{franzle} is the closest approach to ACDCL. 
+%
+The use of ACDCL for interval-based program analysis is 
+proposed in~\cite{tacas12}.  
+%The analysis
+%operates over the abstract domain of floating-point numbers and
+%machine integers, so it is restricted to bounds checking for
+%numerical programs.  
+%
+A similar technique that lifts DPLL(T) to
+programs is Satisfiability Modulo Path Programs (SMPP)~\cite{SMPP}. SMPP
+enumerates program paths using a SAT formula, which are then verified
+using abstract interpretation.  
+%
+The work of \cite{DBLP:conf/esop/MineBR16} proposes an algorithm inspired by constraint
+solvers for inferring disjunctive invariants using intervals.
+%
+The lifting of CDCL to first-order theories is proposed
+in~\cite{dpll,cp09,ndsmt}.
+%
+\Omit{ operates on a fixed first-order partial assignment lattice
+  structure, where first-order variables are mapped to domain values,
+  similar to constants lattice in program analysis.  } Unlike
+previous work that operates on a fixed first-order lattice, however,
+our framework ACDLP can be instantiated with different abstract domains.  This
+involves model search and learning in abstract lattices.  \Omit { The
+  abstract lattice in natural domain SMT does not have complementable
+  meet irreducibles, and therefore does not support generalized clause
+  learning~\cite{sas}.  On the other hand, most abstract lattice have
+  complementation property, thus enabling ACDCL to perform generalized
+  clause learning.  } 
+%
+\cite{DBLP:journals/fmsd/BrainDGHK14} presents a similar decision and learning
+based approach for heap-manipulating programs, but uses a simplistic conflict analysis.
+%
+\cite{DBLP:conf/vmcai/PelleauMTB13} describes a constraint solving algorithm
+using relational numerical domains, but performs model search only.
+%
+%
+% is presented in . They
+%use a relational domain, but focus on the model search, whereas the
+%conflict analysis is simplistic and restarts the algorithm with the
+%learnt clause instead of backtracking.
+%}
+

@@ -1,0 +1,34 @@
+\section{Conclusions}
+In this paper, we present a general algorithmic framework for lifting 
+the model search and conflict analysis procedures in satisfiability 
+solvers to template-based abstract domains.  We instantiate this framework 
+as a novel program analyser, called {\em Abstract Conflict Driven Learning 
+for Programs}, that operates over a template polyhedra abstract domain to 
+determine safety of C programs. To this end, we present an {\em abstract 
+model search} procedure that uses a parameterised abstract transformer 
+to flexibly control the precision and efficiency of the deductions in 
+the template polyhedra abstract domain. 
+
+%\tmcmt{Hang on!  I thought the model search procedure was GENERAL, and 
+%not hard-wired to be the template domain.}
+%while performing lazy 
+%closure operations in the relational domains for efficiency reasons.
+%
+The underlying expressivity of the abstract domain helps our decision 
+heuristics to exploit the high-level structure of the program for making 
+effective decisions.  The {\em abstract conflict analysis} procedure learns 
+abstract transformers over a given template following a UIP computation.
+%\tmcmt{Hang on! I thought conflict analysis was ALSO GENERAL.}
+%
+Experimental evaluation over a range of benchmarks shows that ACDLP is 
+more efficient than a SAT-based BMC technique in terms of total number of 
+{\em decisions}, {\em propagations}, {\em conflicts} and {\em backtracking} 
+iterations and has higher precision compared to an abstract interpreter.
+
+%able to exploit the expressivity of richer abstract domains 
+%as well as the precision of the CDCL architecture.  \tmcmt{I don't understand this ``as well as'' business. Do we mean ``without giving up the precision of...''?}
+%\Omit{
+%The ACDLP analyses in this paper perform bounded model checking. Since we use abstract 
+%domains, however, we will be able to extend it to unbounded verification, a possibility 
+%we intend to explore in future work.
+%}

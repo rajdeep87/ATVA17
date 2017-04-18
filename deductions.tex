@@ -1,0 +1,346 @@
+\section{Abstract Model Search in the Template Polyhedra Domain}\label{sec:deduce}
+%
+\Omit {
+\begin{figure}[t]
+\scriptsize
+\begin{tabular}{l|l|l}
+\hline
+C program & SSA & Octagon \\
+\hline
+\begin{lstlisting}[mathescape=true,language=C]
+int main() {
+ unsigned x, y;
+ __CPROVER_assume(x==y);
+ x++;
+ assert(x==y+1);
+}
+\end{lstlisting}
+&
+\begin{minipage}{4.40cm}
+$\begin{array}{l@{\,\,}c@{\,\,}l}
+SSA &\iff& ((g0 == TRUE) \land \\
+    &    & (cond == (x == y)) \land \\
+    &    & (g1 == (cond \&\& guard0)) \land \\
+    &    & (x' == 1u + x) \land \\
+    &    & (x' == 1u + y || !1))
+\end{array}$
+\end{minipage}
+&
+\begin{minipage}{3.75cm}
+$\begin{array}{l@{\,\,}c@{\,\,}l}
+C &\iff& ((x' > 1) \land (-x'-y < -2) \land \\
+  &    & (-x-x' < -2) \land (y-x' < 0) \land \\                                                                
+  &    & (x-x' < 0) \land (y > 0) \land \\
+  &    & (x > 0) \land (-x'-y < 0) \land \\
+  &    & (x+y > 1) \land (y-x < 1) \land \\
+  &    & (x'-y < 2) \land (x-y < 1) \land \\
+  &    & (x+y > 0) \land (x+x' > 0) \land \\
+  &    & (x'-x < 2))
+\end{array}$
+\end{minipage}
+\\
+\hline
+\end{tabular}
+\caption{C Program, corresponding SSA and Octagonal Inequalities}
+\label{ssa}
+\end{figure}
+}
+%
+%    
+\begin{algorithm2e}[t]
+\DontPrintSemicolon
+\SetKw{return}{return}
+\SetKwData{sat}{sat}
+\SetKwData{conflict}{conflict}
+\SetKwData{unsat}{unsat}
+\SetKwData{unknown}{unknown}
+\SetKwData{true}{true}
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\SetKwFor{Loop}{Loop}{}{}
+\SetKw{KwNot}{not}
+\begin{small}
+\Input{A program in the form of a set of abstract transformers $\abstransset$,
+a propagation trail $\trail$, and a reason trail $\reasons$.}
+\Output{\sat or \conflict or \unknown}
+$\worklist \leftarrow \initworklist_{\propheur}(\abstransset)$ \;
+\While{$!\mathit{worklist.empty}()$} 
+{
+  $\abstransel{\subdomain} \leftarrow \mathit{worklist.pop}()$ \; 
+  $\absval \leftarrow \abstransel{\subdomain}(\abs(\trail))$\;
+  \uIf{$\absval = \bot$} {
+    $\reasons[\bot] \leftarrow \abstransel{\subdomain}$ \;
+    $\mathit{worklist.clear}()$ \;
+    \return \conflict \;
+  }
+  \uElse
+  {
+    $\newdeductions=\onlynew(\absval)$\;
+%    $\newdeductions=\decomp(\absval)\setminus\decomp(\abs(\trail))$\;
+    $\trail \leftarrow \trail \cdot \decomp(\newdeductions)$ \; 
+    $\reasons[|\trail|] \leftarrow \abstransel{\subdomain}$ \;
+    $\updateworklist_{\propheur}(\worklist, \newdeductions, \abstransel{\subdomain},  \abstransset)$ \; 
+  }
+}
+\lIf{$\abstransset$ is $\gamma$-complete at $\abs(\trail)$} {
+  \return \sat
+}
+ \return \unknown \;
+
+\end{small}
+\caption{Abstract Model Search $\mathit{deduce}_{\propheur}(\abstransset,\trail,\reasons)$ \label{Alg:ms}}
+\end{algorithm2e}
+%  
+A model search procedure in a SAT solver involves two steps: {\em deductions} 
+using repeated application of the unit rule (also called Boolean Constraint Propagation (BCP)) 
+to refine current partial assignments, and {\em decisions} to heuristically guess a value for 
+an unassigned literal. BCP can be seen to compute greatest fixed point over the partial assignment  domain~\cite{dhk2013-popl}.  Below, we present an abstract model search procedure that computes a greatest fixed point over abstract transformers $\abstrans{\domain}{\constraint}$.
+ 
+%The unit rule overapproximates a model transformer and deduction 
+%computes a greatest fixed point over the partial assignments
+%domain~\cite{dhk2013-popl}.  We present an abstract model search procedure 
+%that computes a greatest fixed point over meet irreducible deduction 
+%transformer in $S$.  
+%
+
+%-------------------------------------------------------------------------------
+\subsection{Parametrised Abstract Transformers} \label{sec:abst}
+%-------------------------------------------------------------------------------
+\Omit{
+To make our algorithm efficient, we have to focus the abstract
+transformers on performing only the minimally necessary
+work. 
+}
+The key considerations for building an abstract transformer are 
+precision and efficiency.  A~precise transformer is usually 
+less efficient than a more imprecise one~\cite{vmcai04}.  
+In this paper, we present a specialised 
+variant of the abstract transformer to compute deductions called 
+\emph{Abstract Deduction Transformer} (ADT), which is 
+parametrised by a given \emph{subdomain} $\subdomain\subseteq \domain$.  
+%
+A subdomain contains a chosen subset of the elements in $\domain$ including
+$\bot$ and $\top$ that forms a lattice.
+%
+The use of a subdomain serves two purposes:
+\begin{compactenum}[(1)]
+\item It allows us elegantly and flexibly to guide the deductions in 
+%\emph{propagation} heuristics to guide deductions, e.g. 
+  {\em forward}, {\em backward} or {\em multi-way} direction, which 
+  in turn affects the analysis precision.
+\item It makes deductions more efficient, for example by performing lazy closure
+  in template polyhedra domain. For space reasons, we refer the reader to 
+  Appendix~\ref{appendix:lazyclosure} for details of the lazy closure operation. 
+\end{compactenum}
+%
+An ADT is defined formally  as follows. 
+\begin{equation}\label{eq:at2}
+\abstrans{\domain}{\constraint}^\subdomain(\absval)=\absval\meet_\domain \alpha_\subdomain(\{\val\mid \val\in\gamma_\domain(\absval), \val\models \constraint\})
+\end{equation}
+For $\subdomain=\domain$, the ADT is
+identical to the abstract transformer defined in
+Eq.~(\ref{eq:abstrans}) in Section~\ref{sec:domains}.  Note 
+that a restricted subdomain makes a transformer less 
+precise but more efficient.  Conversely, an
+unrestricted subdomain make a transformer more precise, but less
+efficient. Therefore, we have the property
+$\abstrans{\domain}{\constraint}^\domain(\absval)\sqsubseteq
+\abstrans{\domain}{\constraint}^\subdomain(\absval)$.
+%
+\Omit{Thus, the
+parametrisation helps us fine-tune the precision and efficiency of
+deductions.}
+\Omit{Furthermore, the choice of subdomain internally
+  guides the deduction in {\em forward}, {\em backward} or {\em
+    multi-way} direction which are described next.}
+To illustrate point (1), 
+we give examples that demonstrate how the choice of
+subdomain influences the propagation direction:
+
+\paragraph{Forward Transformer.} 
+For an abstract value
+$\absval=(0\leq y \leq 1 \wedge 5\leq z)$, $\constraint=(x=y+z)$, 
+and $L={\intervals[\{x\}]}$,  we have
+$\abstrans{\intervals[\{x,y,z\}]}{x=y+z}^{\intervals[\{x\}]}(\absval)=\absval\meet(x\geq
+6)$.
+Assuming that the equality $x=y+z$ originated from an assignment to $x$,
+this performs a right-hand side (rhs) to left-hand side (lhs) propagation and
+hence emulates a forward analysis. 
+
+\paragraph{Backward Transformer.} 
+For an abstract value $\absval=(0\leq x \leq 10 \wedge 0\leq y \leq 1 \wedge 5\leq z)$, 
+$\constraint=(x=y+z)$, and $L={\intervals[\{y,z\}]}$, we have
+$\abstrans{\intervals[\{x,y,z\}]}{x=y+z}^{\intervals[\{y,z\}]}=\absval\meet (z\leq 10)$. 
+This performs an lhs-to-rhs propagation and hence emulates a backward analysis.  
+
+\paragraph{Multi-way Transformer.} 
+\Omit{We call the propagation with arbitrary subdomains,e.g. 
+$\subdomain=\domain$, \emph{multi-way propagation}, which is able
+to simultaneously perform forward and backward propagation.}
+For an abstract value $\absval=(c\leq1 \wedge c\geq1 \wedge x\leq5 \wedge x\geq5)$, 
+$\constraint=((c = (x=y)) \wedge y=y+1)$ and $L={\intervals[\{c,x,y\}]}$, we have 
+$\abstrans{\intervals[\{c,x,y\}]}{\constraint}^{\intervals[\{c,x,y\}]}=\absval\meet(y\leq6
+\wedge y\geq6)$.  This performs an lhs-to-rhs propagation for $c=(x=y)$ and rhs to lhs propagation
+for $y=y+1$ and hence emulates a multi-way analysis.  
+% $\abstrans{\intervals[\{c,x,y\}]}{y=y+1}^{\intervals[\{c,x,y\}]}=\absval\meet(y\leq6 \wedge y\leq6)$.  
+% We apply the ADTs in sequence for the
+% constraints $\constraint=(c == (x==y))$ and $\constraint=(y=y+1)$ with the
+% setting $L=D$ for all $\constraint$.
+
+\Omit{
+% has already been said above
+For efficiency reasons, an optimisation facilitated by subdomains is 
+\emph{lazy closure} computation for deductions involving relational 
+constraints in template polyhedra domain. For space reasons, we omit 
+the description here and refer the reader to Appendix~\ref{appendix:lazyclosure}.}
+%
+\Omit{
+Note that a restriction to a subdomain makes a transformer less
+precise.
+}
+
+\Omit{
+\paragraph {\textbf{Lazy closure computation}} 
+Computing closure for relational domains, such as octagons is an 
+extremely expensive operation~\cite{pldi15}.  An advantage of our 
+formalism in Eq.~(\ref{eq:at2}) is that
+%we can compute the
+the \emph{closure} operation for relational domains can be computed 
+in a lazy manner. To this end, we construct a subdomain 
+$\subdomain=\makesubdomain_\domain(\subvars)$ for $\abstransel{\subdomain}$,
+which is sufficient to perform one step of the closure operation when 
+$\abstransel{\subdomain}$ is applied.
+%
+For example, let us consider $\domain=\octagons[\{x,y,z\}]$ and
+$\subvars=\{y\}$. An octagonal inequality relates at 
+most two variables. Thus it is sufficient to consider the subdomain
+$\makesubdomain_\domain(\{y\})=\octagons[\{y\}]\cup\octagons[\{x,y\}]\cup\octagons[\{y,z\}]$,
+which will compute the one-step transitive relations of~$y$ with each
+of the other variables. 
+%
+Only if a ADT subsequently makes new deductions 
+on $x$ or $z$, then the next step of the closure will be computed through 
+the subdomain $\octagons[\{x,z\}]$.
+\Omit{
+Hence, when the ADT is applied we do not
+compute the full closure in the full domain,
+but we compute only a single step of the closure in a restricted
+domain, which makes single deduction steps more efficient.
+}
+Hence, an application of ADT does not 
+compute the full closure in the full domain, but compute only a 
+single step of the closure in a restricted domain, which makes each 
+deduction step more efficient.  Thus, we delay the closure operation 
+until the point where it is absolutely necessary.  This makes our deductions 
+in relational domain more efficient.  
+}
+%
+\Omit{
+If $\abstransel{\subdomain}$ deduces new information about $x$ or $z$
+then the next step of the closure will be computed by the worklist
+mechanism of Algorithm~\ref{Alg:ms} that we describe next.
+}
+%
+ 
+%If this indeed affects $x$ and~$z$ then their
+%relations will be inferred in a later step of the propagation
+%algorithm, thus gradually computing the closure. 
+
+%Note that this might
+%increase the number of propagation steps, but it reduces the size of
+%the subdomain used in the ADT.
+
+%Moreover, we want to know what the reasons for a specific deduction are.
+%\[ded(s,a,L)=\{R\rightarrow d\mid R=reasons(s,a,L,d), d \in decomp(\llbracket s \rrbracket^\sharp(a,L))\}\]
+%where 
+%$reasons(s,a,L,d)=\text{argmin}_{R\in\{R'\mid R'\subseteq decomp(a), \llbracket s\rrbracket^\sharp(R,L)=d\}} |R| $.
+
+%However, the choice of a subdomain makes the deductions more efficient.
+%Thus, the choice of a subdomain helps to fine-tune the deductions 
+%during the propagation phase.
+
+%We construct the subdomain from a set of variables $\vars$ such that $\subdomain_\domain(\vars)$ is the set of meet irreducibles $\in \domain$ that contain at last one variable in $\vars$ and most one variable that is not in $\vars$. \pscmt{split into two parts}
+%
+%For example, $\subdomain=\domain[\{y\}]$ being the octagons domain over variables $\{x,y,z\}$ contains all octagonal meet irreducibles involving $\{y\}$, and the pairs $\{x,y\}$ and $\{y,z\}$, but not the meet irreducibles\pscmt{wrong} over $\{x\}$, $\{z\}$ and~$\{x,z\}$.
+
+%The first advantage of this definition is that 
+%The parameterisation of the ADT with a subdomain 
+%$\subdomain$ allow us to guide the propagation in 
+%{\em forward}, {\em backward} or {\em multi-way} direction.
+%-------------------------------------------------------------------------------
+\subsection{Algorithm for the Deduction Phase}
+%-------------------------------------------------------------------------------
+%
+
+Algorithm~\ref{Alg:ms} presents the deduction phase $\deduce$ in 
+our abstract model search procedure.  Its  input is 
+the set of abstract transformers, a propagation trail ($\trail$) 
+and a reason trail~($\reasons$).  Additionally, the procedure 
+$\deduce$ is parametrised by a propagation heuristic ($\propheur$). 
+We write the ADT 
+$\abstrans{\domain}{\constraint}^\subdomain$
+as $\abstransel{\subdomain}$ in Algorithm~\ref{Alg:ms}. 
+%
+The algorithm maintains a {\em worklist}, which is a queue that contains 
+ADTs.  The propagation heuristics provides two 
+functions $\initworklist$ and $\updateworklist$.
+The order of the elements in the worklist and the subdomain $\subdomain$ 
+associated with each ADT ($\abstransel{\subdomain}$) 
+determine the propagation strategy (forward, backward, multi-way).
+A subdomain ($\subdomain$) is constructed for $\abstransel{\subdomain}$ 
+via the function $\makesubdomain$ such that 
+$\subdomain=\makesubdomain_\domain(\subvars)$, where $\subvars$ are 
+the variables that appear in $\abstransel{\subdomain}$. 
+
+The {\em forward} propagation strategy initialises the worklist with
+ADTs that contain constants in the
+right-hand side; the subdomain is constructed via $\makesubdomain_\domain$
+from variables in the left-hand side of the equality constraints
+originating from the assignment statements in the program.
+%
+The {\em backward} propagation strategy initialises the worklist 
+with the assertions; the subdomain is constructed from the 
+right-hand side variables.
+%
+The {\em multi-way} propagation strategy initialises the worklist 
+with the set of all transformers; corresponding subdomains 
+contains the variables occurring in the respective transformers.
+%
+The abstract value $\absval$ is updated upon the application of 
+$\abstransel{\subdomain}$ in line~4 in Algorithm~\ref{Alg:ms}. 
+The function
+$\onlynew(\absval)=\bigsqcap(\decomp(\absval)\setminus\decomp(\abs(\trail)))$
+is used to filter out all meet irreducibles that are already on the trail
+in order to obtain only new deductions ($\newdeductions$) when applying 
+the ADT (shown in line~10).
+%
+Depending on the propagation heuristics, $\updateworklist$ adds
+ADTs $\abstransel{\subdomain}$ to the 
+worklist that contain variables that appear in $\newdeductions$, and 
+updates the subdomains of the ADTs in the worklist 
+to include the variables in $\newdeductions$ (shown in line~13).
+%
+%
+\Omit{
+If $\bot$ is deduced we return \textsf{conflict}.
+Otherwise, when eventually a fixed point has been reached, i.e.\ the worklist is empty, then the abstract value $\abs(\trail)$ is checked whether it is 
+$\gamma$-complete~\cite{dhk2013-popl}. 
+%
+It is $\gamma$-complete if all concrete values in $\gamma(\abs(\trail))$ satisfy $\formula$.
+Otherwise, the algorithm returns \textsf{unknown} and ACDLP makes a new decision.}
+
+If $\abstransel{\subdomain}$ deduces $\bot$, then 
+the procedure $\mathit{deduce}$ returns \textsf{conflict} (shown in line~8).
+Otherwise, when a fixed-point is reached, i.e.~the worklist is empty, we check whether
+the abstract transformers $\abstransset$ are $\gamma$-complete~\cite{dhk2013-popl} for the current abstract value $\abs(\trail)$ 
+(shown in line~15).
+%
+Intuitively, this checks whether all concrete values in 
+$\gamma(\abs(\trail))$ satisfy the safety equation $\formula$, where 
+$\formula:= \bigwedge_{\constraint\in\constraints} \constraint$ is obtained 
+from the program transformation (as defined in Section~\ref{sec:program}).
+%
+If it is indeed 
+$\gamma$-complete, then $\mathit{deduce}$ returns \textsf{sat}.  Otherwise, the 
+algorithm returns \textsf{unknown} and ACDLP makes a new decision.    
+  

@@ -1,0 +1,199 @@
+\section{Gamma Complete Procedure in ACDLP}
+\Omit{
+The termination criterion of CDCL algorithm checks 
+whether all variables in the CNF formula have been assigned, 
+in which case the algorithm terminates indicating that the 
+CNF formula is satisfiable~\cite{cdcl}. An alternative 
+termination criterion is to check whether all clauses 
+are satisfied.  However, modern CDCL based SAT solvers checks 
+whether all the variables in the formula are assigned since the 
+clause state can not be maintained accurately~\cite{cdcl}.
+}
+
+Recall that an over-approximating abstract transformer 
+$f_{o}$ of a transformer $f$ is $\gamma$-complete with 
+respect to an abstract element $a$ if $\gamma \circ f_{o}(a) = f \circ \gamma(a)$.  
+
+If every transformer $f_{o}$ in $\varphi$ is $\gamma$-complete and 
+produces a singleton value in the concrete, then ACDLP terminates 
+with a satisfying assignment.  However, it is expensive to check whether all
+$f_o$ are $\gamma$-complete.  An alternative is to check whether 
+all program variables are assigned singleton values following the least fixed 
+point computation in the propagation phase.  This corresponds to the 
+termination condition in a SAT solver which checks whether all variables 
+in the CNF formula have been assigned.
+
+We present a more sophisticated $\gamma$-complete procedure in ACDLP based 
+on a technique called {\em partial evaluation}.  A decision in ACDLP 
+may render some $f_o \in \varphi$ vacuously true, for example, decisions on 
+conditional branch predicates.  We call such decision, {\em choice decision}.
+The core idea of partial evaluation technique is based on the fact 
+that the variables appearing in non-vacuous $f_o$ can only contribute to 
+determining the satisfiability of $\varphi$ following a choice decision. 
+We call these variables {\em sensitive variables} $(V_s)$ and the rest 
+{\em don't care variables} $(V_d)$.  Therefore, assignments to sensitive 
+variables are sufficient to infer the truth of $\varphi$.  If $\varphi$ is 
+{\em true}, then the abstract value obtained from the deductions via choice 
+decision and sensitive variables produces a satisfying assignment for $\varphi$, 
+and hence a counterexample. 
+
+\Omit{
+The partial evaluation technique identifies all non-singleton variables that 
+do not contribute to a feasible path from a choice decision. We call these variables 
+{\em don't care variables} for the current choice decision.  The don't care variables 
+are identified via path-sensitive analysis that computes analysis information based on 
+the predicates at conditional branch instructions. 
+}
+
+We explain the partial evaluation technique through don't care 
+variables with a simple example.  Consider the program in 
+Figure~\ref{fig:gc-example}. The second column of 
+Figure~\ref{fig:gc-example} shows the corresponding SSA. 
+The program is unsafe. The unsafe trace is shown in bold in third 
+column of figure~\ref{fig:gc-example}. 
+%
+\begin{figure}[t]
+\centering
+\begin{tabular}{c|c|c}
+\hline
+Program & SSA & Unsafe trace \\
+\hline
+\scriptsize
+\begin{lstlisting}[mathescape=true,language=C]
+ int x, y; 
+ _Bool c;
+ assume(0 <= x && 
+       x <= 1); 
+ if(c) 
+  x++; 
+ else 
+  x--; 
+ assert(x<=0); 
+\end{lstlisting} 
+&
+\begin{lstlisting}[mathescape=true,language=C]
+cond#21=(x#16 >= 0 && 
+        !(x#16 >= 2))
+cond#22=(c#20=true)
+guard#22=(cond#21 && guard#0)
+x#23=1+x#16
+guard#23=(cond#22 && guard#22)
+cond#24=true
+x#25=-1 + x#16
+guard#25=(!cond#22 && guard#22)
+x#phi26=(guard#25?x#25:x#23)
+guard#26=(cond#24 && 
+         guard#23 || guard#25)
+!(x#phi26 > 0)||!guard#26
+\end{lstlisting}
+&
+\begin{minipage}{3.0cm}
+\centering
+%\vspace*{0.3cm}
+\scalebox{.5}{\import{figures/}{example.pspdftex}}
+%\caption{\label{fig:oct}}
+\end{minipage}
+\\
+\hline
+\end{tabular}
+\caption{\label{fig:gc-example}  C program, SSA and unsafe trace}
+\end{figure}
+%
+
+Consider the SSA statement $x\#phi26 = (guard\#25 ? x\#25 : x\#23)$, shown in 
+column~2 of Figure~\ref{fig:gc-example}. A CNF representation of the SSA 
+statement is given by, 
+$(!(guard\#25) \vee (x\#phi26=x\#25)) \wedge ((guard\#25) \vee (x\#phi26=x\#23))$. 
+Let $C1=(!(guard\#25) \vee (x\#phi26 = x\#25))$ and $C2=((guard\#25) \vee
+(x\#phi26=x\#23))$. 
+Assume that we make a choice decision, $cond\#22=true$. This subsequently 
+infers that $guard\#25=false$ which makes the clause $C1$ vacuously true. Hence, 
+ACDLP only needs to evaluate the truth of $(x\#phi26=x\#23)$ in $C2$. 
+Thus, the variable $x\#25$ is don't care variable since it belongs to the 
+vacuous clause $C1$ obtained from the choice decision for conditional 
+predicate $cond\#22=true$.  The set of sensitive variables are 
+$\{x\#23, x\#phi26\}$.
+
+When the don't care variables has already been identified, then ACDLP simply 
+restricts the decisions to the {\em sensitive} variables.  We implemented a 
+specific decision heuristic called {\em singleton decision heuristic} that 
+explicitly assigns singleton values to these {\em sensitive variables}.  
+For our example, ACDLP makes a decision 
+on the interval of $x\#23 = [1,2]$, say $x\#23=1$, followed by the propagation 
+which immediately infers that the program is unsafe.  ACDLP then terminates
+and returns a satisfying assignment to $\varphi$ that contains concrete 
+assignments to the sensitive variables only.
+
+However, if the assignment to the sensitive variables does not satisfy 
+$\varphi$, then ACDLP undoes all the deductions made from the singleton 
+assignments to the sensitive variables and backtracks up to the point where 
+the choice decision was made. 
+
+\Omit{
+The advantages of our proposed gamma-complete procedure are two folds. 
+\begin{enumerate}
+  \item It intelligently identifies the set of sensitive program variables through a 
+choice decision thereby restricting future decisions on these variables.  
+  \item It may terminate with a satisfying assignment (or counterexample trace) even 
+when all variables in the program are not assigned, thereby leading to faster 
+counterexample detection.
+\end{enumerate}
+
+%\section{Gamma Complete Procedure}
+\begin{algorithm2e}
+\DontPrintSemicolon
+\SetKw{return}{return}
+\SetKw{continue}{continue}
+\SetKwRepeat{Do}{do}{while}
+\SetKwData{conflict}{conflict}
+\SetKwData{safe}{safe}
+\SetKwData{sat}{sat}
+\SetKwData{unsafe}{unsafe}
+\SetKwData{unknown}{unknown}
+\SetKwData{true}{true}
+\SetKwData{false}{false}
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\SetKwFor{Loop}{Loop}{}{}
+\SetKw{KwNot}{not}
+  \Input{Abstract value $\absval$ and set of sensitive variables $V_s$}
+  \Output{\true if $\absval$ is gamma complete, else \false}
+  \ForEach{$m \in \decomp(\absval)$}{
+    \uIf{$vars(m) \in V_s$} {
+      \uIf{$val(m, \absval)$ is singleton} {
+        \continue
+      }
+      \uElse {
+         \return \false \;
+      }
+    }
+    \uElse {
+      \continue 
+    }
+  }
+  \return \true \;
+\caption{Gamma Complete procedure $gammaComplete(\absval, V_s)$
+  \label{Alg:gammacomplete}}
+\end{algorithm2e}
+%
+Algorithm~\ref{Alg:gammacomplete} presents the gamma complete procedure that
+checks whether a given abstract value $\absval$ is gamma complete with respect
+to the given set of sensitive variables $V_s$. Note that the set $V_s$ is
+obtained from the least fixed point computation in the deduction phase.  The
+procedure $vars(m)$ returns the variables involved in the meet irreducibles $m$.
+For example, $vars(x<10)$ returns $x$.  The procedure $val(m, \absval)$ returns 
+the upper bound and the lower bound of a meet irreducible $m$ with respect to
+the abstract value $\absval$.  For example, $val(x>5, x>5 \wedge y>10 \wedge x<10)$  
+returns the interval $x=[6,9]$.  The procedure $vars()$ and $val()$ are domain
+operations. 
+}
+%
+\Omit{
+\begin{mytheorem}
+  (Soundness). Given a choice decision $d$, let $V_s$ be the set of sensitive 
+  variables and $a$ be the abstract value obtained from deductions
+  through $V_s$ and $d$. If $gammaComplete(a,V_s)$ returns {\em true}, then 
+  $\varphi$ is satisfiable, and ACDLP terminates with the counterexample trace $a$.
+\end{mytheorem}
+}
+%

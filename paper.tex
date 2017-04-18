@@ -1,0 +1,149 @@
+% 16 pages in LNCS format including references. Appendices separate. 
+\documentclass[a4paper]{llncs}
+
+\usepackage{import}
+\usepackage{times}
+\usepackage{multirow}
+\usepackage{microtype}
+\usepackage{array}
+\usepackage{graphicx,wrapfig}
+\usepackage[noadjust]{cite}
+\usepackage{tikz}
+\usetikzlibrary{plotmarks}
+\usepackage{pgfplotstable}
+\usepackage{filecontents}
+\usepackage{pgfplots}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{stmaryrd}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{psfrag}
+\usepackage{epsfig}
+\usepackage{wasysym} 
+%\usepackage{subfigure}
+\usepackage{paralist}
+%\usepackage{dingbat}
+\usepackage[algo2e,linesnumbered,ruled,lined]{algorithm2e}
+\usepackage{hyperref}
+\usepackage[subnum]{cases}
+\makeatother
+
+\newcommand{\extendedonly}[1]{}
+\newcommand{\paperonly}[1]{#1}
+\newtheorem{exmp}{Example}
+
+\newcommand{\tool}[1]{\textsc{#1}\xspace}
+\newcommand{\cbmcv}{\tool{cbmc 5.0}}
+\newcommand{\Omit}[1]{}
+\newcommand{\mydef}[1]{\begin{definition}#1\end{definition}}
+\newcommand{\rmcmt}[1]{{\color{magenta}{#1}}}%#1
+\newcommand{\pscmt}[1]{{\color{blue}{#1}}}%#1
+\newcommand{\dkcmt}[1]{{\color{red!70!black}{#1}}}%#1
+\newcommand{\tmcmt}[1]{{\color{orange}{#1}}}%#1
+\newcommand{\lhcmt}[1]{{\color{purple}{#1}}}%#1
+
+\input{symbols}
+
+\begin{document}
+
+\title{Lifting CDCL to Template-based Abstract Domains\\ for Program Verification}
+
+\author{Rajdeep Mukherjee\inst{1} \and Peter Schrammel\inst{2} \and 
+Leopold Haller\inst{3} \and \\ 
+Daniel Kroening\inst{1} \and Tom Melham\inst{1}}
+
+\institute{University of Oxford, UK \and University of Sussex, UK \and Google Inc., USA}
+
+\maketitle
+
+%===============================================================================
+\begin{abstract}
+%===============================================================================
+%
+The success of Conflict Driven Clause Learning (CDCL) for Boolean
+satisfiability has inspired its adoption in other domains.  We present a
+novel lifting of the CDCL to program analysis called \emph{Abstract Conflict
+Driven Learning for Programs} (ACDLP).  ACDLP alternates between \emph{model
+search}, which performs over-approximate deduction with constraint
+propagation, and \emph{conflict analysis}, which performs under-approximate
+abduction with heuristic choice.  We instantiate the model search and
+conflict analysis algorithms to an abstract domain of \textit{template
+polyhedra}, strictly generalising CDCL from the Boolean lattice to richer
+lattice structures.  Our domain of template polyhedra can express intervals,
+octagons, and certain restricted polyhedral constraints over program
+variables.  We have implemented ACDLP for checking safety properties of C
+programs by bounded model checking.  We~evaluate the performance of our
+analyser by comparing with the CBMC program verifier, which uses
+propositional solvers, and with Astr{\'e}e, a commercial abstract
+interpretation tool.  We observe a two orders of magnitude reduction in the
+number of decisions, propagations, and conflicts compared to CBMC and higher
+precision compared to Astr{\'e}e.  To the best of our knowledge, this is the
+first instantiation of CDCL with a template polyhedra abstract domain for
+safety verification.
+
+\Omit{
+on a set of benchmarks drawn from bit-vector regression in SV-COMP'16, bit-precise 
+software models of hardware circuits auto-generated from v2c tool, 
+auto-generated controller code from simulink and several hand-crafted 
+programs with bounded loops.  
+}
+%
+\end{abstract}
+
+%===============================================================================
+\input{introduction}
+%===============================================================================
+
+%===============================================================================
+%\input{contributions}
+%===============================================================================
+
+%===============================================================================
+\input{example}
+%===============================================================================
+
+%===============================================================================
+\input{domains}
+%===============================================================================
+
+%===============================================================================
+\input{algorithm}
+%===============================================================================
+%\rmcmt{Add soundness proof}
+%===============================================================================
+\input{deductions}
+%===============================================================================
+
+%===============================================================================
+\input{decision}
+%===============================================================================
+
+%===============================================================================
+\input{learning}
+%===============================================================================
+
+%===============================================================================
+\input{experiments}
+%===============================================================================
+
+%===============================================================================
+\input{related_work}
+%===============================================================================
+
+%===============================================================================
+\input{conclusion}
+%===============================================================================
+%\newpage
+\bibliographystyle{splncs03}
+\bibliography{biblio.bib}
+
+\newpage
+\input{appendix}
+%\extendedonly{
+%\input{appendix}
+%}
+
+\end{document}

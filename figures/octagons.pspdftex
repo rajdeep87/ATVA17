@@ -1,0 +1,29 @@
+\begin{picture}(0,0)%
+\includegraphics{octagons_pspdftex}%
+\end{picture}%
+\setlength{\unitlength}{4144sp}%
+%
+\begingroup\makeatletter\ifx\SetFigFont\undefined%
+\gdef\SetFigFont#1#2#3#4#5{%
+  \reset@font\fontsize{#1}{#2pt}%
+  \fontfamily{#3}\fontseries{#4}\fontshape{#5}%
+  \selectfont}%
+\fi\endgroup%
+\begin{picture}(3132,2319)(1021,-4708)
+\put(2566,-4606){\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$z \geq -1$}%
+}}}}
+\put(3916,-3616){\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$x_1 \leq 1$}%
+}}}}
+\put(2566,-2581){\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$z \leq 2$}%
+}}}}
+\put(3106,-2851){\rotatebox{320.0}{\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$x_1+z \leq 2$}%
+}}}}}
+\put(1841,-3479){\rotatebox{46.0}{\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$-x_1+z \leq 3$}%
+}}}}}
+\put(1756,-3796){\rotatebox{320.0}{\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$-x_1-z \leq 2$}%
+}}}}}
+\put(1036,-3661){\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$x_1 \geq -2$}%
+}}}}
+\put(3136,-4277){\rotatebox{38.0}{\makebox(0,0)[lb]{\smash{{\SetFigFont{10}{12.0}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$x_1-z \leq 1$}%
+}}}}}
+\end{picture}%

@@ -1,0 +1,29 @@
+\begin{picture}(0,0)%
+\includegraphics{conflict_graph_pspdftex}%
+\end{picture}%
+\setlength{\unitlength}{4144sp}%
+%
+\begingroup\makeatletter\ifx\SetFigFont\undefined%
+\gdef\SetFigFont#1#2#3#4#5{%
+  \reset@font\fontsize{#1}{#2pt}%
+  \fontfamily{#3}\fontseries{#4}\fontshape{#5}%
+  \selectfont}%
+\fi\endgroup%
+\begin{picture}(8580,1753)(796,-3959)
+\put(5986,-2896){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$-x+y \geq 5 \wedge x-y \geq -5 \; \wedge$}%
+}}}}
+\put(5986,-2626){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$x+y \geq 15 \wedge x+y \leq 15 \; \wedge$}%
+}}}}
+\put(5986,-3121){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$y-10 \geq 0 \wedge -y+10 \geq 0 \; \wedge$}%
+}}}}
+\put(2746,-3661){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$y-5 \geq 0 \wedge -y+5 \geq 0 \; \wedge$}%
+}}}}
+\put(2746,-3391){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$x-y \geq 0 \wedge y-x \geq 0 \; \wedge$}%
+}}}}
+\put(2746,-3886){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$x+y \geq 10 \wedge x+y \leq 10 \; \wedge$}%
+}}}}
+\put(811,-2896){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$x-5 \geq 0 \wedge -x+5 \geq 0$}%
+}}}}
+\put(9361,-2896){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$\bot$}%
+}}}}
+\end{picture}%

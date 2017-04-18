@@ -1,0 +1,83 @@
+\begin{picture}(0,0)%
+\includegraphics{cfg-conflict_pspdftex}%
+\end{picture}%
+\setlength{\unitlength}{4144sp}%
+%
+\begingroup\makeatletter\ifx\SetFigFont\undefined%
+\gdef\SetFigFont#1#2#3#4#5{%
+  \reset@font\fontsize{#1}{#2pt}%
+  \fontfamily{#3}\fontseries{#4}\fontshape{#5}%
+  \selectfont}%
+\fi\endgroup%
+\begin{picture}(8712,3516)(-149,-4846)
+\put(316,-3886){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}z:= x*x}%
+}}}}
+\put(991,-3616){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}n4}%
+}}}}
+\put(991,-4291){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}n5}%
+}}}}
+\put(2206,-4291){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}n6}%
+}}}}
+\put(1351,-4111){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}[ z = -2]}%
+}}}}
+\put(3826,-1771){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}n1}%
+}}}}
+\put(3196,-2671){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}n2}%
+}}}}
+\put(4546,-2671){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}n3}%
+}}}}
+\put(3196,-3886){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}z:= x*x}%
+}}}}
+\put(3871,-3616){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}n4}%
+}}}}
+\put(3871,-4291){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}n5}%
+}}}}
+\put(5086,-4291){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}n6}%
+}}}}
+\put(5671,-1951){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}n1: c = [0,0]}%
+}}}}
+\put(7696,-1906){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}n2: $\bot$}%
+}}}}
+\put(5671,-2806){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}n3: c = [0,0]}%
+}}}}
+\put(7381,-2806){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}n4: x = [-1,-1]}%
+}}}}
+\put(7651,-4291){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}n6: $\bot$}%
+}}}}
+\put(7426,-3526){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}n5: z = [1,1]}%
+}}}}
+\put(946,-1771){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}n1}%
+}}}}
+\put(316,-2671){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}n2}%
+}}}}
+\put(1666,-2671){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}n3}%
+}}}}
+\put(-134,-2131){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}[ c != 0]}%
+}}}}
+\put(1576,-2131){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}[c == 0]}%
+}}}}
+\put(181,-3211){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}x:= 2}%
+}}}}
+\put(1576,-3211){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}x:= -1}%
+}}}}
+\put(721,-4561){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\bfdefault}{\updefault}{\color[rgb]{.56,0,0}[z = -2]}%
+}}}}
+\put(4231,-3571){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\bfdefault}{\updefault}{\color[rgb]{.56,0,0}[x = 2]}%
+}}}}
+\put(3601,-1501){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\bfdefault}{\updefault}{\color[rgb]{.56,0,0}[x = $\top$]}%
+}}}}
+\put(1081,-4831){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\bfdefault}{\updefault}{\color[rgb]{0,0,1}A. CFG P}%
+}}}}
+\put(4051,-4831){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\bfdefault}{\updefault}{\color[rgb]{0,0,1}B. CFG P'}%
+}}}}
+\put(6706,-4831){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\bfdefault}{\updefault}{\color[rgb]{0,0,1}C. ACFG for P'}%
+}}}}
+\put(3646,-4561){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\bfdefault}{\updefault}{\color[rgb]{.56,0,0}[z = 4]}%
+}}}}
+\put( 46,-3616){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\bfdefault}{\updefault}{\color[rgb]{.69,0,0}[x = $\bot$]}%
+}}}}
+\put(2836,-2131){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}[ c != 0]}%
+}}}}
+\put(4456,-2131){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}[c == 0]}%
+}}}}
+\end{picture}%

@@ -1,0 +1,53 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[t]
+\begin{tabular}{@{\hspace{-1.5em}}c@{\hspace{1em}}c}
+\begin{tikzpicture}[scale=0.75]
+	\begin{loglogaxis} [
+      xmin=0.1,xmax=2500, ymin=0.1, ymax=2500, 
+      xlabel=Forward Propagation, ylabel=Multi-way Propagation, 
+      title={Performance of Propagation Heuristics},
+			legend pos = north west,
+			%legend style={at={(0.8,0.15)},
+			%anchor=north,legend columns=-1 },
+			]
+\addplot [mark size=1pt,only marks,scatter,point meta=explicit symbolic,
+	scatter/classes={s={mark=square},u={mark=triangle*,blue}},] 
+	table [meta=label] {plotdata/scatter-chaotic-forward.dat};
+	\legend{Safe,Unsafe}
+  \addplot [domain=.1:2500] {x};
+\end{loglogaxis}
+\end{tikzpicture}
+ &
+\begin{tikzpicture}[scale=0.75]
+\pgfplotscreateplotcyclelist{markstyles}{%
+mark=diamond\\%
+mark=square*,red\\%
+mark=triangle*,blue\\%
+}
+	\begin{axis} [
+  title={Performance of Decision Heuristics}, ymode = log,
+  xmin=0, xmax=70, only marks,
+  ymin=0, ymax=1600, 
+  xlabel={Benchmarks},
+  ylabel={time (in seconds)},
+  xtick={},
+  ytick={}, %{0, 0.5, 1.0, 10, 50, 100, 200, 500, 700, 1000, 1500},
+	legend pos=north west, mark size=1pt, cycle list name=markstyles,
+ ]
+ \addplot table[x=benchmark,y=time] {plotdata/berkmin.dat};
+ \addplot table[x=benchmark,y=time] {plotdata/random.dat};
+ \addplot table[x=benchmark,y=time] {plotdata/ordered.dat};
+ \addlegendentry{Berkmin}
+ \addlegendentry{Random}
+ \addlegendentry{Ordered}
+ %\addplot [domain=.1:2500] {};
+ \end{axis}
+\end{tikzpicture} \\
+(a) & (b)
+\end{tabular}
+\caption{\label{prop-dec}
+Effect of Propagation Heuristics and Decision Heuristics in ACDLP
+}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

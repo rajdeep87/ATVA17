@@ -1,0 +1,119 @@
+\subsection{Decisions}\label{sec:decide}
+%
+A decision $\decisionvar$ is a meet irreducible that refines the
+current abstract value $\abs(\trail)$, when the result of fixed-point 
+computation through deduction is neither a {\em conflict} nor a {\em 
+satisfiable model} 
+of $\formula$.  A decision must always be consistent 
+with respect to the trail $\trail$, 
+i.e., $\abs(\trail\cdot \decisionvar)\neq \bot$.  A new 
+decision increases the decision level by one. Given 
+the current abstract value $\abs(\trail)$, the procedure $\decide$ 
+in Algorithm~\ref{Alg:ms} heuristically returns a meet irreducible.
+
+
+%Note that meet irreducibles in
+%relational domains may involve several variables.
+%
+For example, a decision in the interval domain can be of the form 
+$x R d$ where $R \in \{\leq,\allowbreak\geq\}$, and $d$ 
+is the bound.  A decision in the octagon domain can specify relations 
+between variables, and can be of the form $ax - by \leq d$, where 
+$x$ and $y$ are variables, $a,b \in \{-1,0,1\}$ are coefficients, 
+and $d$ is a constant.
+%\in \mathbb{R}\cup\{\infty\}$ is the bound of the inequality \pscmt{we have bitvectors!}. 
+%
+%Hence, a decision can specify a relation between variables, for example 
+%$(x \leq y)$.  
+
+\Omit{
+We call a meet irreducible that does not represent a valid decision a
+\emph{singleton} meet irreducible.  
+This is similar to a literal in a SAT solver that is already 
+assigned $\true$ or $\false$, and thus cannot participate in 
+a decision.
+%
+For template polyhedra, singletons are the meet irreducibles
+corresponding to a pair of rows $\vec{c}_1,\vec{c}_2$ in matrix
+$\mat{C}$ with $\vec{c}_1\vec{\numvar}=-\vec{c}_2\vec{\numvar}$
+(i.e.\ \emph{matching} rows) and the corresponding bounds
+$\numabsval_1=-\numabsval_2$.
+%
+A singleton in the interval domain corresponds to a singleton interval
+such as $x\leq 1 \wedge -x\leq -1$.  For the octagon domain, $1 \leq x-y
+\leq 1$ is a singleton.
+%
+%We cannot make decisions for template rows of singletons because there
+%is no choice left. 
+%
+Note that for relational domains singletons do not necessarily
+concretise to singleton sets of concrete values for the variables
+involved.
+}
+%
+%over a set of branching
+%variables $\{B\} \subseteq \mathcal{V}$, a bound $c$, and a polarity
+%($\leq$ or $\geq$).  For interval domain, $|B|=1$ since an interval
+%meet irreducible is defined over a single variable.  For octagons,
+%$|B|=2$.  A decision adds a new meet irreducible $m$ to the trail.
+%Subsequently, the new state of the solver is defined over $m$ and
+%corresponding label information $s=decision$, which is described
+%below.
+%\[decide: \quad (\mathcal{E},S) \rightarrow (\mathcal{E}(m,s),S) \]
+
+%Let $\mathcal{V}$ be a set of all singletons and non-singletons.  
+%Otherwise, the variable is non-singleton 
+\Omit {
+We have implemented several decision heuristics in ACDLP: {\em ordered}, 
+{\em longest-range}, {\em random}, and the {\em Berkmin}~\cite{eugoldberg07} 
+decision heuristic.  The {\em ordered} decision heuristic 
+%creates an ordering among meet irreducibles, 
+makes decisions on meet irreducibles that involve conditional 
+variables (variables that appear in conditional branches) first 
+before choosing meet irreducibles with numerical variables.  
+%The ordered heuristic gives an effect of trace partitioning~\cite{toplas07}.
+%
+The {\em longest-range} heuristic simply keeps track of the bounds
+$\numabsval_l,\numabsval_u$ of matching template rows, which are 
+%\footnote{These are template rows with row vectors $\vec{c}$, $\vec{c}'$ such that $\vec{c}=-\vec{c}'$.}
+row vectors $\vec{c}$, $\vec{c}'$ such that $\vec{c}=-\vec{c}'$.
+%\pscmt{[that has become a bit hard to understand since some of the definitions have been removed]} 
+$\numabsval_l\leq \vec{c}\vec{x}\leq \numabsval_u$, picks the one with the longest range
+$\numabsval_u-\numabsval_l$, and randomly returns the meet irreducible
+$\vec{c}\vec{x}\leq
+\lfloor\frac{\numabsval_l+\numabsval_u}{2}\rfloor$ or its
+complement. This ensures a fairness policy in selecting a variable
+since it guarantees that the intervals of meet irreducibles are
+uniformly restricted.
+%
+The {\em random} decision heuristic arbitrarily picks a meet irreducible  
+for making decision. 
+%
+%The {\em relational} decision heuristics is only relevant for relational 
+%abstract domains.  
+%
+The {\em Berkmin} decision heuristic is inspired by the 
+decision heuristic used in the Berkmin~\cite{eugoldberg07} SAT solver.  
+The Berkmin heuristic %is currently implemented for interval constraints only.  
+%The heuristic 
+keeps track of the activity of %an interval 
+meet irreducibles that participate in conflict clauses. 
+Based on the most active meet irreducible, ranges are split 
+similar to the {\em longest-range} heuristic.
+}
+
+\Omit {
+as well as variables that actively contribute to conflicts but do not explicitly 
+appear in conflict clauses.  The set of conflict clauses is 
+organised chronologically with the top clause 
+as the one deduced in the last.  A branching variable is chosen among the 
+free variables whose literals are in the top unsatisfied conflict clause.  
+A similar decision heuristic is also implemented in Chaff~\cite{chaff} SAT 
+solver, that computes the activity of a variable as the number of occurrences 
+of that variable in conflict clauses only. 
+}
+%
+%A bound of a meet irreducible is heuristically chosen to be an
+%approximation of the arithmetic average of the current bounds.
+%However, the polarity ($\leq$ or $\geq$) of a meet irreducible is
+%chosen randomly.

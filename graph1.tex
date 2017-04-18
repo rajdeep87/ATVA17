@@ -1,0 +1,54 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%% scatter plots %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[t]
+  \centering
+\begin{tabular}{@{\hspace{-1.5em}}c@{\hspace{1em}}c}
+\begin{tikzpicture}[scale=0.55]
+	\begin{loglogaxis} [xmin=0.1,xmax=4000, ymin=0.1, ymax=4000, xlabel= SAT (Decision),
+			ylabel=ACDCL (Decision), 
+			legend pos = north west,
+			%legend style={at={(0.8,0.15)},
+			%anchor=north,legend columns=-1 },
+			]
+\addplot [mark size=1pt,only marks,scatter,point meta=explicit symbolic,
+	scatter/classes={s={mark=square},u={mark=triangle*,blue}},] 
+	table [meta=label] {plotdata/scatter-decision.dat};
+	\legend{Safe,Unsafe}
+\addplot [domain=.1:4000] {x};
+%\addplot [red,sharp plot, domain=.1:1500] {900}
+%          node [below] at (axis cs:10,850) {timeout};
+%\addplot [red,sharp plot, domain=.1:1500] coordinates{(900,.1) (900,1500)}
+%          node [left,rotate=90] at (axis cs:700,10) {timeout}
+ %node [right,black] at (axis cs:10,3) {portfolio faster}
+ %node [right,black] at (axis cs:1,55) {kIkI faster};
+%\addplot [red,sharp plot, update limits=false] coordinates{(900,.1) (900,1500)}
+%	node [left] at {axis cs:700,200} {timeout};
+\end{loglogaxis}
+\end{tikzpicture}
+ &
+\begin{tikzpicture}[scale=0.55]
+  \centering
+	\begin{loglogaxis} [xmin=.1,xmax=83000, ymin=.1, ymax=83000, xlabel=SAT (Propagation),
+			ylabel=ACDCL (Propagation),
+			legend pos = north west,
+      %legend style={at={(0.8,0.15)},
+			%anchor=north,legend columns=-1 },
+			]
+\addplot [mark size=1pt,only marks,scatter,point meta=explicit symbolic,
+	scatter/classes={s={mark=square},u={mark=triangle*,blue}},] 
+	table [meta=label] {plotdata/scatter-propagation.dat};
+	\legend{Safe,Unsafe}
+\addplot [domain=.1:83000] {x};
+%\addplot [red,sharp plot, domain=.1:1500] {900}
+%          node [below] at (axis cs:10,850) {timeout};
+%\addplot [red,sharp plot, domain=.1:1500] coordinates{(900,.1) (900,1500)}
+%          node [left,rotate=90] at (axis cs:700,150) {timeout}
+ %node [right,black] at (axis cs:10,3) {CPAchecker faster}
+ %node [right,black] at (axis cs:1,55) {kIkI faster};
+\end{loglogaxis}
+\end{tikzpicture} \\
+(a) & (b)
+\end{tabular}
+\caption{\label{fig:results}
+Comparison between SAT-based BMC and ACDLP: number of decisions and propagations}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

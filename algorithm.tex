@@ -1,0 +1,185 @@
+\section{Abstract Conflict Driven Learning for Programs}
+%
+%
+\begin{figure}[htbp]
+\centering
+\vspace*{-0.2cm}
+\scalebox{.55}{\import{figures/}{acdlp-top.pspdftex}}
+\caption{Architectural View of ACDLP \label{conflict}}
+\end{figure}
+%
+\begin{algorithm2e}[t]
+\DontPrintSemicolon
+\SetKw{return}{return}
+\SetKwRepeat{Do}{do}{while}
+%\SetKwFunction{assume}{assume}
+%\SetKwFunction{isf}{isFeasible}
+\SetKwData{conflict}{conflict}
+\SetKwData{safe}{safe}
+\SetKwData{sat}{sat}
+\SetKwData{unsafe}{unsafe}
+\SetKwData{unknown}{unknown}
+\SetKwData{true}{true}
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\SetKwFor{Loop}{Loop}{}{}
+\SetKw{KwNot}{not}
+\begin{small}
+\Input{A program in the form of a set of abstract transformers $\abstransset$.}
+\Output{The status \safe or \unsafe. %and a counterexample if \unsafe.
+}
+$\trail \leftarrow \langle\rangle$, $\reasons \leftarrow []$ \;
+$\mathit{result} \leftarrow \deduce_{\propheur}(\abstransset,\trail,\reasons)$ \;
+\lIf{$\mathit{result}$ = \conflict} {
+  \return \safe}
+\While{$true$} 
+{
+\lIf{$\mathit{result}$ = \sat} {
+  \return \unsafe}
+  $\decisionvar \leftarrow \decide_{\decheur}(\abs(\trail))$ \;
+  $\trail \leftarrow \trail \cdot \decisionvar$ \; 
+  $\reasons[|\trail|] \leftarrow \top$ \;
+  $\mathit{result} \leftarrow \deduce_{\propheur}(\abstransset,\trail,\reasons)$\;
+  \Do{$\mathit{result} = \conflict$} {
+    \lIf{$\neg \analyzeconflict_{\confheur}(\abstransset,\trail,\reasons)$} {
+      \return \safe
+    }
+    $\mathit{result} \leftarrow \deduce_{\propheur}(\abstransset,\trail,\reasons)$ \;
+  }
+}
+\end{small}
+\caption{Abstract Conflict Driven Learning $ACDLP_{\propheur,\decheur,\confheur}(\abstransset)$ \label{Alg:acdcl}}
+\end{algorithm2e}
+%
+In this section, we present our framework called \emph{Abstract Conflict 
+Driven Learning for Programs} that uses abstract model search and abstract 
+conflict analysis procedures for safety verification of programs. 
+The input to ACDLP (Algorithm~\ref{Alg:acdcl}) is a
+program in the form of a set of abstract transformers
+$\abstransset=\{\abstrans{\domain}{\sigma}|\sigma\in\Sigma\}$
+w.r.t.\ an abstract domain~$\domain$.  Recall that the safety 
+formula $\bigwedge_{\constraint\in\constraints} \constraint$ 
+is unsatisfiable if and only if the program is safe.  
+The algorithm is parametrised by heuristics for propagation $(\propheur)$, 
+decisions $(\decheur)$, and conflict analysis $(\confheur)$.
+%\rmcmt{Approximation of the concrete transformers in 
+%$\abstransset$ are typically available in abstract domain in the 
+%form of strongest-post condition or weakest pre-condition. } 
+The algorithm maintains a propagation trail $\trail$ and 
+a reason trail~$\reasons$.
+%The propagation trail is initialized with an empty sequence.  
+The propagation trail stores all meet irreducibles inferred by 
+the abstract model search phase (deductions and decisions).  
+The reason trail maps the elements of the propagation trail to the
+transformers $\abstransel{}\in\abstransset$ that were used to
+derive them. 
+%
+\begin{definition} 
+The \emph{abstract value} $\abs(\trail)$ corresponding to 
+the propagation trail $\trail$ is the conjunction of the 
+meet irreducibles on the trail:
+$\abs(\trail)=\bigsqcap_{m \in \trail}m$ with
+$\abs(\trail)=\top$ if $\trail$ is the empty sequence.
+\end{definition}
+%
+The algorithm begins with an empty $\trail$, a empty $\reasons$, and the
+abstract value $\top$.  The procedure $\deduce$ (details in
+Section~\ref{sec:deduce}) computes a greatest fixed-point over the
+transformers in $\abstransset$ that refines the abstract value,
+similar to the Boolean Constraint Propagation
+step in SAT solvers.  If the result of $\deduce$
+is \textsf{conflict} ($\bot$), the algorithm terminates with
+\textsf{safe}.  Otherwise, the analysis enters into the while loop at line 4
+and makes a new decision by a call to $\decide$ (see
+Section~\ref{sec:decide}), which returns a new meet irreducible
+$\decisionvar$.
+%
+%\pscmt{what happens if we cannot make any decision any more?
+%  -- then we should either have deduced $\bot$ or $\abs(\trail)$ must
+%  be $\gamma$-complete} 
+%
+We concatenate $\decisionvar$ to the trail~$\trail$.  The decision
+$\decisionvar$ refines the current abstract value $\abs(\trail)$ represented
+by the trail, i.e., $\abs(\trail\cdot\decisionvar)\sqsubseteq \abs(\trail)$.
+%
+% WE ExPLAIN THAT LATER
+%However, $\decisionvar$ must be consistent with the state of the
+%solver, i.e., $\abs(\trail\cdot \decisionvar)\neq \bot$.
+%
+For example, a decision in the interval domain restricts the range of 
+intervals for variables.
+%
+We set the corresponding entry in the reason trail~$\reasons$ to $\top$
+to mark it as a decision.
+% so the analysis jumps under a 
+%greatest fixed-point \pscmt{???}. Note that the widening operation in abstract interpretation 
+%jumps above a least fixed-point, so decisions can be viewed as 
+%{\em dual widening} \pscmt{what do we learn?}.  
+%
+The procedure $\deduce$ is called next to infer new meet irreducibles
+based on the current decision.  The model search phase
+alternates between the decision and deduction until $\deduce$ returns
+either \textsf{sat} or \textsf{conflict}.  
+
+If  $\deduce$ returns  \textsf{sat}, then 
+we have found an abstract value that represents models of the safety formula, which
+are counterexamples to the required safety property, and so ACDLP return
+\textsf{unsafe}.
+%
+% has found an abstract value that represents a set of models of $\formula$ or the
+% deduction leads to a \textsf{conflict}.  Checking whether the abstract
+% model concretises to a set of models of $\formula$; this
+% corresponds to a $\gamma$-completeness~\cite{dhk2013-popl} check in
+% abstract interpretation.  If $v$ is $\gamma$-complete, then it cannot
+% be refined further.  Thus, the algorithm returns the abstract model
+% $v$, which is a set of concrete models, and terminates with
+% \textsf{unsafe} or the current abstraction is insufficient to
+% determine the satisfiability of $\formula$.  
+%
+If  $\deduce$ returns  \textsf{conflict}, 
+the algorithm enters in the $\analyzeconflict$ 
+phase (see Section~\ref{sec:conflict}) to learn the reason for the conflict.   There can be multiple
+incomparable reasons for conflict.
+% \pscmt{do you have to explain this here?} -- based on the choice of Unique
+%Implication Point (UIP)~\cite{cdcl}.  
+ACDLP heuristically chooses one reason~$\conflictset$ and learns it 
+by adding it as an abstract transformer to $\abstransset$. The analysis 
+backtracks by removing the content of $\trail$ up to a point where it does not 
+conflict with $\conflictset$.  ACDLP then performs deductions with the learnt 
+transformer.  If $\analyzeconflict$ returns $\false$, then no further
+backtracking is possible.  Thus, the safety formula is unsatisfiable
+and ACDLP returns \textsf{safe}.
+
+% A learnt clause must include asserting cuts which guarantees
+% derivation of new meet irreducibles after backtracking. The clause
+% learning and backtracking continues as long as the result of deduction
+% is conflicting ($\bot$), that is, the abstract value does not
+% abstractly satisfy the formula \pscmt{define}.  If no further
+% backtrack is possible, then the algorithm terminates and $\formula$ is
+% \textsf{safe}. Else, the algorithm makes a new decision and the above
+% process is repeated until $\deduce$ returns \textsf{sat} or the
+% algorithm backtracks to decision level 0 after a conflict in which
+% case it returns \textsf{safe}.
+
+%\paragraph{Solver State.}  \pscmt{This paragraph seems redundant. Doesn't this redefine $\trail$?} The state of a ACDLP solver is a tuple 
+%of the form $\langle \mathcal{E}, S \rangle$.  Here, $\mathcal{E}$ 
+%is a sequence of labelled information of the form $(m,s)$ where 
+%$m$ is a meet irreducible and $s = \mathsf{decision}$ if $m$ is a decision, 
+%or $s = \mathsf{deduction}$ if $m$ is inferred by a deduction. And $S$ is 
+%a set of abstract deduction transformer \pscmt{???}.  A trail in a SAT solver 
+%stores variable assignments of the form $(p, t)$, where $p$ is 
+%a propositional variable that appears at most once in the trail 
+%and $t$ is a truth assignment (true or false).  Whereas, a trail 
+%$\trail$ in ACDLP contains a sequence of meet irreducibles 
+%inferred by deduction or decision phase where a variable in trail 
+%can be assigned \pscmt{constrained?} multiple times, each time with increasingly precise 
+%bounds \pscmt{that's specific for a particular domain}.  
+%\rmcmt{define trail refinement}
+%\Omit {
+%A current valuation $v$ is a meet of all elements of trail
+%$\trail$, such that $v = \top$ when $\trail$ is 
+%empty or $v=\underset{i \geq 0 \wedge i \leq |\trail|}{\meet m_i}$, where 
+%$m_i \in \trail$.  A solver is in conflict if some clauses in
+%$\abstransset$ is not abstractly satisfied by $v$.
+%}
+%\pscmt{define ``consistent with trail''}

@@ -1,0 +1,237 @@
+\documentclass{article}
+\usepackage{multirow}
+
+\begin{document}
+
+\title{Detailed Experimental Result with Runtimes}
+\date{}
+\maketitle 
+%\section{Runtime comparison between ACDLP and CBMC}
+%
+\begin{table}[!b]
+\begin{center}
+{
+\begin{tabular}{l|r|r}
+\hline
+  Design & \multicolumn{2}{c}{time (in seconds)} \\ 
+  \cline{2-3}
+  & CBMC & ACDLP \\ \hline
+  \multicolumn{3}{c}{\textbf{Verilog-C benchmark suite}} \\ \hline 
+  cache\_coherence & 2.32 & 2.99 \\ \hline  
+  FIFO & 5.27 & 15.81 \\ \hline
+  TicTacToe & 4.41 & 13.98 \\ \hline
+  traffic\_light & 6.11 & 19.85 \\ \hline
+  Vending & 10.14 & 28.05 \\ \hline 
+  DAIO & 20.14 & 24.46 \\ \hline 
+  Dekker & 7.14 & 21.10 \\ \hline 
+  Ibuf & 13.17 & 36.75 \\ \hline
+  Non-pipleine Microprocessor & 15.19 & 38.94 \\ \hline
+  \multicolumn{3}{c}{\textbf{Bit-vector Regression suite}} \\ \hline 
+  bv1 & 0.09 & 0.08 \\ \hline
+  bv2 & 0.10 & 0.09 \\ \hline
+  bv3 & 0.03 & 0.08 \\ \hline
+  bv4 & 0.11 & 0.09 \\ \hline
+  bv5 & 0.11 & 0.09 \\ \hline
+  bv6 & 0.11 & 0.10 \\ \hline 
+  bv7 & 0.13 & 0.09 \\ \hline 
+  bv8 & 0.11 & 0.10 \\ \hline
+  bv9 & 0.12 & 0.10 \\ \hline
+  bv11 & 0.10 & 0.09 \\ \hline
+  bv12 & 0.11 & 0.10 \\ \hline
+  bv13 & 0.12 & 0.10 \\ \hline
+  bv14 & 0.13 & 0.10 \\ \hline
+\end{tabular}
+}
+\end{center}
+\caption{Runtime comparison between ACDLP and CBMC}
+\label{solver2}
+\end{table}
+
+
+\begin{table}[!b]
+\begin{center}
+{
+\begin{tabular}{l|r|r}
+\hline
+  Design & \multicolumn{2}{c}{time(in seconds)} \\ 
+  \cline{2-3}
+  & CBMC & ACDLP \\ \hline
+  \multicolumn{3}{c}{\textbf{Control-Flow benchmark suite}} \\ \hline 
+  bit-wise&0.12 & 0.23
+  \\ \hline 
+  bottom1&0.12 & 0.07
+  \\ \hline 
+  bottom10&0.11 & 1.04
+  \\ \hline 
+  bottom11&0.14 & 0.32
+  \\ \hline 
+  bottom12&0.13 & 1.32
+  \\ \hline 
+  bottom13&0.16 & 2.54
+  \\ \hline 
+  bottom2&0.10 & 0.07
+  \\ \hline 
+  bottom3&0.09 & 0.07
+  \\ \hline 
+  bottom4&0.11 & 0.07
+  \\ \hline 
+  bottom5&0.09 & 0.07
+  \\ \hline 
+  bottom6&0.14 & 0.08
+  \\ \hline 
+  bottom7&0.09 & 0.07
+  \\ \hline 
+  bottom8&0.13 & 0.27
+  \\ \hline 
+  bottom9&0.79 & 2.30
+  \\ \hline 
+  branch1&0.16 & 0.27
+  \\ \hline 
+  branch2&0.15 & 2.01
+  \\ \hline 
+  branch3&0.11 & 0.55
+  \\ \hline 
+  branch4&0.09 & 0.85
+  \\ \hline 
+  branch5&0.10 & 2.23
+  \\ \hline 
+  branch7&1.20 & 3.06
+  \\ \hline 
+  branch8&0.78 & 2.73
+  \\ \hline 
+  unsafe0&0.11 & 0.08
+  \\ \hline 
+  unsafe1&0.17 & 0.52
+  \\ \hline 
+  unsafe2&0.19 & 0.71
+  \\ \hline 
+  unsafe3&0.26 & 1.83
+  \\ \hline 
+  counter&13.42 & 74.64
+  \\ \hline 
+  counter1&21.34 & 72.19
+  \\ \hline 
+  equivalence&10.38 & DNT
+  \\ \hline 
+\end{tabular}
+}
+\end{center}
+\caption{Runtime comparison between ACDLP and CBMC (DNT stands for Did Not Terminate)
+(Timeout is set to 120 seconds)}
+\label{solver2}
+\end{table}
+
+
+\begin{table}[!b]
+\begin{center}
+{
+\begin{tabular}{l|r|r}
+\hline
+  Design & \multicolumn{2}{c}{time(in seconds)} \\ 
+  \cline{2-3}
+  & CBMC & ACDLP \\ \hline
+  \multicolumn{3}{c}{\textbf{Control-Flow benchmark suite}} \\ \hline 
+  if1&0.10 & 0.80
+  \\ \hline 
+  if2&0.11 & 6.81
+  \\ \hline 
+  if3&0.14 & 0.07
+  \\ \hline 
+  if4&0.09 & 0.07
+  \\ \hline 
+  if-else&0.18 & 1.48
+  \\ \hline 
+  if-else2&0.14 & 0.34
+  \\ \hline 
+  loop1& 0.29  & 7.10
+  \\ \hline 
+  loop1-safe& 7.10 & 31.77
+  \\ \hline 
+  loop1-unsafe& 8.12 & 27.06
+  \\ \hline 
+  loop2-safe& 10.13 & DNT
+  \\ \hline 
+  polyhedra0& 1.75 & 3.34
+  \\ \hline 
+  polyhedra1& 1.13 & 3.45
+  \\ \hline 
+  relational1& 0.74 & 1.40
+  \\ \hline 
+  relational2 & 0.75 & 2.90
+  \\ \hline 
+  relational3& 0.71 & 3.54
+  \\ \hline 
+  relational4& 43.18 & DNT
+  \\ \hline 
+  safe1& 0.11 & 0.14
+  \\ \hline 
+  simple8& 0.12 & 0.08
+  \\ \hline 
+  switch1& 0.15 & 0.53
+  \\ \hline 
+  switch2& 0.27 & 6.98
+  \\ \hline 
+  switch3 & 0.12 & 0.19
+  \\ \hline 
+  switch4 & 0.09 & 0.07
+  \\ \hline 
+  switch5& 54.79 & DNT
+  \\ \hline 
+\end{tabular}
+}
+\end{center}
+\caption{Runtime comparison between ACDLP and CBMC (DNT stands for Did Not Terminate)
+(Timeout is set to 120 seconds)}
+\label{solver2}
+\end{table}
+%
+\begin{table}[!b]
+\begin{center}
+{
+\begin{tabular}{l|l|r|r|r|r|r|r|r}
+\hline
+           &          &     & Safe/  &           & Propa-  &           & Conflict &          \\
+  Verifier & Category & LOC & Unsafe & Decisions & gations & Conflicts & literals & Restarts \\ \hline
+  CBMC & \multirow{2}{*}{Bit-vector} & \multirow{2}{*}{501} &
+  \multirow{2}{*}{6/7} & 1011 & 1190 & 0 & 0 & 7 \\
+  ACDLP & & & & 0 & 44 & 0 & 0 & 0 \\ \hline
+  CBMC & \multirow{2}{*}{Control-Flow} & \multirow{2}{*}{692} & 
+  \multirow{2}{*}{38/17} & 29382 & 379727 & 4520 & 37160 & 62 \\ 
+  ACDLP & & & & 414 & 6487 & 195 & 180 & 0  \\ \hline
+  CBMC & \multirow{2}{*}{Verilog-C} & \multirow{2}{*}{2422} & 
+  \multirow{2}{*}{5/5} & 131932 & 322707 & 69 & 349 & 6 \\ 
+  ACDLP & & & & 625 & 8196 & 22 & 22 & 0 \\ \hline
+  %CBMC & \multirow{2}{*}{Numerical} & \multirow{2}{*}{} & 
+  %\multirow{2}{*}{} & & & & & & \\
+  %ACDLP & & & & 161 & 3130 & 10 & 5 & 0 & \\ \hline  
+\end{tabular}
+}
+\end{center}
+\caption{CBMC versus ACDLP: Comparison of Solver Statistics per Category}
+\label{detailed_result}
+\end{table}
+%
+%\section{Precision comparison between ACDLP and Astr{\'e}e}
+%
+\begin{table}[t]
+\begin{center}
+{
+\begin{tabular}{l|l|r|r|r}
+\hline
+  Verifier & Category & \#Proved (safe/unsafe) & \#Inconclusive & \#False Positives \\ \hline
+  Astr{\'e}e & \multirow{2}{*}{Bit-vector} & 5/7 & 0 & 1 \\
+  ACDLP & & 6/7 & 0 & 0 \\ \hline
+  Aste{\'e}e & \multirow{2}{*}{Control-Flow} & 24/9 & 0 & 22 \\
+  ACDLP & & 35/17 & 3 & 0 \\ \hline
+  Astr{\'e}e & \multirow{2}{*}{Verilog-C} & 2/4 & 0 & 4 \\
+  ACDLP & & 4/5 & 1 & 0 \\ \hline
+  %Astr{\'e}e & \multirow{2}{*}{Numerical(13)} & 6/7 &  & \\
+  %ACDLP & & & & \\ \hline
+\end{tabular}
+}
+\end{center}
+  \caption{Astr{\'e}e versus ACDLP: Comparison of Precision per Category}
+\label{ai-result}
+\end{table}
+%
+\end{document}

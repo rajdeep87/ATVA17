@@ -1,0 +1,161 @@
+\section{Introduction}
+
+%%%%%%%%%%%%%%%%%%%%%%% AI %%%%%%%%%%%%%%%%%%%%%%%%
+%
+Static program analysis with abstract interpretation has been widely used to
+verify properties of safety-critical systems~\cite{CC77,
+DBLP:conf/pldi/BlanchetCCFMMMR03}.  Static analyses commonly aim to compute
+program invariants as fixed-points of abstract transformers~\cite{se2011}. 
+Abstract states are chosen from a lattice that has meet $(\sqcap)$ and join
+$(\sqcup)$ operations; the meet precisely models set intersection (or
+conjunction, taking a logical view), and the join over-approximates set
+union (or disjunction).  Over-approximation in the join operation is one of
+the sources of precision loss that can yield false alarms.  Typical abstract
+domains are non-distributive; suppose $a$ and $b$ together represent the
+abstract semantics of a program and $c$ represents a set of abstract
+behaviours that violate the specification.  In a non-distributive domain,
+$(a \sqcup b) \sqcap c$ can be strictly less precise than $(a \sqcap c)
+\sqcup (b \sqcap c)$.  This means that in typical abstract domains,
+analysing program behaviours separately can improve the precision of the
+analysis.  Usual means to address false alarms therefore include not only
+the use of richer abstract domains, but also of refinements that delay joins
+or perform some form of case-splitting.  Such techniques trade off higher
+precision against lower efficiency and may be susceptible to case
+enumeration behaviour.
+
+%%%%%%%%%%%%%%%%%%%%%%% CDCL %%%%%%%%%%%%%%%%%%%%%
+By contrast, model checking (MC)~\cite{mc-book} can be seen to operate on
+distributive lattice structures that represent disjunction without loss
+of precision.  Classical MC directly operates on distributive
+representations, such as BDDs, while more recent implementations use SAT
+solvers.  SAT solvers themselves operate on partial assignments, which are
+non-distributive structures.  To handle disjunction, case-splitting is
+performed~\cite{sas12}.  Propositional SAT solvers solve large formulae, and
+are often able to avoid enumerating cases.  The impressive performance of
+modern solvers is credited to well-tuned decision heuristics and
+sophisticated clause learning algorithms.  Collectively, these algorithms
+are referred to as \emph{Conflict Driven Clause Learning}
+(CDCL)~\cite{cdcl}.  An obvious idea is to lift CDCL from the
+\Omit{non-distributive Boolean }domain of partial assignments to other
+non-distributive domains.
+
+%%%%%%%%%%%%%%%%%%%%%%% ACDCL %%%%%%%%%%%%%%%%%%%%%
+Abstract Conflict Driven Clause Learning (ACDCL,~\cite{dhk2013-popl}) is one 
+such lattice-based generalization of CDCL.  ACDCL is a general algorithmic 
+framework, parameterized by a concrete domain $C$  and an abstract domain
+$A$. Classical CDCL can be viewed as an instance of ACDCL 
+in which $C$ is the set of propositional truth assignments and $A$ the 
+domain of propositional partial assignments~\cite{leo-thesis}.  Since 
+the concrete domain of interest is a parameter to the framework, 
+ACDCL can in principle be used to build both 
+\emph{logical decision procedures}~\cite{DBLP:journals/fmsd/BrainDGHK14} 
+and \emph{program analyzers}.  In the former case, the concrete domain is the 
+set of candidate models for the formula; in the latter case, it is the 
+set of program traces that may lead to an error.  Haller et. al. 
+in~\cite{DBLP:journals/fmsd/BrainDGHK14,sas13,fmcad12} illustrate the 
+first idea by presenting an ACDCL based floating-point decision procedure.  
+%
+
+%%%%%%%%%%%%%%%%%%%%%%% ACDLP %%%%%%%%%%%%%%%%%%%%%
+
+In this paper, we present an extension of ACDCL to program analysis.
+We call our framework \emph{Abstract Conflict Driven Learning for Programs}
+(ACDLP).   ACDLP uses partition-based transformer learning to operate over
+non-distributive lattices for safety checking of C programs.  The key insight
+is to use decisions and learning to precisely reason about disjunctions in
+non-distributive domains, thereby automatically refining the precision of
+analysis.  We~introduce two central components of the framework: an abstract
+model search algorithm for programs that searches for counterwitness and an 
+abstract conflict analysis procedure that learns new transformer that
+approximate set of unsafe traces.  
+%%%%%%%%%%%%%%%%%%%%%%% Domain %%%%%%%%%%%%%%%%%%%%%
+We illustrate the application of our framework to program analysis 
+using a \textit{template polyhedra abstract domain}~\cite{tacas08}, which 
+include most of the commonly used abstract domains, such as boxes, 
+octagons~\cite{octagon}, zones~\cite{minethesis} and TCMs~\cite{vmcai05}.  
+
+We present an experimental evaluation of our analyser compared 
+to CBMC~\cite{cbmc.tacas:2004}, which uses propositional solvers, and to 
+Astr{\'e}e~\cite{DBLP:conf/pldi/BlanchetCCFMMMR03}, a commercial abstract 
+interpretation tool.  Our experiments suggest that ACDLP can be seen as a 
+technique to improve efficiency of SAT-based BMC. Additionally, it can 
+also be perceived as an automatic way to improve the precision of abstract 
+interpretation for bounded unwindings of programs.  We make the following 
+contributions.
+%
+\begin{enumerate}
+\item A novel program analysis algorithm that lifts model search and conflict
+analysis procedures over a template polyhedra abstract domain. This is 
+embodied in our tool, \emph{ACDLP}, for automatic bounded 
+safety verification of C programs.
+\item A parameterized abstract transformer that guides the analysis in forward,
+backward and multi-way direction.
+\item A First UIP learning algorithm over relational lattice structures. 
+\end{enumerate}
+%
+
+\Omit{
+While the focus of this paper is the analysis of loop-free unwindings of programs, our technique is in 
+principle compatible with abstract-interpretation-based handling of loops using 
+widenings~\cite{leo-thesis}.  Although, finding non-trivial trace abstraction 
+that satisfy properties of ACDCL is an open problem.  Finally, we present the 
+results of experimental evaluation of our analyser compared to CBMC~\cite{cbmc.tacas:2004}, 
+which uses propositional solvers, and to Astr{\'e}e~\cite{DBLP:conf/pldi/BlanchetCCFMMMR03}, 
+a commercial abstract interpretation tool. 
+}
+%%%%%%%%%%%%%%%%%%%%%%% Experiments %%%%%%%%%%%%%%%%%%%%%
+%\vspace{-7mm}
+
+% This abstract domain captures many
+% relationships between program variables that intervals cannot represent.
+% TM - INTERVALS don't express relationships at all. 
+
+%Fundamentally, the abstract domain of polyhedra~\cite{polyhedra} is a 
+%complete relational domain that capture all linear inequalities 
+%between program variables.  
+%It is a `relational' domain, in the sense that
+%its elements express relationships between two or more program variables. 
+%By contrast, the interval domain expresses constraints on individual program variables.
+
+
+\Omit {
+
+
+%This enables an ACDCL-based analyser to automatically refine an imprecise 
+%analysis and thus prevents enumeration behaviour.  
+
+%To date, ACDCL has been instantiated as a decision procedure for the
+%first-order theory of floating-point arithmetic~\cite{DBLP:journals/fmsd/BrainDGHK14}, 
+
+%\rmcmt{state other limitations}.  
+that is, given abstract domain elements $a$, $b$, $c$, 
+$(a \sqcup b) \sqcap c \sqsupseteq (a \sqcap c) \sqcup (b \sqcap c)$.
+
+We provide a theoretical recipe and a practical instantiation for 
+generalising CDCL architecture to arbitrary abstract domains.   
+
+\paragraph{Abstract Domain.} 
+Limited expressivity of abstract domains may lead to imprecise 
+over-approximation which gives rise to false alarms. Evidently, the 
+verification of many programs requires more expressive numerical domains, 
+such as polyhedra for analysis.  These domains capture numerical 
+relationship between program variables that intervals cannot express.  
+To this end, we provide a theoretical recipe and a practical instantiation 
+for generalising CDCL architecture to arbitrary abstract domains, thus 
+lifting it to richer lattice structures. 
+
+The key motivation of our work is to combine the precision of a SAT solver 
+and the efficiency of an abstract interpreter to present a new class of 
+program analysers.  
+
+\rmcmt{Introduce ACDLP here with a distinct notion for programs}
+Whereas the propositional reasoning of SAT solvers can be lifted easily from the 
+Boolean lattice to other non-relational domains, application to relational 
+domains is challenging because of the relational properties of inferred 
+deductions and the complexity of the closure operation in fixed-point computation 
+during the propagation phase.  In this paper, we identify specific modifications 
+to the CDCL algorithm that are necessary to lift propositional CDCL to 
+template polyhedra domain. 
+
+\rmcmt{Present program and property driven trace partitioning (with inline example with octagons)} 
+}
