@@ -3,15 +3,16 @@
 In this section, we present two simple examples to demonstrate the core idea
 of ACDLP for bounded model checking.  For each example, we apply three
 analysis techniques: \textit{abstract interpretation} (AI), SAT-based
-\textit{bounded model checking} (BMC) and ACDLP.
-
-\paragraph{General Working Mechanism of ACDLP.}
+\textit{bounded model checking} (BMC) and ACDLP. \\ 
 %
-Our first example, shown in Fig.~\ref{fig:example1}, demonstrates that
-interval analysis in ACDLP is more precise than a forward AI in the interval
-domain, and that ACDLP with intervals can achieve a precision similar to
-that of octagonal AI without more sophisticated mechanisms such as trace
-partitioning~\cite{toplas07}.
+\textbf{First Example}
+The simple Control-Flow Graph (CFG) in Fig.~\ref{fig:example1} squares
+a machine integer and checks that the result is positive.  To avoid
+overflow, we assume the input~v has an upper bound~N.  This example 
+demonstrates that a) interval analysis in ACDLP is more precise than a 
+forward AI in the interval domain, and b) ACDLP with intervals 
+can achieve a precision similar to that of octagonal AI without 
+more sophisticated mechanisms such as trace partitioning~\cite{toplas07}.
 %
 \begin{figure}[t]
 \centering
@@ -46,17 +47,18 @@ Control-Flow Graph & Interval Analysis in ACDLP & Octagon Analysis \\
 \caption{\label{fig:example1}
 CFG and corresponding Abstract Conflict Graphs for Interval and Octagon Analysis}
 \end{figure}
+%
 
-The simple Control-Flow Graph (CFG) in Fig.~\ref{fig:example1} squares
-a machine integer and checks that the result is positive.  To avoid
-overflow, we assume the input~v has an upper bound~N.  Conventional
-forward interval AI is too imprecise to verify safety of this program
+
+\noindent \textbf{AI versus ACDLP}
+Conventional forward interval AI is too imprecise to verify safety of this program
 owing to the control-flow join at node~n4.  For example, the
 state-of-the-art AI tool Astr{\'e}e requires external hints, provided
-by manually annotating the code with partition directives at n1.  This
-tells the tool to analyse program paths separately.
+by manually annotating the code with partition directives at n1.  This 
+informs Astr{\'e}e to analyse program paths separately.
 
-ACDLP can be understood as an algorithm to automatically infer such
+%\textbf{General Working Mechanism of ACDLP}
+However, ACDLP can be understood as an algorithm to automatically infer such
 partitions.  For the example in Fig.~\ref{fig:example1}, interval analysis
 with ACDLP is sufficient to prove safety.  The analysis records the
 decisions and deductions in a \textit{trail} data-structure.  The trail can
@@ -88,7 +90,7 @@ partitions necessary for a precise analysis.  Alternatively, the octagon
 analysis in ACDLP---illustrated in the third column of
 Fig.~\ref{fig:example1}---can prove safety with propagations only. 
 No~decisions are required.  Forward AI with octagons in Astr{\'e}e is also
-able to prove safety.
+able to prove safety. \\ \\
 %
 \begin{table}[!b]
 \begin{center}
@@ -139,13 +141,16 @@ Control-Flow Graph & Octagon Analysis in ACDLP \\
 CFG and corresponding Abstract Conflict Graphs for Octagon Analysis}
 \end{figure}
 %
-\paragraph{Decisions and Learning in the Octagon Domain.}
+\noindent \textbf{Second Example}
 Our second example, given in Fig.~\ref{fig:example2}, demonstrates that 
 octagon analysis in ACDLP is more precise than forward AI in the octagon domain.
 % LATER, b) \emph{ACDLP with octagons can outperform SAT-based BMC}.  
 The CFG in Fig.~\ref{fig:example2} computes the absolute 
 values of two variables, $x$ and~$y$, under the assumption 
-$(x=y) \lor (x=-y)$. Forward AI in the octagon domain infers 
+$(x=y) \lor (x=-y)$. 
+
+\noindent \textbf{AI versus ACDLP}
+Forward AI in the octagon domain infers 
 the octagonal constraint $\mathrm{Error}{:}\;(p\geq0 \wedge p+q\geq0 \wedge q\geq0 \wedge p+x\geq0 \wedge 
 p-x\geq0 \wedge q+y\geq0 \wedge q-y\geq0)$. Clearly this is too 
 imprecise to prove safety. 
@@ -165,9 +170,9 @@ results shown in ACG4, ACG5, and ACG6.  Clearly, the decisions $x=-y$ and
 $x<0$ also lead to safety.  The analysis backtracks to DL0 and returns {\em
 safe}.  Note that the specific decision heuristic we use in this case
 exploits the control structure of the program to infer partitions that are
-sufficient to prove safety.
+sufficient to prove safety. \\ \\
 %
-\paragraph{Comparison with BMC.}
+\noindent \textbf{ACDLP versus BMC}
 ACDLP can require many fewer iterations than SAT-based BMC due to its
 ability to reason over much richer lattice structures.
 %in terms of number of {\em decisions}, {\em propagations}, and {\em conflicts}. 
