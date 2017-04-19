@@ -2,6 +2,7 @@
   \centering
 \begin{tikzpicture}[y=.2cm, x=.7cm,font=\sffamily]
  	%axis
+  \Omit{
 	\draw (0,0) -- coordinate (x axis mid) (85,0);
     	\draw (0,0) -- coordinate (y axis mid) (0,5);
     	%ticks
@@ -14,7 +15,22 @@
 	%labels      
 	\node[below=0.8cm] at (x axis mid) {Number of Benchmarks};
   \node[rotate=90, above=0.8cm] at (y axis mid) {Time [seconds]};
+}
 
+
+  \begin{axis}[
+    width=0.8\linewidth,
+    xlabel={Number of Benchmarks},
+    ylabel={Time (seconds)},
+    domain = 1:85,
+    xmin=1, xmax=85,
+    ymin=0, ymax=5,
+    ytick={0,0.2,0.4,...,5}
+    xmode = log,
+    log basis x={2},
+    xticklabel=\pgfmathparse{2^\tick}\pgfmathprintnumber{\pgfmathresult},
+    legend pos = north west
+  ]
 	%plots
 	\draw plot[mark=*, mark options={fill=white}] 
 		file {plotdata/cbmc-time.dat};
@@ -29,7 +45,7 @@
 	\begin{scope}[shift={(4,4)}] 
 	\draw (0,0) -- 
 		plot[mark=*, mark options={fill=white}] (0.25,0) -- (0.5,0) 
-		node[right]{soft};
+		node[right]{CBMC};
     \Omit{
   \draw[yshift=\baselineskip] (0,0) -- 
 		plot[mark=triangle*, mark options={fill=white}] (0.25,0) -- (0.5,0)
