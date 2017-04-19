@@ -271,9 +271,8 @@ mechanism of Algorithm~\ref{Alg:ms} that we describe next.
 \subsection{Algorithm for the Deduction Phase}
 %-------------------------------------------------------------------------------
 %
-
 Algorithm~\ref{Alg:ms} presents the deduction phase $\deduce$ in 
-our abstract model search procedure.  Its  input is 
+our abstract model search procedure.  The input to $\deduce$ is 
 the set of abstract transformers, a propagation trail ($\trail$) 
 and a reason trail~($\reasons$).  Additionally, the procedure 
 $\deduce$ is parametrised by a propagation heuristic ($\propheur$). 
@@ -291,7 +290,7 @@ A subdomain ($\subdomain$) is constructed for $\abstransel{\subdomain}$
 via the function $\makesubdomain$ such that 
 $\subdomain=\makesubdomain_\domain(\subvars)$, where $\subvars$ are 
 the variables that appear in $\abstransel{\subdomain}$. 
-
+\Omit{
 The {\em forward} propagation strategy initialises the worklist with
 ADTs that contain constants in the
 right-hand side; the subdomain is constructed via $\makesubdomain_\domain$
@@ -305,6 +304,7 @@ right-hand side variables.
 The {\em multi-way} propagation strategy initialises the worklist 
 with the set of all transformers; corresponding subdomains 
 contains the variables occurring in the respective transformers.
+}
 %
 The abstract value $\absval$ is updated upon the application of 
 $\abstransel{\subdomain}$ in line~4 in Algorithm~\ref{Alg:ms}. 

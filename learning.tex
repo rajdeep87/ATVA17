@@ -1,124 +1,68 @@
 \section{Abstract Conflict Analysis in Template Polyhedra Domain}\label{sec:conflict}
 %
-A logic-based abductive inference~\cite{abd1} tries to find an explanation $\phi$ 
-from a statement $\formula$ such that the truth of $\phi$ is sufficient to 
-guarantee the truth of $\formula$ and $\phi$ is consistent with the background
-theory.  However, our formalization of abductive inference in this work is a dual of 
-deductive inference that takes an input set $\allval$ contradicting a 
-$\formula$ and find a weakest reason or explanation for $\allval$, assuming 
-that $\formula$ is unsatisfiable.
+Propositional conflict analysis with FIRST-UIP~\cite{cdcl} can be seen 
+as abductive reasoning that under-approximates a 
+set of models that do not satisfy a formula~\cite{sas12,dhk2013-popl}.  
+Below, we present an abstract conflict analysis procedure, $\analyzeconflict$ of 
+Algorithm~\ref{Alg:acdcl}, that uses a 
+domain-specific abductive transformer for effective learning. 
+A conflict analysis procedure involves two steps: {\em abduction} 
+and {\em heuristic choice for generalisation}. Abduction infers 
+possible generalisations for a conflict which is followed by 
+heuristically selecting a generalisation.  The main idea of abductive reasoning is to 
+iteratively replace a singleton assignment $s$ in the conflict 
+reason by a partial assignment that is sufficient to infer $s$.  
+Informally, an abstract abductive transformer, $\abd{}{}$, 
+for a given formula $\formula$ adds abstract models to the input set
+$\allval$, that do not satisfy $\formula$. 
 %
+For example, an abstract abductive transformer for $\formula=\{x=y+1\}$ 
+is given by, $\abd{x=y+1}{\intervals}(x \geq 0)=(x \geq 0 \cup y \leq -2)$.
+%
+Conflict abduction is performed by obtaining cuts through markings in the 
+trail $\trail$, by the application of abstract Unique Implication Point (UIP) 
+search algorithm~\cite{uip,cdcl}.  Every cut in the graph is a reason for conflict. 
+%
+\Omit{
 \begin{definition}
 An \emph{abstract abductive transformer}, 
 $\abd{\formula}{\domain}: \allval \rightarrow \allval$, for a 
 formula $\formula$ over an input set of abstract values 
 $\allval$ in abstract domain $\domain$ such that 
-$\ded{\formula}{\domain}(\allval) \sqsubseteq \bot$, is given by, 
+$\ded{}{\domain}(\allval) \sqsubseteq \bot$, is given by, 
 $\abd{\formula}{\domain}(\allval)=\{\absval \mid \absval \in \allval 
 \vee \absval\not\models\formula\}$. \\
 \end{definition}
-%
-An abstract abductive transformer is thus a dual of abstract
-deduction transformer, that is, 
-$\ded{\formula}{\domain}(\allval)$=$\neg\circ\abd{\formula}{\domain}(\neg\allval)$. 
-Informally, an abstract abductive transformer,
-$\abd{}{}$, for a given formula $\formula$ adds abstract models to the input set
-$\allval$, that do not satisfy $\formula$. 
-%
-\begin{exmp}
-For example, an abstract abductive transformer for $\formula=\{x=y+1\}$ 
-is given by, $\abd{x=y+1}{\intervals}(x \geq 0)=(x \geq 0 \cup y \leq -2)$.
-\end{exmp}
-%
-The FIRST-UIP algorithm in SAT solver can be seen as abductive 
-reasoning~\cite{leo-thesis} over the elements in the reasons 
-trail, $\reasons$.  The abstract conflict analysis procedure in 
-ACDLP with the FIRST-UIP computes an under-approximation of the 
-abstract abductive transformer, $\abd{\formula}{\domain}(\allval)$, 
-since the result of $\abd{}{}$ returns a generalization of the 
-original conflict reason $\allval$. 
-
-It decomposes the global abductive transformer over the formula 
-$\formula$ and original conflict reason $\phi$ into several 
-local single-step abduction over the elements in the reasons 
-trail, $\reasons$ and propagation trail $\trail$. That is, 
-each application of single-step abduction compute generalized 
-reasons for individual deductions through the 
-application of \emph{abductive generalization tranformer}, 
-$\abdgen{\formula}{\dedresult}{\domain}$, which is defined next. 
-%
-\begin{definition}
-Assuming that $\dedresult$ is deduced from a formula $\formula$ starting from 
-an abstract value $\absval$, an {\em abductive generalisation transformer}, 
-  $\abdgen{\formula}{\dedresult}{\domain}: \absval \rightarrow \absval'$, 
-for a formula $\formula$ maps an existing reason $\absval \in \allval$    
-for the deduction result $\dedresult$ to a generalized reason $\absval'$ 
-such that $\absval' \sqsupseteq \absval$. 
-\end{definition}
-%
-\begin{exmp}
-For example, an abductive generalization transformer for the formula 
-$\formula=\{x=y+z\}$ over an interval domain is given by, 
-$\abdgen{x=y+z}{x \geq 6}{\intervals}(0 \leq y \leq 1 \wedge 5 \leq z)=(y \geq 0 
-\wedge z \geq 5)$.
-\end{exmp}
-%
-\Omit{
-\begin{exmp}
-For example, an abductive generalization transformer for the formula 
-$\formula=\{x=2(y+z)\}$ over an octagon domain given by, 
-\begin{equation}\label{eq:abdgen}
-\abdgen{x=2(y+z)}{(0\leq y \leq 2 \wedge 1 \leq y-z \leq 1 \wedge -2\leq x\leq 6)}{\octagons}
-(0\leq y \leq 2 \wedge 1 \leq y-z \leq 1 \wedge t \geq 1 \wedge t \leq 2)
-\end{equation}
-is $(0\leq y \leq 2 \wedge 1 \leq y-z \leq 1)$.
-\end{exmp}
 }
-%
-There can be multiple incomparable generalizations for each application 
-of a transformer $\abstrans{\domain}{\constraint}$. A conflict analysis 
-procedure with FIRST-UIP keeps track of one conflict reason for efficiency 
-reasons.  
-%
-A conflict analysis procedure involves two steps: {\em abduction} 
-and {\em heuristic choice for generalisation}. Abduction infers 
-possible generalisations for conflict which is followed by a heuristic choice
-that heuristically picks one generalisation.  The main idea of abductive reasoning is to 
-iteratively replace a singleton assignment $s$ in the conflict 
-reason by a partial assignment that is sufficient to infer $s$.  
-Conflict abduction is performed by obtaining cuts through markings in the 
-trail $\trail$, by the application of abstract Unique Implication Point (UIP) 
-search algorithm~\cite{uip,cdcl}.  Every cut in the graph is a reason for conflict. 
-%
-Figure~\ref{conflict-oct} illustrates the property of the trail 
-graphically for the formula $\formula= \{x+y=z \wedge x+z=2y \wedge z+y>10\}$.
-For the partial abstract value, 
-$\absval=\{x\leq0 \wedge -x+z\geq4 \wedge x+z\leq4 x-z\geq-4 \wedge z\leq4\}$, 
-obtained from the trail, the result of the abstract deduction transformer is
-$\abstrans{\octagons}{y=(x+z)/2}(\absval)=\{x+y\leq2, y\leq2, y+z\leq6\}$.
 %
 \begin{figure}[htbp]
 \centering
-\scalebox{.50}{\import{figures/}{oct_implgraph.pspdftex}}
+\scalebox{.55}{\import{figures/}{oct_implgraph.pspdftex}}
 \caption{\label{conflict-oct} Finding Abstract UIP in Octagon Domain}
 \end{figure}  
 %
 \subsubsection{Abstract UIP Search}
 An abstract UIP algorithm~\cite{DBLP:journals/fmsd/BrainDGHK14} 
 traverses the trail $\trail$ starting from the conflict node and 
-computes a cut that suffices to produce a conflict.  The algorithm 
-returns a learnt transformer $\aunit$, which is described next. 
-For example, consider a formula $\formula:= (y{=}x \wedge y{=}y{+}x \wedge y {\leq} 0)$. 
-Fig.~\ref{conflict} records the sequence of deductions in the octagon domain 
-that are inferred from a decision $(x{-}5 {\geq} 0 \wedge {-}x{+}5 {\geq} 0)$.  
+computes a cut that suffices to produce a conflict.  
+For example, consider a formula $\formula:= \{x{+}4{=}z \wedge 
+x{+}z{=}2y \wedge z{+}y>10\}$.   Fig.~\ref{conflict} records the 
+sequence of deductions in the octagon domain that are inferred from 
+a decision $(x{\leq}0)$.  The arrows in Fig.~\ref{conflict-oct} shows that 
+for the partial abstract value, 
+$\absval=\{x\leq0 \wedge -x+z\geq4 \wedge x+z\leq4 x-z\geq-4 \wedge z\leq4\}$, 
+obtained from the trail, the result of the abstract deduction transformer is
+$\abstrans{\octagons}{y=(x+z)/2}(\absval)=\{x+y\leq2, y\leq2, y+z\leq6\}$.
 A conflict ($\bot$) is reached for this decision.   
 Note that there exist multiple incomparable reasons for conflict,
-marked as {\em cut0} and {\em cut1} in Fig.~\ref{conflict}.  Here, cut0 is 
+marked as {\em cut0} and {\em cut1} in Fig.~\ref{conflict-oct}.  Here, cut0 is 
 the first UIP (node closest to conflict node).  Choosing cut0 yields 
-a learnt clause $(x+y<15 \vee -x-y<-15 \vee -x+y<5 \vee x-y<-5 \vee y-10<0 \vee -y+10<0)$, 
-which is obtained by negating the reason for conflict.  
+a learnt clause $(x+y > 2 \vee y > 2 \vee y+z>6)$, which is obtained by 
+negating the reason for conflict.  The abstract UIP algorithm returns a learnt 
+transformer $\aunit$, which is described next. 
 %    
 \subsubsection{Learning in Template Polyhedra Domain}
+%
 Learning in a propositional solvers yields an asserting
 clause~\cite{cdcl} that expresses the negation of the conflict
 reasons.  We present a lattice-theoretic generalisation of the 
@@ -143,8 +87,6 @@ Rule (1) shows $\aunit$ returns $\bot$ since
 $\absval \sqsubseteq \bigsqcap \conflictset$ is conflicting.  
 Rule (2) $\aunit$ infer a valid meet irreducible, 
 which implies that $\conflictset$ is unit.
-
-%$\aunit$ strictly generalizes the unit rule in SAT solvers.  
 %
 Let us consider an example, where $\conflictset = \{x \geq 2, x \leq 5, y
 \leq 7 \}$ and $\absval = (x \geq 3\wedge\allowbreak x \leq
@@ -157,7 +99,6 @@ $\absval \sqsubseteq (x \geq 2)$ and $\absval \sqsubseteq (x \leq 5)$.
 If~none of the above rules hold true, $\aunit$ returns~$\top$.
 %
 \subsubsection{Backjumping}
-%After adding $\aunit$ to $\abstransset$, we 
 A backjumping procedure removes all the meet irreducibles from 
 the trail up to a decision level that restores the analysis to a
 non-conflicting state.  The backjumping level is defined by the
@@ -166,60 +107,3 @@ to the root (decision level~0) where the conflict
 clause is still unit.  If a conflict clause is globally unit, then the
 backjumping level is the root of the search tree and
 $\analyzeconflict$ returns $\false$, otherwise it returns $\true$.
-
-%The abstract clause learning and backjumping procedures in the abstract 
-%conflict graph is stated in terms of the state of ACDLP solver as follows.
-%THIS is already explained above
-%\[AbsLearn: \quad  (\mathcal{E},S) \rightarrow (\mathcal{E},S \wedge
-%\mathcal{L}) \quad \text{if} \; \mathcal{L} \notin S \; \textrm{and}
-%\; (S \wedge \mathcal{L}) \; \text{is not UNSAT} \]
-%\[AbsBackjump: \quad (\mathcal{E}_1(m,s)\mathcal{E}_2,S) \rightarrow
-%(\mathcal{E}_1,S) \quad \text{if} \; (\mathcal{E}_1,S) \; \text{is not in conflict} \]   
-
-\Omit {
-\subsection{Clause Learning in Abstract Lattice}
-Conflict graph for Intervals
-Conflict graph for Octagons
-
-\textit{Characteristics of Conflict clause}
-\begin{enumerate}
-\item A conflict clause must include asserting cuts. An asserting cut is a cut
-that contain exactly one node at the current decision level. Assertion cuts yields 
-clauses that can be used to derive new information after backtracking.
-
-\item A conflict clause must be UNIT after backtracking. 
-
-\item There can be multiple cuts and hence multiple UIPs. In other words, there
-can be multiple incomparable reasons for a conflict. But conflict analysis
-procedure chooses one that is asserting. 
-
-\item The conflict clause should be made false by the current partial assignment
-and thus exclude an assignment leading to conflict. 
-\end{enumerate}
-
-1.DPLL style -- chronological backtracking \\
-2. CDCL style -- non-chronological backtracking \\
-  a. first-uip \\
-  b. last-uip \\
-
-**********************************************
-\subsection{Lifting First UIP to Octagon domain}
-**********************************************
-unit-ness guarantee in octagon domain:
-  Popped stmt: y23=1+y21
-   Abstract value:
-   D1: y23-y21 < 2 &&
-   D2: y23+y21 > 0 &&
-   D3: y21 < 1
-   After backtracking, apply unit rule 
-   y23 > 1 -- deduction from unit rule
-   Value inconsistent !!
- 
- Note: 
- 1> cannot make reasoning at literal level for relational domain because literals are dependant on each other. As soon as literals denote relation between first-order variables, the pure reasoning on boolean skeleton is not sufficient. 
- 
-2> Intervals are orthogonal half spaces similar to booleans. 
-
-3> After backtracking, the application of unit rule is done as follows for relational domains:
-  Pass the learnt clause (as statement) and the abstrat value to the domain to make deductions.
-}
