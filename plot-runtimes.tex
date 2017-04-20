@@ -5,7 +5,7 @@
   \begin{axis}[
     width=\linewidth,
     xlabel={Number of Benchmarks},
-    ylabel={Time (seconds)},
+    ylabel={Time seconds},
     domain = 1:85,
     xmin=1, xmax=85,
     ymin=0, ymax=5,
@@ -15,6 +15,8 @@
     xticklabel=\pgfmathparse{2^\tick}\pgfmathprintnumber{\pgfmathresult},
     legend pos = north west
   ]
+    %\addplot [dashed]
+    % {plotdata/cbmc-time.dat};
 	%plots
 	\draw plot[mark=*, mark options={fill=white}] 
 		file {plotdata/cbmc-time.dat};
@@ -24,7 +26,7 @@
 	%	file {div_ciu_oscar.dat};
 	%\draw plot[mark=square*]
 	%	file {div_ciu_oscar_extrapolated.dat};  
-    
+  \end{axis}  
 	%legend
 	\begin{scope}[shift={(4,4)}] 
 	\draw (0,0) -- 
