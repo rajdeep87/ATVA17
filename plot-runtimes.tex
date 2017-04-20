@@ -1,31 +1,15 @@
 \begin{figure}[t]
   \centering
-\begin{tikzpicture}[y=.2cm, x=.7cm,font=\sffamily]
+\begin{tikzpicture}
  	%axis
-  \Omit{
-	\draw (0,0) -- coordinate (x axis mid) (85,0);
-    	\draw (0,0) -- coordinate (y axis mid) (0,5);
-    	%ticks
-    	\foreach \x in {0,...,85}
-     		\draw (\x,10pt) -- (\x,-3pt)
-			node[anchor=north] {\x};
-    	\foreach \y in {0,1,...,5}
-     		\draw (0.01pt,\y) -- (-3pt,\y) 
-     			node[anchor=east] {\y}; 
-	%labels      
-	\node[below=0.8cm] at (x axis mid) {Number of Benchmarks};
-  \node[rotate=90, above=0.8cm] at (y axis mid) {Time [seconds]};
-}
-
-
   \begin{axis}[
-    width=0.8\linewidth,
+    width=\linewidth,
     xlabel={Number of Benchmarks},
     ylabel={Time (seconds)},
     domain = 1:85,
     xmin=1, xmax=85,
     ymin=0, ymax=5,
-    ytick={0,0.2,0.4,...,5}
+    ytick={0,0.2,0.4,...,5},
     xmode = log,
     log basis x={2},
     xticklabel=\pgfmathparse{2^\tick}\pgfmathprintnumber{\pgfmathresult},
