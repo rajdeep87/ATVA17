@@ -60,7 +60,7 @@ first idea by presenting an ACDCL based floating-point decision procedure.
 
 In this paper, we present an extension of ACDCL to program analysis.
 We call our framework \emph{Abstract Conflict Driven Learning for Programs}
-(ACDLP).   ACDLP uses partition-based transformer learning to operate over
+(ACDLP).   ACDLP uses decision and learning techniques to operate over
 non-distributive lattices for safety checking of C programs.  The key insight
 is to use decisions and learning to precisely reason about disjunctions in
 non-distributive domains, thereby automatically refining the precision of
@@ -83,14 +83,16 @@ also be perceived as an automatic way to improve the precision of abstract
 interpretation for bounded unwindings of programs.  We make the following 
 contributions.
 %
+\vspace{-3mm}
 \begin{enumerate}
 \item A novel program analysis algorithm that lifts model search and conflict
-analysis procedures over a template polyhedra abstract domain. This is 
-embodied in our tool, \emph{ACDLP}, for automatic bounded 
+analysis procedures over a template polyhedra abstract domain. These techniques
+are embodied in our tool, \emph{ACDLP}, for automatic bounded 
 safety verification of C programs.
-\item A parameterized abstract transformer that guides the analysis in forward,
-backward and multi-way direction.
-\item A First UIP learning algorithm over relational lattice structures. 
+\item We present a parameterized abstract transformer for counterwitness 
+  search that guides the analysis in forward, backward and multi-way direction.
+\item A UIP-based transformer learning over template polyhedra abstract domain 
+  through abductive reasoning for effective conflict analysis. 
 \end{enumerate}
 %
 
