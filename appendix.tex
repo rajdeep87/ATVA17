@@ -1,7 +1,7 @@
 \appendix
 %
 \section{Detailed Experimental Results}\label{appendix:extended_result}
-
+\rmcmt{recount total benchmarks in tables}
 Table~\ref{detailed_result} gives a detailed comparison between CBMC version
 5.5 and ACDLP.  Columns~1--4 in Table~\ref{detailed_result} contain the
 name of the tool, the benchmark category, the number of lines of code (LOC),
@@ -68,8 +68,6 @@ bit-wise operations out-of-the-box.
 \label{detailed_result}
 \end{table}
 %
-
-
 The statistics reported in Table~\ref{detailed_result} for ACDLP is obtained 
 with an ordered decision heuristic, multi-way propagation heuristic and a
 first-UIP learning heuristic.  Note that the deductions using a 
@@ -78,17 +76,7 @@ heuristics, but it takes longer time to reach the fixed-point.
 Another advantage of multi-way heuristic is that it significantly 
 reduces the overall number of decisions and learning iterations due to stronger 
 and more precise deductions.  Analysis using ACDLP reduces the total number of 
-decisions, propagations and learning compared to CBMC by a factor of~2X.  However, 
-the total analysis time for CBMC is less than ACDLP.  
-%SAT solvers have been engineered for optimized performance. 
-Our template polyhedra domain is not optimized for efficiency and hence we 
-perform our comparison based on the number of decisions, propagations and conflicts.  
-SAT-based analysis is still faster in terms of runtime. Our hope is that the
-large reduction in number of decisions and conflicts can lead to improved
-runtime given efficient domain implementations.
-
-%\rmcmt{This is mainly due to the excellent performance of the
-%underlying SAT solver that has been engineered heavily over the past decade. }
+decisions, propagations and learning compared to CBMC by a factor of~2X.  
 %
 \begin{table}[t]
 \begin{center}
