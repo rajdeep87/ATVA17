@@ -14,16 +14,16 @@
     ymode = log,
     %log basis x={2},
     %xticklabel=\pgfmathparse{2^\tick}\pgfmathprintnumber{\pgfmathresult},
-    legend pos = south west,
+    legend pos = north west,
     grid = major,
     major grid style={line width=.2pt,draw=gray!50}
   ]
 	
   %plots
-  \addplot table [only marks, y=time, x=Benchmarks]{plotdata/cbmc-time.dat};
+  \addplot table [only marks, y=time, x=Benchmarks]{plotdata/sorted-cbmc-time.dat};
 	\addlegendentry{CBMC}
   
-  \addplot table [only marks, y=time, x=Benchmarks]{plotdata/acdlp-time.dat};
+  \addplot table [only marks, y=time, x=Benchmarks]{plotdata/sorted-acdlp-time.dat};
   \addlegendentry{ACDLP}
   
   %\draw plot[mark=*, mark options={fill=white}] 
