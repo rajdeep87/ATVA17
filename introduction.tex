@@ -2,16 +2,16 @@
 
 %%%%%%%%%%%%%%%%%%%%%%% AI %%%%%%%%%%%%%%%%%%%%%%%%
 %
-Static program analysis with abstract interpretation has been widely used to
-verify properties of safety-critical systems~\cite{CC77,
-DBLP:conf/pldi/BlanchetCCFMMMR03}.  Static analyses commonly aim to compute
-program invariants as fixed-points of abstract transformers~\cite{se2011}. 
-Abstract states are chosen from a lattice that has meet $(\sqcap)$ and join
-$(\sqcup)$ operations; the meet precisely models set intersection (or
-conjunction, taking a logical view), and the join over-approximates set
-union (or disjunction).  Over-approximation in the join operation is one of
-the sources of precision loss that can yield false alarms.  Typical abstract
-domains are non-distributive; suppose $a$ and $b$ together represent the
+Static program analysis with abstract interpretation has been widely 
+used to verify properties of safety-critical systems~\cite{CC77}.  
+Static analyses commonly aim to compute program invariants as 
+fixed-points of abstract transformers.  Abstract states are chosen 
+from a lattice that has meet $(\sqcap)$ and join $(\sqcup)$ operations; 
+the meet precisely models set intersection (or conjunction, taking a 
+logical view), and the join over-approximates set union (or disjunction).  
+Over-approximation in the join operation is one of the sources of 
+precision loss that can yield false alarms.  Typical abstract domains 
+are non-distributive; suppose $a$ and $b$ together represent the
 abstract semantics of a program and $c$ represents a set of abstract
 behaviours that violate the specification.  In a non-distributive domain,
 $(a \sqcup b) \sqcap c$ can be strictly less precise than $(a \sqcap c)
@@ -35,9 +35,8 @@ are often able to avoid enumerating cases.  The impressive performance of
 modern solvers is credited to well-tuned decision heuristics and
 sophisticated clause learning algorithms.  Collectively, these algorithms
 are referred to as \emph{Conflict Driven Clause Learning}
-(CDCL)~\cite{cdcl}.  An obvious idea is to lift CDCL from the
-\Omit{non-distributive Boolean }domain of partial assignments to other
-non-distributive domains.
+(CDCL)~\cite{cdcl}.  An obvious idea is to lift CDCL from the domain of 
+partial assignments to other non-distributive domains.
 
 %%%%%%%%%%%%%%%%%%%%%%% ACDCL %%%%%%%%%%%%%%%%%%%%%
 Abstract Conflict Driven Clause Learning (ACDCL,~\cite{dhk2013-popl}) is one 
@@ -52,7 +51,7 @@ ACDCL can in principle be used to build both
 and \emph{program analyzers}.  In the former case, the concrete domain is the 
 set of candidate models for the formula; in the latter case, it is the 
 set of program traces that may lead to an error.  Haller et. al. 
-in~\cite{DBLP:journals/fmsd/BrainDGHK14,sas13,fmcad12} illustrate the 
+in~\cite{DBLP:journals/fmsd/BrainDGHK14} illustrate the 
 first idea by presenting an ACDCL based floating-point decision procedure.  
 %
 
@@ -72,7 +71,7 @@ approximate set of unsafe traces.
 We illustrate the application of our framework to program analysis 
 using a \textit{template polyhedra abstract domain}~\cite{tacas08}, which 
 include most of the commonly used abstract domains, such as boxes, 
-octagons~\cite{octagon}, zones~\cite{minethesis} and TCMs~\cite{vmcai05}.  
+octagons, zones and TCMs.  
 
 We present an experimental evaluation of our analyser compared 
 to CBMC~\cite{cbmc.tacas:2004}, which uses propositional solvers, and to 
