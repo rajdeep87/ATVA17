@@ -126,7 +126,7 @@ precise than the analysis in Astr{\'e}e.
 \section{Decision Heuristics in ACDLP}
 %
 We have implemented several decision heuristics in ACDLP: {\em ordered}, 
-{\em longest-range}, {\em random}, and the {\em Berkmin}~\cite{eugoldberg07} 
+{\em longest-range}, {\em random}, and the {\em Berkmin} 
 decision heuristic.  The {\em ordered} decision heuristic 
 %creates an ordering among meet irreducibles, 
 makes decisions on meet irreducibles that involve conditional 
@@ -154,7 +154,7 @@ for making decision.
 %abstract domains.  
 %
 The {\em Berkmin} decision heuristic is inspired by the 
-decision heuristic used in the Berkmin~\cite{eugoldberg07} SAT solver.  
+decision heuristic used in the Berkmin SAT solver.  
 The Berkmin heuristic %is currently implemented for interval constraints only.  
 %The heuristic 
 keeps track of the activity of %an interval 
@@ -209,7 +209,7 @@ thus allowing the heuristics to choose the decision variable among the set of le
 %
 Learning has a significant influence on the runtime of ACDLP.  We compare
 the UIP-based learning technique with an analysis that performs classical 
-DPLL-style analysis~\cite{DPLL62}.
+DPLL-style analysis.
 %chronoligical backtracking without learning.  
 The effect of UIP computation allows ACDLP to backtrack non-chronologically 
 and guide the model search with a learnt transformer.  But classical 
@@ -219,7 +219,7 @@ within the time bound for 20\% of our benchmarks.
 \section{Computing Lazy Closure in Template Polyhedra Domain}\label{appendix:lazyclosure}
 %
 Computing the closure for relational domains, such as octagons, is
-expensive~\cite{pldi15}.  An~advantage of our formalism in
+expensive.  An~advantage of our formalism in
 Eq.~(\ref{eq:at2}) is that the \emph{closure} operation for relational
 domains can be computed in a lazy manner through the construction of a
 subdomain.  A subdomain $\subdomain$ is constructed from domain $\domain$
