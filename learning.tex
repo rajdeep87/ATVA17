@@ -80,13 +80,16 @@ complementable meet irreducibles and a set of meet irreducibles $\conflictset
   \bot       & \text{if } \absval \sqsubseteq \bigsqcap \conflictset & (1)\\
   \bar{t}    & \text{if } t \in \conflictset \; \text{and} \; \forall t' \in \conflictset
   \setminus \{t\}. \absval  \sqsubseteq t' & (2) \\
-  \top & \text{otherwise} & (4) \\
+  \top & \text{otherwise} & (3) \\
  \end{array}\right.
 \]
 Rule (1) shows $\aunit$ returns $\bot$ since 
 $\absval \sqsubseteq \bigsqcap \conflictset$ is conflicting.  
-Rule (2) $\aunit$ infer a valid meet irreducible, 
-which implies that $\conflictset$ is unit.
+Rule (2) of $\aunit$ infer a valid meet irreducible, 
+which implies that $\conflictset$ is unit.  However, if 
+$\aunit$ returns $\top$, then the learned clause is not 
+asserting after backtracking.  This would prevent any new 
+deductions from the learned clause. Progress is then made by decisions.
 %
 Let us consider an example, where $\conflictset = \{x \geq 2, x \leq 5, y
 \leq 7 \}$ and $\absval = (x \geq 3\wedge\allowbreak x \leq
@@ -107,3 +110,4 @@ to the root (decision level~0) where the conflict
 clause is still unit.  If a conflict clause is globally unit, then the
 backjumping level is the root of the search tree and
 $\analyzeconflict$ returns $\false$, otherwise it returns $\true$.
+\rmcmt{Termination of Learning over TP domain}
