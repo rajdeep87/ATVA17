@@ -110,21 +110,17 @@ For example, a decision in the interval domain restricts the range of
 intervals for variables.
 %
 We set the corresponding entry in the reason trail~$\reasons$ to $\top$
-to mark it as a decision.
-% so the analysis jumps under a 
-%greatest fixed-point \pscmt{???}. Note that the widening operation in abstract interpretation 
-%jumps above a least fixed-point, so decisions can be viewed as 
-%{\em dual widening} \pscmt{what do we learn?}.  
+to mark it as a decision.  Here, the index of $\reasons$ is the size 
+of trail $\trail$, denoted by $|\trail|$.
 %
 The procedure $\deduce$ is called next to infer new meet irreducibles
 based on the current decision.  The model search phase
 alternates between the decision and deduction until $\deduce$ returns
 either \textsf{sat} or \textsf{conflict}.  
 
-If  $\deduce$ returns  \textsf{sat}, then 
-we have found an abstract value that represents models of the safety formula, which
-are counterexamples to the required safety property, and so ACDLP return
-\textsf{unsafe}.
+If  $\deduce$ returns  \textsf{sat}, then we have found an abstract value 
+that represents models of the safety formula, which are counterexamples 
+to the required safety property, and so ACDLP return \textsf{unsafe}.
 %
 % has found an abstract value that represents a set of models of $\formula$ or the
 % deduction leads to a \textsf{conflict}.  Checking whether the abstract
