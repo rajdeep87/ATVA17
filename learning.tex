@@ -12,7 +12,7 @@ possible generalisations for a conflict which is followed by
 heuristically selecting a generalisation.  The main idea of abductive reasoning is to 
 iteratively replace a singleton assignment $s$ in the conflict 
 reason by a partial assignment that is sufficient to infer $s$.  
-Informally, an abstract abductive transformer, $\abd{}{}$, 
+Informally, an abstract abductive transformer, $\abd{}{}(A)$, 
 for a given formula $\formula$ adds abstract models to the input set
 $\allval$, that do not satisfy $\formula$. 
 %
@@ -21,7 +21,7 @@ is given by, $\abd{x=y+1}{\intervals}(x \geq 0)=(x \geq 0 \cup y \leq -2)$.
 %
 Conflict abduction is performed by obtaining cuts through markings in the 
 trail $\trail$, by the application of abstract Unique Implication Point (UIP) 
-search algorithm~\cite{uip,cdcl}.  Every cut in the graph is a reason for conflict. 
+search algorithm~\cite{cdcl}.  Every cut in the graph is a reason for conflict. 
 %
 \Omit{
 \begin{definition}
@@ -38,7 +38,7 @@ $\abd{\formula}{\domain}(\allval)=\{\absval \mid \absval \in \allval
 \begin{figure}[t]
 \centering
 \scalebox{.55}{\import{figures/}{oct_implgraph.pspdftex}}
-\caption{\label{conflict-oct} Finding Abstract UIP in Octagon Domain}
+\caption{\label{uip} Finding Abstract UIP in Octagon Domain}
 \end{figure}  
 %
 \subsubsection{Abstract UIP Search}
@@ -46,18 +46,19 @@ An abstract UIP algorithm~\cite{DBLP:journals/fmsd/BrainDGHK14}
 traverses the trail $\trail$ starting from the conflict node and 
 computes a cut that suffices to produce a conflict.  
 For example, consider a formula $\formula:= \{x{+}4{=}z \wedge 
-x{+}z{=}2y \wedge z{+}y>10\}$.   Fig.~\ref{conflict} records the 
+x{+}z{=}2y \wedge z{+}y>10\}$.  The ACG in Fig.~\ref{uip} records the 
 sequence of deductions in the octagon domain that are inferred from 
-a decision $(x{\leq}0)$.  The arrows in Fig.~\ref{conflict-oct} shows that 
-for the partial abstract value, 
+a decision $(x{\leq}0)$ for the formula $\formula$.  The arrows (in red) 
+shows the relationship between the reason trail and propagation trail in 
+bottom of Fig.~\ref{uip}.  For the partial abstract value, 
 $\absval=\{x\leq0 \wedge -x+z\geq4 \wedge x+z\leq4 x-z\geq-4 \wedge z\leq4\}$, 
 obtained from the trail, the result of the abstract deduction transformer is
 $\abstrans{\octagons}{y=(x+z)/2}(\absval)=\{x+y\leq2, y\leq2, y+z\leq6\}$.
-A conflict ($\bot$) is reached for this decision.   
+A conflict ($\bot$) is reached for the decision ${x{\leq}0}$.   
 Note that there exist multiple incomparable reasons for conflict,
-marked as {\em cut0} and {\em cut1} in Fig.~\ref{conflict-oct}.  Here, cut0 is 
+marked as {\em cut0} and {\em cut1} in Fig.~\ref{uip}.  Here, cut0 is 
 the first UIP (node closest to conflict node).  Choosing cut0 yields 
-a learnt clause $(x+y > 2 \vee y > 2 \vee y+z>6)$, which is obtained by 
+a learnt clause $(y+z>6)$, which is obtained by 
 negating the reason for conflict.  The abstract UIP algorithm returns a learnt 
 transformer $\aunit$, which is described next. 
 %    
@@ -99,7 +100,6 @@ $\aunit_\conflictset(\absval) = \bot$ using the rule (1), since $\absval
 $\absval = (x \geq 3\wedge x \leq 4)$ and the same $\conflictset$ as above,
 then $\aunit_\conflictset(\absval) = (y \geq 8)$ using rule (2), since
 $\absval \sqsubseteq (x \geq 2)$ and $\absval \sqsubseteq (x \leq 5)$.  
-If~none of the above rules hold true, $\aunit$ returns~$\top$.
 %
 \subsubsection{Backjumping}
 A backjumping procedure removes all the meet irreducibles from 
