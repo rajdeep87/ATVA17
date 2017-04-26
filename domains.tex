@@ -170,9 +170,9 @@ $\formula$ is unsatisfiable if and only if the program is safe.
 %-------------------------------------------------------------------------------
 \subsection{Abstract Domain}
 %-------------------------------------------------------------------------------
-SAT solvers operate on the domain of partial
-assignments~\cite{sas12,dhk2013-popl}.  In this paper, we use a reduced
-product domain~\cite{CC79}
+%Silva et. al.~\cite{sas12,dhk2013-popl} showed that SAT solvers operate on the domain 
+%of partial assignments~\cite{sas12,dhk2013-popl}.  
+In this paper, we instantiate ACDLP over a reduced product domain~\cite{CC79}
 $\domain[\vars]=\booldomain^{|\boolvars|}\times\reldomain[\numvars]$ where
 $\booldomain$ is the Boolean domain that permits abstract values
 $\{\true,\false,\bot,\top\}$ over boolean variables $\boolvars$ in the
@@ -186,7 +186,7 @@ over $\numvars$, as given in Table~\ref{domain}.
 \subsubsection{Template Polyhedra Abstract Domain}
 %-------------------------------------------------------------------------------
 %
-An abstract value of the template polyhedra domain~\cite{sriram}
+An abstract value of the template polyhedra domain~\cite{vmcai05}
 represents a set $\numconcval$ of values of the vector $\vec{\numvar}$ 
 of numerical (bitvector) variables $\numvars$ of their respective
 data types. (Currently, signed and unsigned integers are supported.)
@@ -216,7 +216,7 @@ $(a \leq x_i \leq b)$ & $(\pm x_i \pm x_j \leq d)$ & $(x_i - x_j \leq d)$ &
 \end{table}
 %
 There are several optimisation-based 
-techniques~\cite{sriram,GS07b,BJKS15} for computing the domain operations, 
+techniques~\cite{vmcai05} for computing the domain operations, 
 such as meet ($\meet$) and join ($\sqcup$), in the template polyhedra domain.  
 In our implementation, we use the strategy iteration approach of~\cite{BJKS15}.
 %
@@ -333,8 +333,8 @@ $\abstransset=\{\abstrans{\domain}{\constraint}\mid
 An important property of a clause-learning SAT solver is that each
 non-singleton element of the partial assignment domain can be 
 decomposed into a set of \textit{precisely complementable} singleton
-elements~\cite{dhk2013-popl}.  This property 
-is required to learn elements that help to guide the model search away from the
+elements~\cite{dhk2013-popl}.  This property of domain elements
+are necessary to learn elements that help to guide the model search away from the
 conflicting region of the search space.  
 % The complementation operator 
 % in abstract domains is different from the notion of precise complements. 
