@@ -52,25 +52,27 @@ and \emph{program analyzers}.  In the former case, the concrete domain is the
 set of candidate models for the formula; in the latter case, it is the 
 set of program traces that may lead to an error.  Haller et. al. 
 in~\cite{DBLP:journals/fmsd/BrainDGHK14} illustrate the 
-first idea by presenting an ACDCL based floating-point decision procedure.  
+first idea by presenting a floating-point decision procedure that uses interval 
+constraint propagation.
 %
 
 %%%%%%%%%%%%%%%%%%%%%%% ACDLP %%%%%%%%%%%%%%%%%%%%%
 
-In this paper, we present an extension of ACDCL to program analysis.
-We call our framework \emph{Abstract Conflict Driven Learning for Programs}
-(ACDLP).   ACDLP uses decision and learning techniques to operate over
-non-distributive lattices for safety checking of C programs.  The key insight
-is to use decisions and learning to precisely reason about disjunctions in
-non-distributive domains, thereby automatically refining the precision of
-analysis.  We~introduce two central components of the framework: an abstract
-model search algorithm for programs that searches for counterwitness and an 
-abstract conflict analysis procedure that learns new transformer that
-approximate set of unsafe traces.  
+In this paper, we explore the second idea by presenting an extension of 
+ACDCL to program analysis.  We call our 
+framework \emph{Abstract Conflict Driven Learning for Programs}
+(ACDLP).  The key insight of ACDLP is to use decisions and learning to precisely 
+reason about disjunctions in non-distributive domains, thereby automatically 
+refining the precision of analysis for safety checking of C programs.  
+We~introduce two central components of our framework: an abstract
+model search algorithm that uses decisions and propagations to 
+search for counterexample trace and an abstract conflict analysis 
+procedure that approximate a set of unsafe traces through transformer 
+learning.
 %%%%%%%%%%%%%%%%%%%%%%% Domain %%%%%%%%%%%%%%%%%%%%%
 We illustrate the application of our framework to program analysis 
-using a \textit{template polyhedra abstract domain}~\cite{tacas08}, which 
-include most of the commonly used abstract domains, such as boxes, 
+using a \textit{template polyhedra abstract domain}~\cite{vmcai05}, 
+which include most of the commonly used abstract domains, such as boxes, 
 octagons, zones and TCMs.  
 
 We present an experimental evaluation of our analyser compared 
@@ -86,12 +88,13 @@ contributions.
 \begin{enumerate}
 \item A novel program analysis algorithm that lifts model search and conflict
 analysis procedures over a template polyhedra abstract domain. These techniques
-are embodied in our tool, \emph{ACDLP}, for automatic bounded 
-safety verification of C programs.
-\item We present a parameterized abstract transformer for counterwitness 
-  search that guides the analysis in forward, backward and multi-way direction.
-\item A UIP-based transformer learning over template polyhedra abstract domain 
-  through abductive reasoning for effective conflict analysis. 
+are embodied in our tool, \emph{ACDLP}, for automatic bounded safety verification 
+    of C programs.
+\item A parameterized abstract transformer that guides the model
+  search in forward, backward and multi-way direction for counterexample
+    detection. 
+\item A conflict analysis procedure that performs UIP-based transformer learning 
+  over template polyhedra abstract domain through abductive reasoning. 
 \end{enumerate}
 %
 

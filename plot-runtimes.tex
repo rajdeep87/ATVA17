@@ -20,12 +20,16 @@
   ]
 	
   %plots
-  \addplot table [only marks, y=time, x=Benchmarks]{plotdata/sorted-cbmc-time.dat};
+    \addplot table [only marks, mark options={fill=white}, text mark as
+    node=true, y=time, x=Benchmarks]{plotdata/sorted-cbmc-time.dat};
 	\addlegendentry{CBMC}
   
   \addplot table [only marks, y=time, x=Benchmarks]{plotdata/sorted-acdlp-time.dat};
   \addlegendentry{ACDLP}
   
+  \addplot table [only marks, y=time, x=Benchmarks]{plotdata/sorted-astree-time.dat};
+    \addlegendentry{Astr{\'e}e}
+ 
   %\draw plot[mark=*, mark options={fill=white}] 
 	%	file {plotdata/cbmc-time.dat};
 	
