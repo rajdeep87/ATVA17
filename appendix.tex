@@ -106,15 +106,6 @@ tool, the benchmark category, the total number of instances proved safe or
 unsafe (labelled as safe/unsafe), the total number of inconclusive
 benchmarks and total number of false positives per category.
 
-To enable precise analysis using Astr{\'e}e, we manually instrumented 
-partition directives in some benchmarks.  These directives provides 
-external hint to the tool to guide the trace partitioning heuristics.  
-Note that it requires significant domain knowledge to select the right 
-partition directive.  Usually, such high-precision is not needed for 
-static analysis, since it makes the analysis very expensive.  Without 
-trace partitioning, the analysis using Astr{\'e}e shows high degree of 
-imprecision. 
-
 Table~\ref{ai-result} shows that ACDLP proved more benchmarks than
 Astr{\'e}e in all categories.  The total number of inconclusive results in
 ACDLP is three.  The inconclusive results is because of timeout.  By

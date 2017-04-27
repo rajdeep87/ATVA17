@@ -1,77 +1,6 @@
 \section{Program Model and Abstract Domain}\label{sec:domains}
-%This section introduces the program model and identifies properties of abstract
-%domains that are necessary for learning in abstract lattice structures.
-%\rmcmt{A formal definition of program}
-% \subsection{Programs:}
-% %
-% A {\em program} $\program$ is formally defined as follows.
-% \[
-% \begin{array}[t]{@{}lll}
-% \program & {:}{:}{=} & \mathit{Procedure} \\
-% \mathit{Procedure} & {:}{:}{=} & \mathit{Statement} \mid \mathit{Procedure} \\
-% \mathit{Statement} & {:}{:}{=} & CStatement \mid \mathit{function(Var_1,\dots,Var_n)} \\
-% \mathit{CStatement} & {:}{:}{=} & x {:}{=} exp \mid \mathit{ITE}(b, s_1,s_2) \mid \mathit{s_1;s_2} \mid loop\{s\} \\
-% \end{array}
-% \]
-% Consider sets of expressions $Exp$ and Boolean expressions $BExp$
-% over variables $Var$ of $\program$.  The variables in $Var$ 
-% can take numeric values in $Val$.  A procedure is denoted as 
-% $\mathit{function(Var_1,\dots,Var_n)}$.  A $\mathit{CStatement}$ 
-% is an assignment, conditional, sequential concatenation or a loop. \\
-% \textbf{Control-flow Graph:} A CFG is a triple $(Loc, E, lbl)$, 
-% where $Loc$ is the set of locations with an unique start 
-% location $(init)$ and error location $(err)$, $E$ is the set 
-% of control-flow edges that are labelled with the set 
-% $lbl \in Statement$.  For the purpose of illustration, we 
-% assume that all the procedures are inlined.  
-
 %-------------------------------------------------------------------------------
 \subsection{Program Representation}\label{sec:program}  
-\Omit {
-\begin{wrapfigure}{r}{3cm}
-\[
-\begin{array}{rcl}
-g_0 &=& \true \\
-\multicolumn{3}{l}{0 \leq v\leq N} \\
-g_1 &=& g_0\wedge c\\
-x_0 &=& v \\
-x_1 &=& -v \\
-x_2 &=& g_1?x_0:x_1 \\
-g_2 &=& g_1 \vee g_0\wedge \neg c\\
-z &=& x_2 * x_2 \\
-\multicolumn{3}{l}{z<0 \wedge g_2}
-\end{array}
-\]
-\caption{\label{fig:ssa}
-SSA for the example in Fig.~\ref{fig:example}
-}
-\end{wrapfigure}
-}
-%
-\Omit{
-\begin{figure}[t]
-\center
-\scriptsize
-\begin{tabular}{l}
-\hline
- SSA \\
-\hline
-\begin{minipage}{4.50cm}
-$\begin{array}{rcl}
-\constraints:= (g_0 = (0 \leq v\leq N)) \wedge \\
-(g_1 = (g_0 \wedge c)) \wedge (x_0 = v) \wedge \\
-(x_1 = -v) \wedge (x_2 = g_1?x_0:x_1) \wedge \\
-(g_2 = (g_1 \vee g_0\wedge \neg c)) \wedge \\
-(z  = x_2 * x_2) \wedge (g_2 \wedge z<0)
-\end{array}$
-\end{minipage}
-\\
-\hline
-\end{tabular}
-\caption{Static Single Assignment Form}
-\label{ssa}
-\end{figure}
-}
 %
 We consider \emph{bounded programs} with safety
 properties given as a set of assertions, $\assertions$, in the program.
@@ -84,21 +13,8 @@ where $\program$ contains an encoding of the statements in the program as
 constraints, obtained after translating the program
 into single static assignment (SSA) form via a data flow analysis.
 %
-%Fig.~\ref{ssa} gives the SSA constraints for the program in Fig.~\ref{fig:example}.
 The representation $\constraints$ for the program in Fig.~\ref{fig:example1} is 
-\Omit{
-\begin{equation}\label{eq:ssa}
-\begin{array}{l}
-(g_0{=}(0 \leq v{\leq}N)) \wedge 
-(g_1{=}(g_0 \wedge c)) \wedge (x_0{=}v) \wedge 
-(x_1{=}-v) \wedge \\
-(x_2{=}g_1?x_0:x_1) \wedge 
-(g_2{=}(g_1 \vee g_0\wedge \neg c)) \wedge 
-(z {=}x_2{\cdot}x_2) \wedge (g_2 \wedge z{<}0)
-\end{array}
-\end{equation}
-}
-%\tmcmt{Rajdeep: sorry, the above needs to be a \textit{set}, not a formula. See LeTeX source.}
+%
 \begin{equation}\label{eq:ssa}
 \begin{array}{l@{}l}
 \{ & g_0 = (0 \leq v \leq N),\:
@@ -129,75 +45,6 @@ Based on the above program representation, we define a \textit{safety formula}
 $\formula:= \bigwedge_{\constraint\in\constraints} \constraint$. The formula 
 $\formula$ is unsatisfiable if and only if the program is safe.
 %
-%
-%For example, figure~\ref{swssa} presents the program analysis constraints for 
-%a C program in Static Single Assignment (SSA) form.  
-
-% \subsection{Concrete Semantics}
-% \pscmt{not sure that adds anything for TACAS}
-% The {\em concrete} domain is a lattice 
-% of concrete environments, $Env = Var \rightarrow Val$, and is 
-% defined by $CDom = (Env, \sle_{C}, \join_{C}, \meet_{C})$.
-% A transformer, $post_{stmt}$, of concrete domain defines 
-% the effect of a statement $stmt$ on the concrete domain, 
-% $post_{stmt} : \powerset(Env) \rightarrow \powerset(Env)$.  
-% 
-% A state in concrete domain is a tuple $\langle l, \sigma \rangle$, 
-% where $l$ is a location and $\sigma \in Env$.  A trace is a sequence 
-% of states $(l_0, \sigma_0), \ldots (l_n, \sigma_n)$ such that for all 
-% $0 \leq i \leq n$, there exists a cfg egde $(l_{i}, l_{i+1})$ 
-% if $\sigma_{i+1} \in post_{i}(\sigma_{i})$. 
-
-%-------------------------------------------------------------------------------
-%\paragraph{Safety problem}  
-%
-
-% \subsection{Static Analysis Equations for Safety}
-% Static program analysis based on abstract interpretation~\cite{DBLP:conf/emsoft/Cousot07} 
-% perform safety analysis by computing fixed point to infer invariants 
-% over program variables.  However, bounded model checking (BMC) tries to search 
-% for a counterexample in a bounded execution trace, by symbolically executing a 
-% program up to a finite bound.  
-% Similar to BMC, ACDCL searches for a counterexample by solving the formula shown below.
-% For a set $N$ of program analysis constraints defined over a set 
-% of constraint variables $Var = \{X_i| i \in N\}$, representing a program
-% $\program$ and a concrete domain $\powerset(Env)$, the static analysis equation 
-% for safety of $\program$ is given as follows.  Here, $X_{init}, X_{Err}$ denote the initial valuation 
-% and the \rmcmt{final valuation} of constraint variables.
-% \[\formula = X_{init} \subseteq Env \wedge \underset{p,q \in |\program|}
-% {\bigwedge} \{ X_p \subseteq post_{(p,q)}(X_q) \} \wedge X_{err} \supset \emptyset \] 
-
-%-------------------------------------------------------------------------------
-\subsection{Abstract Domain}
-%-------------------------------------------------------------------------------
-%Silva et. al.~\cite{sas12,dhk2013-popl} showed that SAT solvers operate on the domain 
-%of partial assignments~\cite{sas12,dhk2013-popl}.  
-In this paper, we instantiate ACDLP over a reduced product domain~\cite{CC79}
-$\domain[\vars]=\booldomain^{|\boolvars|}\times\reldomain[\numvars]$ where
-$\booldomain$ is the Boolean domain that permits abstract values
-$\{\true,\false,\bot,\top\}$ over boolean variables $\boolvars$ in the
-program, and $\reldomain$ is a \textit{template polyhedra}~\cite{vmcai05}
-domain over the numerical (bitvector) variables $\numvars$.  Our template
-polyhedra domain can express various relational and non-relational templates
-over $\numvars$, as given in Table~\ref{domain}.
-% 
-%In our prototype implementation and for illustrative purposes 
-%-------------------------------------------------------------------------------
-\subsubsection{Template Polyhedra Abstract Domain}
-%-------------------------------------------------------------------------------
-%
-An abstract value of the template polyhedra domain~\cite{vmcai05}
-represents a set $\numconcval$ of values of the vector $\vec{\numvar}$ 
-of numerical (bitvector) variables $\numvars$ of their respective
-data types. (Currently, signed and unsigned integers are supported.)
-For example, in the program given by Eq.~(\ref{eq:ssa}), we have four 
-numerical variables, written as the vector $\vec{\numvar} = (x_0,x_1,x_2,z)$.  
-An abstract value is a constant vector $\vec{\numabsval}$ that represents 
-sets of values for $\vec{\numvar}$ for which 
-$\mat{C}\vec{\numvar}\leq\vec{\numabsval}$, for a fixed coefficient 
-matrix $\mat{C}$.  The domain containing $\vec{\numabsval}$ is augmented 
-by a special element $\bot$ to denote the minimal element of the lattice.  
-%
 \begin{table}[t]
 \small
 \begin{center}
@@ -215,6 +62,36 @@ $(a \leq x_i \leq b)$ & $(\pm x_i \pm x_j \leq d)$ & $(x_i - x_j \leq d)$ &
 \label{domain}
 \end{table}
 %
+%-------------------------------------------------------------------------------
+\subsection{Abstract Domain}
+%-------------------------------------------------------------------------------
+%Silva et. al.~\cite{sas12,dhk2013-popl} showed that SAT solvers operate on the domain 
+%of partial assignments~\cite{sas12,dhk2013-popl}.  
+In this paper, we instantiate ACDLP over a reduced product domain~\cite{CC79}
+$\domain[\vars]=\booldomain^{|\boolvars|}\times\reldomain[\numvars]$ where
+$\booldomain$ is the Boolean domain that permits abstract values
+$\{\true,\false,\bot,\top\}$ over boolean variables $\boolvars$ in the
+program, and $\reldomain$ is a \textit{template polyhedra}~\cite{vmcai05}
+domain over the numerical (bitvector) variables $\numvars$.  Our template
+polyhedra domain can express various relational and non-relational templates
+over $\numvars$, as given in Table~\ref{domain}.
+% 
+%-------------------------------------------------------------------------------
+\subsubsection{Template Polyhedra Abstract Domain}
+%-------------------------------------------------------------------------------
+%
+An abstract value of the template polyhedra domain~\cite{vmcai05}
+represents a set $\numconcval$ of values of the vector $\vec{\numvar}$ 
+of numerical (bitvector) variables $\numvars$ of their respective
+data types. (Currently, signed and unsigned integers are supported.)
+For example, in the program given by Eq.~(\ref{eq:ssa}), we have four 
+numerical variables, written as the vector $\vec{\numvar} = (x_0,x_1,x_2,z)$.  
+An abstract value is a constant vector $\vec{\numabsval}$ that represents 
+sets of values for $\vec{\numvar}$ for which 
+$\mat{C}\vec{\numvar}\leq\vec{\numabsval}$, for a fixed coefficient 
+matrix $\mat{C}$.  The domain containing $\vec{\numabsval}$ is augmented 
+by a special element $\bot$ to denote the minimal element of the lattice.  
+%
 There are several optimisation-based 
 techniques~\cite{vmcai05} for computing the domain operations, 
 such as meet ($\meet$) and join ($\sqcup$), in the template polyhedra domain.  
@@ -230,21 +107,8 @@ For notational convenience we will use conjunctions of linear
 inequalities, for example $x_1\geq 0 \wedge x_1-z\leq 30$, to write the
 abstract domain value $\vec{\numabsval}=\vecv{0}{30}$,
 with $\mat{C}=\qmat{-1}{0}{1}{-1}$ and $\vec{\numvar}=\vecv{x_1}{z}$. 
-%\tmcmt{Does it matter that we seem to switch freely between a row vector (above) and a column vector (here) for x?}
 $\true$ corresponds to $\top$ and $\false$ to $\bot$.
-
-%\tmcmt{Sudden introduction of this logical perspective is confusing. Get rid of it?  Also new fonts are suddenly used here for true and false.}
 %
-\Omit{
-\begin{wrapfigure}{r}{4.5cm}
-\vspace*{-7ex}
-\scalebox{.65}{\import{figures/}{octagons.pspdftex}}
-\caption{Example of an octagon}\label{octagon}
-\vspace*{-5ex}
-\end{wrapfigure} 
-}
-%
-%In the interval domain $\intervals[\numvars]$,
 For a program with $N=|\numvars|$ variables, the template 
 matrix $\mat{C}$ for the interval domain $\intervals[\numvars]$, 
 has $2N$ rows. Hence, it generates at most $2N$ inequalities, one
@@ -253,14 +117,10 @@ for the upper and lower bounds of each variable.
 For octagons $\octagons[\numvars]$, we have at most $2N^2$
 inequalities, one for the upper and lower bounds of each variable and
 sums and differences for each pair of variables. 
-%Fig.~\ref{octagon} gives an example of an octagon and its associated inequalities.
-%
-%A~fundamental difference between relational and 
 Unlike a non-relational domain, a relational domain such as octagons 
 requires the computation of a \emph{closure} in order to obtain a normal 
 form, necessary for precise domain operation. 
 The closure computes all implied domain constraints.  
-%that is usually required for precise and efficient domain operations.  
 An example of a closure computation for octagonal inequalities is
 $\mathit{closure}((x-y \leq 4) \wedge (y-z \leq 5))=((x-y \leq 4) \wedge (y-z
 \leq 5) \wedge (x-z \leq 9))$.
@@ -270,33 +130,8 @@ cubic complexity in the number of program variables~\cite{pldi15}.
 We therefore compute closure lazily in template polyhedra domain in our abstract 
 model search procedure. We refer the reader to Appendix~\ref{appendix:lazyclosure} 
 for details of lazy closure computation. 
-%\tmcmt{Will reference to an appendix be allowed in the final paper?}
-
-\Omit{
-In this paper, we use a product domain $\domain[\vars]=\booldomain^{|\boolvars|}\times\reldomain[\numvars]$ where
-$\booldomain$ is the Boolean domain $\langle\{\true,\false,\bot,\top\},\Rightarrow,\wedge,\vee\rangle$ \tmcmt{Do we really need to introduce this notation here?}, 
-$\boolvars$ are the Boolean variables in the program, 
-and $\reldomain$ is a \emph{template polyhedra} domain over the 
-numerical (bitvector) variables $\numvars$. 
-}
-%
-%We instantiate $\reldomain$ with the template polyhedra domain~\cite{sriram}.
-\Omit{
-For notational convenience we will denote elements of
-$\booldomain^{|\boolvars|}$ by their concretisations to propositional formulae.  
-For example, the program given by Eq.~(\ref{eq:ssa}) has four Boolean variables
-written as the vector $(g_0,g_1,c,g_2)$. Thus, we will denote an abstract 
-value $(\top, \false, \true, \top) \in \booldomain^4$ as $\neg g_1 \wedge c$.
-}
-
 %-------------------------------------------------------------------------------
 \subsubsection{Abstract Transformers}
-%
-%In a typical abstract interpretation based Galois-connection setting
-%over an over-approximate domain, every concrete element has a unique
-%over-approximate representation in the abstract.  Likewise, every
-%concrete transformer is over-approximated by a unique abstract
-%transformer.  We now define an abstract deduction transformer.
 %
 An abstract transformer $\abstrans{\domain}{\constraint}$ transforms an
 abstract value $\absval$ through a constraint $\constraint$; it
@@ -308,10 +143,7 @@ transformer is
 \end{equation}
  where we write 
 $\val\models \constraint$ if the concrete value $\val$ satisfies the constraint $\constraint$.
-%$\forall \vec{y}\in c: (s[\vec{y}/\vec{\numvar}]
-%\equiv \true)$, i.e., the constraint $s$ is valid when evaluated over
-%all values $\vec{y}$ of its variables $\vec{\numvar}$ in the concretisation
-%of $a$. 
+%
 Any abstract transformer that over-approximates the best abstract
 transformer is a sound transformer and can be used in our algorithm.
 %
@@ -320,7 +152,6 @@ For example, we can deduce $\abstrans{\domain}{x=2(y+z)}(\absval)=(0\leq y
 for the abstract value $\absval=(0\leq y \leq 2 \wedge\allowbreak 1 \leq y-z
 \leq 1)$.
 %
-%A detailed description of abstract transformer is presented in Section~\ref{sec:abst}.
 We~denote the set of abstract transformers for a safety equation
 $\formula$ using abstract domain $\domain$ by
 $\abstransset=\{\abstrans{\domain}{\constraint}\mid
@@ -336,17 +167,11 @@ decomposed into a set of \textit{precisely complementable} singleton
 elements~\cite{dhk2013-popl}.  This property of domain elements
 are necessary to learn elements that help to guide the model search away from the
 conflicting region of the search space.  
-% The complementation operator 
-% in abstract domains is different from the notion of precise complements. 
 %
 Most numerical abstract domains, such as intervals and octagons lack
 complements in general, i.e., not every element in the domain has a
 precise complement.  However, these domain elements can be represented
 as intersections of half-spaces, each of which admit a precise complement.
-%\tmcmt{(does this mean 'lack complements in general' - i.e., NOT every element has a precise complement?}, but they \tmcmt{Grammar says that ``they'' here means the domains. Surely you mean the elements?} 
-%
-% We identify specific properties of domain elements necessary for 
-% abstract model search and learning in abstractions.  
 We formalise this in the sequel.
 %
 \begin{definition} 
@@ -357,70 +182,36 @@ structure $A$ is an element with the following property.
 \end{equation}
 \end{definition}
 %
-%Meet irreducibles in ACDCL correspond to the concept of literals in a SAT solver.
 The meet irreducibles in the Boolean domain $\booldomain$ 
 for a variable $x$ are $x$ and $\neg x$. The meet 
 irreducibles in the template polyhedra domain are all elements 
 that concretise to half-spaces, i.e., they can be represented 
 by a single inequality. For the interval domain, these are 
 $x \leq d$ or $x \geq d$ for constants $d$. 
-
-%An important property of meet irreducibles in case of partial assignments 
-%domain is that they have precise complements.  
-%For example, the complement of $\{x \mapsto true \}$ is a 
-%singleton element,$\{x \mapsto false \}$, in the partial assignments domain. 
-
+%
 \begin{definition}
 A \emph{meet decomposition} $\decomp(\absval)$ of an abstract
 element $\absval \in \domain$ is a set of meet irreducibles $M \subseteq \domain$ such that 
 $\absval=\bigsqcap_{m\in M} m$.
-%$forall m_i \in M, \meet(m_i) = a$, where $max(i) = |M|$.
 \end{definition}
 
 \noindent For polyhedra this intuitively means that each polyhedron can be
 written as an intersection of half-spaces.
 %
 For example, the meet decomposition of the interval domain element
-% $(x,y) \in [2,4]\times[3, 5]$ 
 $decomp(2\leq x\leq 4 \wedge 3\leq y\leq 5)$ is
 the set $\{x\geq 2, x\leq 4, y\geq 3, y\leq 5\}$.
-% \langle x:[2, 4] \rangle \in ItvDom$ which gives set of meet irreducibles, 
-% $\{ \langle y \succeq 3 \rangle, \langle y \preceq 5 \rangle, 
-% \langle x \succeq 2 \rangle, \langle x \preceq 4 \rangle \}$, that are 
-% precisely complementable.
-
+%
 \begin{definition} 
 An element $\absval\in \domain$ is called \emph{precisely complementable}
-iff there exists $\bar{\absval} \in \domain$ such that $\neg\gamma(\bar{\absval})=\gamma(\absval)$.
+iff there exists $\bar{\absval} \in \domain$ such that 
+$\neg\gamma(\bar{\absval})=\gamma(\absval)$.
 That is, there is an element whose negated concretisation equals
 the concretisation of $\absval$.
-%m\meet\bar{m}=\bot \wedge m\join\bar{m}=\top$.
-%A complementable meet irreducible $\bar{M}$ of an abstract lattice $A$ is the complement of a meet 
-%irreducible $M \in A$ such that $\bar{M} \in A$ and the concretisation of $M$ 
-%is the set complement of $\bar{M}$.  
-%If every meet irreducible in $A$ is complementable, then $A$ is said to
-%be have complementable meet irreducibles.
 \end{definition}
-
-% An important property of a clause learning SAT solver 
-% is that a partial assignments domain can be decomposed 
-% into a set of precisely complementable singleton assignments.  
-% This property of the partial assignments domain helps to 
-% guide the model search away from the conflicting region 
-% of the search space and allows case-based analysis.  Complementation 
-% operator in abstract domains is different from the notion of precise
-% complements. 
-%
-% \begin{definition}{(Precise complement)} Let $A$ be an lattice. A precise 
-% complement of an abstract element $a \in A$ is an element $\bar{a} \in A$ 
-% such that the negation of concretization $(\gamma)$ of $a$ is equivalent to 
-% concretization of $\bar{a}$, that is, $\gamma(\bar{a}) = \neg \gamma(a))$.
-% \end{definition}
 %
 The precise complementation property of a partial assignment lattice can
 be generalised to other lattice structures. 
-%Most numerical abstract domains, such as intervals, octagons, polyhedra, can be decomposed
-%into half-spaces, which admits precise complements.  
 %
 For example, the precise complement of a meet irreducible $(x \leq 2)$ in
 the interval domain over integers is $(x \geq 3)$, or the precise complement
@@ -431,132 +222,3 @@ not require a complementation operator.  Hence, abstract domain libraries,
 such as APRON~\cite{apron}, do not provide it.  But it can be implemented
 with the help of a meet decomposition as explained above.
 %
-%\tmcmt{$\leftarrow$ This sentence does not make sense!}
-\Omit{Numerical abstract domains that admit complementable decomposition
-  are shown in Fig.~\ref{fig:complement}.}
-% 
-\Omit{
-\begin{table}
-\begin{center}
-{
-\begin{tabular}{l|l}
-\hline
-Domain & Precise Complements \\ \hline 
-Interval & \((x \leq n) \quad \longrightarrow (x > n)\) \\ \hline
-Octagon & \((x+y < 1) \quad \longrightarrow (-x-y < 0)\) \\ \hline
-Equality & \((x==y) \quad \longrightarrow (x \neq y)\) \\ \hline 
-\end{tabular}
-}
-\end{center}
-\label{fig:complement}
-\end{table}
-}
-%
-\Omit {
-Note that for many domains $A$, including template polyhedra,
-most domain elements are not precisely complementable within $A$.
-%
-In fact, for template polyhedra all non-meet-irreducible elements $e$
-(except $\bot$ and $\top$) are not precisely complementable,
-whereas all meet irreducibles are precisely complementable.
-%
-Hence, we can complement each element in the meet decomposition of $e$ and
-re-interpret the obtained set as a disjunction. 
-%
-%Thus the complement of the octagon in Fig.~\ref{octagon} 
-%can be written as a disjunction of meet irreducibles:
-%\[(x{\leq} -3) \lor (x{\geq} 2) \lor (y{\leq} -2) \lor (y{\geq} 3) \lor (x+y{\geq} 3) \lor (x-y{\geq} 2) \lor 
-% (y-x{\geq} 4) \lor (-x-y{\geq} 3)\]
-}
-
-\Omit {
-\begin{definition}{(Abstract Valuation)} An {\em abstract valuation} is a
-mapping of variables to an element of abstract domain. For example, 
-\Omit {
-a mapping of variable $x$ to an interval environment is given by 
-$\langle x \mapsto [2,5] \rangle$ or a 
-}
-a mapping of constraint variables $\{x,y\}$ to octagon environment 
-is given by $\langle x-y \mapsto 0, y-x \mapsto 0 \rangle$.  
-An abstract valuation is {\em atomic} if each variable is mapped to a singleton 
-value or to $\bot$.  An abstract valuation $(v)$ abstractly satisfies a formula 
-$\formula$ if for every variable $x$ in $\formula$, there is a concrete solution 
-$(c)$ such that $c(x) \subseteq \gamma \circ v(x)$ holds. 
-\end{definition}
-}
-
-%
-%Another feature that abstract domain libraries do not provide is to
-%track the reasons why certain deductions have been made. We come back
-%to this point in Section~\ref{sec:abst}.
-
-% The abstract transformer, $apost_{stmt}$, captures the effect of different program 
-% statements in the abstract domain. The transformer is precise for octagonal 
-% assignments $(x:=y+1)$ but imprecise for non-octagonal assignments $(x:=y+z)$, 
-% as shown below.
-% \[apost_{x:=y+1}(a) = b = \langle x-y \leq 1, y-x \leq 1 \rangle \qquad apost_{x:=y+z}(b) = \langle \top \rangle \]  
-
-% \begin{definition}{(Abstract Deduction Transformer)} An abstract deduction
-% transformer, $\widehat{ded_{\formula}}$ for a formula $\formula$ over an abstract 
-% domain $A$ is a sound approximation of a concrete model transformer
-% $ded_{\formula}$, given by $\widehat{ded_{\formula}} : A \rightarrow A$, such that 
-% $\forall a \in A: \widehat{ded_{\formula}}(a) \in \{\top, \bot, m\}$, where 
-% $m \in A$ is a meet irreducible.   
-% \end{definition}
-
-% Let us consider a formula $\formula = (x:=y-1)$ to be analyzed over 
-% an interval abstract domain, $A = ItvDom$, and let $a = \langle y:[3, 5]
-% \rangle \in ItvDom$, then $\widehat{ded_{\formula}}(a) = a \meet \langle x:[2, 4]
-% \rangle$.  An abstract deduction transformer is typically computed in the form 
-% of strongest post-condition or a weakest pre-condition of a formula in the 
-% abstract domain.  
-
-% For a program with $N$ variables, let $L$ be the total number of 
-% meet irreducibles returned by a domain $D$.  For $D$ = {\em ItvDom}, the 
-% maximum value of $L$ is $2*N$, whereas the maximum value of $L$ is 
-% $2*(N^2)$ for $D$ = {\em OctDom}. Note that an octagon is the conjunction 
-% of all octagonal inequalities in the set $L$.
-%
-%========================
-%\input{literals-clauses}
-%========================
-
-% \Omit {
-% The commonly used library for numerical abstract domains  
-% is the APRON C library~\cite{apron}.  This library is 
-% used for the static analysis of the numerical variables 
-% of a program by abstract interpretation. APRON provides a 
-% C API interface to various abstract domains and libraries 
-% such as {\em BOX}, {\em OCTAGON}, {\em Convex Polyhedra} and
-% {\em Linear Equalities} library.  The aim of such analysis is 
-% to compute invariants over numerical variables in the 
-% program~\cite{se2011}. 
-% }
-% \Omit {
-% To this end, we implement our own template-based polyhedra domain and interval 
-% domain which supports complementation operator.  
-% %For example, the octagon in Fig.~\ref{octagon} can be written as a conjunction of:
-% %\[(x>=-2) \land (x<=1) \land (y>=-1) \land (y<=2) \land (x+y<=2)
-% %\land (x-y<=1) \land (y-x<=3) \land (-x-y<=2)\] 
-% \pscmt{That's no valid motivation. We never complement a whole octagon, but just a
-%  meet-irreducible. It's trivial to do that with APRON. The reason was
-% a different one: APRON does not support all C operators, e.g. the bitwise
-% operators.} 
-% } 
-
-\Omit{
-A general polyhedral analysis is most expressive \pscmt{what does ``most'' mean?} but has exponential 
-worst-case space and time complexity.  By contrast, template polyhedra 
-are restricted since they can encode inequalities of the 
-form $a_1x_1 + \ldots + a_nx_n \geq c$ \pscmt{it looks inconsistent to have $\geq$ here and $\leq$ a few lines below; also the coefficients here are $a$ whereas they are $c$ below; constant is $c$ here and $d$ below\ldots; also, $a$ is used for abstract value in later sections.}, where the coefficients 
-$a_1, \ldots, a_n$ are fixed apriori.  Hence, the complexity of 
-a template polyhedral analysis is in worst-case polynomial time in the 
-size of the program and the domain~\cite{vmcai05}. 
-}
-
-\Omit{
-Thus, the expressivity of template polyhedra lies between weakly relational domain 
-such as intervals $(a \leq x_i \leq b)$, octagons $(\pm x_i \pm x_j \leq c)$, 
-and strongly relational domain such as polyhedra domain.  
-}
-

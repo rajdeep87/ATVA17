@@ -90,10 +90,10 @@ partitions necessary for a precise analysis.  Alternatively, the octagon
 analysis in ACDLP---illustrated in the third column of
 Fig.~\ref{fig:example1}---can prove safety with propagations only. 
 No~decisions are required.  Forward AI with octagons in Astr{\'e}e is also
-able to prove safety. \\ \\
+able to prove safety.  
 %
-\begin{table}[t]
-\scriptsize
+\begin{table}[!b]
+%\scriptsize
 \begin{center}
 {
 \begin{tabular}{l|r|r|r|r|r|r}
@@ -142,6 +142,8 @@ Control-Flow Graph & Octagon Analysis in ACDLP \\
 CFG and corresponding Abstract Conflict Graphs for Octagon Analysis}
 \end{figure}
 %
+
+
 \noindent \textbf{Second Example}
 Our second example, given in Fig.~\ref{fig:example2}, demonstrates that 
 octagon analysis in ACDLP is more precise than forward AI in the octagon domain.
@@ -189,8 +191,6 @@ $\intervals[\numvars]$ and $\octagons[\numvars]$ are the Interval and Octagon
 domains over $\numvars$. As can be seen, ACDLP outperforms BMC in the total number of 
 {\em decisions}, {\em propagations}, {\em learnt clauses} and {\em restarts} 
 for both example programs.
-
-%\tmcmt{The fonts are all messed up in the paragraph/table above. Is it $t$ or $\mathrm{t}$ for `true'? Multi-character italic identifiers, in maths mode, should be encased in mathrm{...}. Etc. PropVars is a truly horrible set name.}
 
 \Omit{
 However, in contrast to a SAT solver, the octagonal analysis in ACDLP is 

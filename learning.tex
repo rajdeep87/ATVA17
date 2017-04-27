@@ -51,7 +51,7 @@ sequence of deductions in the octagon domain that are inferred from
 a decision $(x{\leq}0)$ for the formula $\formula$.  The arrows (in red) 
 shows the relationship between the reason trail and propagation trail in 
 bottom of Fig.~\ref{uip}.  For the partial abstract value, 
-$\absval=\{x\leq0 \wedge -x+z\geq4 \wedge x+z\leq4 x-z\geq-4 \wedge z\leq4\}$, 
+$\absval=\{x\leq0 \wedge x+z\leq4 \wedge z\leq4\}$, 
 obtained from the trail, the result of the abstract deduction transformer is
 $\abstrans{\octagons}{y=(x+z)/2}(\absval)=\{x+y\leq2, y\leq2, y+z\leq6\}$.
 A conflict ($\bot$) is reached for the decision ${x{\leq}0}$.   

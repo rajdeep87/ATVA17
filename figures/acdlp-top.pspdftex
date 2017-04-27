@@ -10,4 +10,8 @@
   \selectfont}%
 \fi\endgroup%
 \begin{picture}(8761,4557)(1654,-6193)
+\put(7426,-3391){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}Transformer $(\abd{}{})$}%
+}}}}
+\put(2881,-3391){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}Transformer $(\abstransel{})$}%
+}}}}
 \end{picture}%
