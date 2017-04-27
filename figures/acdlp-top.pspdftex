@@ -12,6 +12,10 @@
 \begin{picture}(8761,4557)(1654,-6193)
 \put(7426,-3391){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}Transformer $(\abd{}{})$}%
 }}}}
-\put(2881,-3391){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}Transformer $(\abstransel{})$}%
+\put(1801,-5461){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$\gamma$-complete ?}%
+}}}}
+\put(3016,-3391){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}Transformer $(\abstransel{})$}%
+}}}}
+\put(3061,-5956){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}\textbf{UNSAFE}}%
 }}}}
 \end{picture}%
