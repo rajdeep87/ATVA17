@@ -3,9 +3,10 @@
   \begin{tikzpicture}[scale=0.60]
 
 \pgfplotscreateplotcyclelist{markstyles}{%
-solid, every mark/.append style={solid, fill=white}, mark=square*\\%
-solid, every mark/.append style={solid, blue}, mark=triangle*\\%
-solid, every mark/.append style={solid, fill=black}, mark=otimes*\\%
+solid, every mark/.append style={solid, fill=white}, mark=square*, mark size=2.5\\%
+solid, every mark/.append style={solid, blue}, mark=triangle*,mark size=2.5\\%
+solid, every mark/.append style={solid, fill=black}, mark=otimes*,, mark
+    size=2.5\\%
 }
  	%axis
   \begin{axis}[
@@ -17,6 +18,7 @@ solid, every mark/.append style={solid, fill=black}, mark=otimes*\\%
     ymin=0, ymax=200,
     %ytick={0,20,...,200},
     xtick={1,5,10,...,85},
+    width=20cm, height= 9cm,
     ymode = log,
     %log basis x={2},
     %xticklabel=\pgfmathparse{2^\tick}\pgfmathprintnumber{\pgfmathresult},
@@ -27,13 +29,13 @@ solid, every mark/.append style={solid, fill=black}, mark=otimes*\\%
   ]
 	
   %plots
-    \addplot table [only marks, y=time, x=Benchmarks]{plotdata/sorted-cbmc-time.dat};
+    \addplot table [only marks, y=Time, x=Benchmarks]{plotdata/cbmc.dat};
 	\addlegendentry{CBMC}
   
-  \addplot table [only marks, y=time, x=Benchmarks]{plotdata/sorted-acdlp-time.dat};
+  \addplot table [only marks, y=Time, x=Benchmarks]{plotdata/acdlp.dat};
   \addlegendentry{ACDLP}
   
-  \addplot table [only marks, y=time, x=Benchmarks]{plotdata/sorted-astree-time.dat};
+  \addplot table [only marks, y=Time, x=Benchmarks]{plotdata/astree.dat};
     \addlegendentry{Astr{\'e}e}
 	
   \end{axis}  
