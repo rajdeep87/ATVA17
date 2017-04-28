@@ -9,7 +9,7 @@
 			%legend style={at={(0.8,0.15)},
 			%anchor=north,legend columns=-1 },
 			]
-\addplot [mark size=1pt,only marks,scatter,point meta=explicit symbolic,
+\addplot [only marks,scatter,point meta=explicit symbolic,
 	scatter/classes={s={mark=square,mark size=2.5},u={mark=triangle*,blue,mark size=2.5}},] 
 	table [meta=label] {plotdata/scatter-decision.dat};
 	\legend{Safe,Unsafe}
@@ -33,7 +33,7 @@
       %legend style={at={(0.8,0.15)},
 			%anchor=north,legend columns=-1 },
 			]
-\addplot [mark size=1pt,only marks,scatter,point meta=explicit symbolic,
+\addplot [only marks,scatter,point meta=explicit symbolic,
 	scatter/classes={s={mark=square,mark size=2.5},u={mark=triangle*,blue,mark size=2.5}},] 
 	table [meta=label] {plotdata/scatter-propagation.dat};
 	\legend{Safe,Unsafe}

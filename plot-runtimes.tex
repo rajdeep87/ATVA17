@@ -1,10 +1,16 @@
 \begin{figure}[t]
   \centering
   \begin{tikzpicture}[scale=0.60]
+
+\pgfplotscreateplotcyclelist{markstyles}{%
+solid, every mark/.append style={solid, fill=white}, mark=square*\\%
+solid, every mark/.append style={solid, blue}, mark=triangle*\\%
+solid, every mark/.append style={solid, fill=black}, mark=otimes*\\%
+}
  	%axis
   \begin{axis}[
     width=\linewidth,
-    xlabel={Number of Benchmarks},
+    xlabel={Benchmark Number},
     ylabel={Time (seconds)},
     domain = 1:85,
     xmin=1, xmax=85,
@@ -16,12 +22,12 @@
     %xticklabel=\pgfmathparse{2^\tick}\pgfmathprintnumber{\pgfmathresult},
     legend pos = north west,
     grid = major,
-    major grid style={line width=.2pt,draw=gray!50}
+    major grid style={line width=.2pt,draw=gray!50},
+    cycle list name=markstyles
   ]
 	
   %plots
-    \addplot table [only marks, mark options={fill=white}, text mark as
-    node=true, y=time, x=Benchmarks]{plotdata/sorted-cbmc-time.dat};
+    \addplot table [only marks, y=time, x=Benchmarks]{plotdata/sorted-cbmc-time.dat};
 	\addlegendentry{CBMC}
   
   \addplot table [only marks, y=time, x=Benchmarks]{plotdata/sorted-acdlp-time.dat};
@@ -29,9 +35,6 @@
   
   \addplot table [only marks, y=time, x=Benchmarks]{plotdata/sorted-astree-time.dat};
     \addlegendentry{Astr{\'e}e}
- 
-  %\draw plot[mark=*, mark options={fill=white}] 
-	%	file {plotdata/cbmc-time.dat};
 	
   \end{axis}  
 \end{tikzpicture}
