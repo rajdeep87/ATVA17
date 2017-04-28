@@ -64,7 +64,7 @@ with ACDLP is sufficient to prove safety.  The analysis records the
 decisions and deductions in a \textit{trail} data-structure.  The trail can
 be viewed to represent a graph structure called the {\em Abstract Conflict
 Graph} (ACG) that stores dependencies between decisions and deductions
-nodes, similar to the way an \emph{Implication Graph} works in a SAT solver. 
+nodes, similar to the way an \emph{Implication Graph}~\cite{cdcl} works in a SAT solver. 
 Nodes of the ACG in the second column of Fig.~\ref{fig:example1} are
 labelled with the CFG location and the corresponding abstract value. 
 Beginning with the assumption that v=[0,5] at node~n1, the intervals
@@ -144,8 +144,7 @@ CFG and corresponding Abstract Conflict Graphs for Octagon Analysis}
 %
 
 
-\noindent \textbf{Second Example}
-Our second example, given in Fig.~\ref{fig:example2}, demonstrates that 
+\noindent \textbf{Second Example} Fig.~\ref{fig:example2}, demonstrates that 
 octagon analysis in ACDLP is more precise than forward AI in the octagon domain.
 % LATER, b) \emph{ACDLP with octagons can outperform SAT-based BMC}.  
 The CFG in Fig.~\ref{fig:example2} computes the absolute 

@@ -122,16 +122,18 @@ parametrised by a given \emph{subdomain} $\subdomain\subseteq \domain$.
 A subdomain contains a chosen subset of the elements in $\domain$ including
 $\bot$ and $\top$ that forms a lattice.
 %
-The use of a subdomain serves two purposes:
-\begin{compactenum}[(1)]
-\item It allows us elegantly and flexibly to guide the deductions in 
+The use of a subdomain serves two purposes -- 
+%\begin{compactenum}[(1)]
+%\item 
+  a) It allows us elegantly and flexibly to guide the deductions in 
 %\emph{propagation} heuristics to guide deductions, e.g. 
   {\em forward}, {\em backward} or {\em multi-way} direction, which 
-  in turn affects the analysis precision.
-\item It makes deductions more efficient, for example by performing lazy closure
+  in turn affects the analysis precision, and 
+%\item
+  b) It makes deductions more efficient, for example by performing lazy closure
   in template polyhedra domain. For space reasons, we refer the reader to 
   Appendix~\ref{appendix:lazyclosure} for details of the lazy closure operation. 
-\end{compactenum}
+%\end{compactenum}
 %
 An ADT is defined formally  as follows. 
 \begin{equation}\label{eq:at2}

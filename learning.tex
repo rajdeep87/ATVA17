@@ -21,19 +21,8 @@ is given by, $\abd{x=y+1}{\intervals}(x \geq 0)=(x \geq 0 \cup y \leq -2)$.
 %
 Conflict abduction is performed by obtaining cuts through markings in the 
 trail $\trail$, by the application of abstract Unique Implication Point (UIP) 
-search algorithm~\cite{cdcl}.  Every cut in the graph is a reason for conflict. 
-%
-\Omit{
-\begin{definition}
-An \emph{abstract abductive transformer}, 
-$\abd{\formula}{\domain}: \allval \rightarrow \allval$, for a 
-formula $\formula$ over an input set of abstract values 
-$\allval$ in abstract domain $\domain$ such that 
-$\ded{}{\domain}(\allval) \sqsubseteq \bot$, is given by, 
-$\abd{\formula}{\domain}(\allval)=\{\absval \mid \absval \in \allval 
-\vee \absval\not\models\formula\}$. \\
-\end{definition}
-}
+search algorithm~\cite{cdcl}.  Every cut in the graph is a reason for
+conflict.\\ 
 %
 \begin{figure}[t]
 \centering
@@ -41,7 +30,9 @@ $\abd{\formula}{\domain}(\allval)=\{\absval \mid \absval \in \allval
 \caption{\label{uip} Finding Abstract UIP in Octagon Domain}
 \end{figure}  
 %
-\subsubsection{Abstract UIP Search}
+
+
+\noindent \textbf{Abstract UIP Search}
 An abstract UIP algorithm~\cite{DBLP:journals/fmsd/BrainDGHK14} 
 traverses the trail $\trail$ starting from the conflict node and 
 computes a cut that suffices to produce a conflict.  
@@ -60,9 +51,11 @@ marked as {\em cut0} and {\em cut1} in Fig.~\ref{uip}.  Here, cut0 is
 the first UIP (node closest to conflict node).  Choosing cut0 yields 
 a learnt clause $(y+z>6)$, which is obtained by 
 negating the reason for conflict.  The abstract UIP algorithm returns a learnt 
-transformer $\aunit$, which is described next. 
+transformer $\aunit$, which is described next.\\ 
 %    
-\subsubsection{Learning in Template Polyhedra Domain}
+
+
+\noindent \textbf{Learning in Template Polyhedra Domain}
 %
 Learning in a propositional solvers yields an asserting
 clause~\cite{cdcl} that expresses the negation of the conflict

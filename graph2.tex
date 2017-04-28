@@ -4,7 +4,7 @@
 \begin{tabular}{@{\hspace{-1.5em}}c@{\hspace{1em}}c}
 \begin{tikzpicture}[scale=0.75]
 	\begin{loglogaxis} [
-      xmin=0.1,xmax=2500, ymin=0.1, ymax=2500, 
+      xmin=0.1,xmax=200, ymin=0.1, ymax=200, 
       xlabel=Forward Propagation, ylabel=Multi-way Propagation, 
       title={Performance of Propagation Heuristics},
 			legend pos = north west,
@@ -12,10 +12,10 @@
 			%anchor=north,legend columns=-1 },
 			]
 \addplot [mark size=1pt,only marks,scatter,point meta=explicit symbolic,
-	scatter/classes={s={mark=square},u={mark=triangle*,blue}},] 
+	scatter/classes={s={mark=square,mark size=2.5},u={mark=triangle*,blue,mark size=2.5}}] 
 	table [meta=label] {plotdata/scatter-chaotic-forward.dat};
 	\legend{Safe,Unsafe}
-  \addplot [domain=.1:2500] {x};
+  \addplot [domain=.1:200] {x};
 \end{loglogaxis}
 \end{tikzpicture}
  &
@@ -27,8 +27,8 @@ mark=triangle*,blue\\%
 }
 	\begin{axis} [
   title={Performance of Decision Heuristics}, ymode = log,
-  xmin=0, xmax=70, only marks,
-  ymin=0, ymax=1600, 
+  xmin=0, xmax=85, only marks,
+  ymin=0, ymax=200, 
   xlabel={Benchmarks},
   ylabel={time (in seconds)},
   xtick={},
@@ -38,7 +38,7 @@ mark=triangle*,blue\\%
  \addplot table[x=benchmark,y=time] {plotdata/berkmin.dat};
  \addplot table[x=benchmark,y=time] {plotdata/random.dat};
  \addplot table[x=benchmark,y=time] {plotdata/ordered.dat};
- \addlegendentry{Berkmin}
+ \addlegendentry{Activity}
  \addlegendentry{Random}
  \addlegendentry{Ordered}
  %\addplot [domain=.1:2500] {};
