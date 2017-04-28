@@ -67,9 +67,11 @@ partial safety proof using an
 abstract abductive transformer, $\abd{}{}$, followed by a heuristic choice of conflict 
 reason.  Similar to SAT solver, ACDLP picks one conflict reason from multiple
 incomparable reasons for conflict for efficiency reasons. Hence, it operates over 
-an under-approximate domain of conflict reasons.  The conflict analysis returns a 
-learnt transformer and the model search is repeated with this new transformer.  Else,
-if no further backtracking is possible, then ACDLP terminates and returns
+an underapproximate domain of conflict reasons.  A conflict reason
+underapproximates a set of invalid or safe traces. The conflict analysis returns a 
+learnt transformer (negation of conflict reason) that over-approximate a set of 
+valid and unsafe traces. Model search is repeated with this new transformer.  
+Else, if no further backtracking is possible, then ACDLP terminates and returns
 \emph{safe}.  We present the ACDLP algorithm in subsequent section.
 
 The input to ACDLP (Algorithm~\ref{Alg:acdcl}) is a
