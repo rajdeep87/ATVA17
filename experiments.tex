@@ -31,12 +31,21 @@ using Astr{\'e}e, all bounded loops in the program are completely unwound up
 to a given bound before passing to Astr{\'e}e.  This prevents Astr{\'e}e
 from widening loops.
 %
+<<<<<<< HEAD
 ACDLP is instantiated to a product of the Booleans and the interval or
 octagon domain instance of template polyhedra.  ACDLP is also
 configured with a decision heuristic (ordered, random,
 activity-based), propagation (forward, backward and multi-way), and
 conflict-analysis (learning UIP, DPLL-style).  The timeout for our
 experiments is set to~200 seconds.
+=======
+ACDLP is instantiated to a product of the Booleans
+and the interval or octagon domain instance of template polyhedra.  ACDLP is
+also configured with a decision heuristic (ordered, random, activity
+based), propagation (forward, backward and multi-way), and conflict-analysis
+(learning UIP, DPLL-style).  The timeout for our experiments is set to~200
+seconds.  
+>>>>>>> debea1a06a777197944ed072d5d13f81522b63d5
 %
 \Omit {
 To enable precise analysis using Astr{\'e}e, all our benchmarks are 
@@ -85,9 +94,18 @@ than ACDLP for {37}\% cases (32 out of 85); but the analysis using
 Astr{\'e}e shows a high degree of imprecision (marked as timeout in 
 Figure~\ref{fig:runtimes}).  Astr{\'e}e reported~53 false alarms 
 among~85 benchmarks.  Whereas, analysis using ACDLP produce correct 
+<<<<<<< HEAD
 results for~81 benchmarks.  ACDLP timed out for~4 benchmarks. Clearly, ACDLP has higher precision than 
 Astr{\'e}e. Detailed analysis of the comparison between ACDLP, CBMC and 
 Astr{\'e}e is presented in Appendix~\ref{appendix:extended_result}.  
+=======
+results for~81 benchmarks. ACDLP timed out on 4 benchmarks.  Clearly, 
+ACDLP has higher precision than Astr{\'e}e. Detailed analysis 
+of the comparison between ACDLP and 
+Astr{\'e}e is presented in Table~\ref{ai-result} of 
+Appendix~\ref{appendix:extended_result}.  Statistics for each phase of ACDLP 
+algorithm are given in Table~\ref{detailed_result} in Appendix~\ref{appendix:extended_result}.  
+>>>>>>> debea1a06a777197944ed072d5d13f81522b63d5
 
 
 Our experimental evaluation suggest that ACDLP can be seen as a
