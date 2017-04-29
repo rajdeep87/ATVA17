@@ -162,12 +162,14 @@ and {\em multi-way} propagation strategy in ACDLP.  The
 choice of strategy influences the total number of decisions and clause 
 learning iterations.  Hence, the propagation strategy has a
 significant influence on the runtime, which can be seen in
-Fig.~\ref{prop-dec}(a).  Compared to forward propagation, the multi-way
+Fig.~\ref{prop-dec}(a).  We did not report the performance 
+of {\em backward} propagation strategy due to large 
+number of timeouts.  Compared to forward propagation, the multi-way
 strategy may take more iterations to reach the fixed-point, but it
 subsequently reduces the total number of decisions and conflicts to prove the
 program.  This is attributed to the higher precision of the meet irreducibles 
 inferred by the multi-way strategy, which subsequently aids the decision 
-heuristics to make better decisions.
+heuristics to make better decisions.  
 
 \paragraph{Decision Heuristics.}
 %
@@ -304,17 +306,6 @@ L2: $\makesubdomain_\domain(\{x\})=\octagons[\{x\}]\cup\octagons[\{x,y\}]\cup\oc
 \caption{\label{fig:lazy}
 C Program and Lazy closure operation for Octagons}
 \end{figure}
-%
-\section{Difference between ACDLP and CEGAR}
-%
-ACDLP is not, however, similar to abstraction refinement. ACDLP works on a fixed abstraction.  
-Also, transformer learning in ACDLP does not soundly over-approximate the existing program 
-transformers, hence it is distinct from transformer refinement in classical Counterexample 
-Guided Abstraction Refinement (CEGAR).
-%
-%===============================================================================
-\input{gamma-complete}
-%===============================================================================
 %
 \Omit{
 \section{Program and Property Driven Trace partitioning in ACDLP}

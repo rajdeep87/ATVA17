@@ -33,11 +33,10 @@ using Astr{\'e}e, all bounded loops in the program are completely unwound up
 to a given bound before passing to Astr{\'e}e.  This prevents Astr{\'e}e
 from widening loops.
 %
-For these experiments, ACDLP is instantiated to a product of the Booleans
+ACDLP is instantiated to a product of the Booleans
 and the interval or octagon domain instance of template polyhedra.  ACDLP is
-also configured with a heuristic choice of decision (ordered, random, berkmin), 
-propagation (forward and multi-way), and conflict-analysis (learning UIP, 
-DPLL-style).  The timeout for our experiments is set to one hour.  
+also configured with a decision heuristic (ordered, random, activity
+based), propagation (forward, backward and multi-way), and conflict-analysis (learning UIP, DPLL-style).  The timeout for our experiments is set to one hour.  
 %
 \Omit {
 To enable precise analysis using Astr{\'e}e, all our benchmarks are 
@@ -50,10 +49,8 @@ analysis using Astr{\'e}e shows high degree of imprecision.
 
 \input{graph1}
 \input{plot-runtimes}
-
-%\paragraph{Precision and Efficiency of Analysis.}
 %
-\textbf{ACDLP versus CBMC}
+\noindent \textbf{ACDLP versus CBMC}
 Fig.~\ref{fig:results} presents a comparison of the analyses using CBMC
 and ACDLP.  Fig.~\ref{fig:results}(a) clearly shows that the SAT based analysis 
 made significantly more decisions compared to ACDLP for all the benchmarks. 
@@ -87,7 +84,7 @@ Figure~\ref{fig:runtimes} demonstrates that Astr{\'e}e is~2X faster
 than ACDLP for {37}\% cases (32 out of 85); but the analysis using 
 Astr{\'e}e shows a high degree of imprecision (marked as timeout in 
 Figure~\ref{fig:runtimes}).  Astr{\'e}e reported~53 false alarms 
-among~85 benchmarks.  Whereas, anaysis using ACDLP produce correct 
+among~85 benchmarks.  Whereas, analysis using ACDLP produce correct 
 results for all benchmarks.  Clearly, ACDLP has higher precision than 
 Astr{\'e}e. Detailed analysis of the comparison between ACDLP and 
 Astr{\'e}e is presented in Table~\ref{ai-result} of 
@@ -99,5 +96,4 @@ Our experimental evaluation suggest that ACDLP can be seen as a
 technique to improve the efficiency of SAT-based BMC.  Additionally, ACDLP can
 also be perceived as an automatic way to improve the precision of conventional
 abstract interpretation over non-distributive lattices through automatic partition 
-generation techniques such as decisions and transformer learning for approximating
-set of unsafe traces.
+generation techniques such as decisions and transformer learning.
