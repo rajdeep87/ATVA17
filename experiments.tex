@@ -21,9 +21,7 @@ intensive programs with nested loops containing relational properties.
 %The software models drawn from hardware benchmarks contains complex bit-wise
 %operations, which are handled out-of-the-box by our domain implementation. 
 All the programs with bounded loops are completely unrolled before
-analysis.
-
-We compare ACDLP with the state-of-the-art SAT-based bounded model checker
+analysis.  We compare ACDLP with the state-of-the-art SAT-based bounded model checker
 CBMC (\cite{cbmc}, version 5.5) and a commercial static analysis tool,
 Astr{\'e}e (\cite{astree}, version 14.10).  CBMC uses MiniSAT~2.2.1 in the
 backend.  Astr{\'e}e uses a range of abstract domains, which includes
@@ -38,7 +36,7 @@ octagon domain instance of template polyhedra.  ACDLP is also
 configured with a decision heuristic (ordered, random,
 activity-based), propagation (forward, backward and multi-way), and
 conflict-analysis (learning UIP, DPLL-style).  The timeout for our
-experiments is set to one hour.
+experiments is set to~200 seconds.
 %
 \Omit {
 To enable precise analysis using Astr{\'e}e, all our benchmarks are 
@@ -87,11 +85,9 @@ than ACDLP for {37}\% cases (32 out of 85); but the analysis using
 Astr{\'e}e shows a high degree of imprecision (marked as timeout in 
 Figure~\ref{fig:runtimes}).  Astr{\'e}e reported~53 false alarms 
 among~85 benchmarks.  Whereas, analysis using ACDLP produce correct 
-results for all benchmarks.  Clearly, ACDLP has higher precision than 
-Astr{\'e}e. Detailed analysis of the comparison between ACDLP and 
-Astr{\'e}e is presented in Table~\ref{ai-result} of 
-Appendix~\ref{appendix:extended_result}.  Statistics for each phase of ACDLP 
-algorithm are given in Table~\ref{detailed_result} in Appendix~\ref{appendix:extended_result}.  
+results for~81 benchmarks.  ACDLP timed out for~4 benchmarks. Clearly, ACDLP has higher precision than 
+Astr{\'e}e. Detailed analysis of the comparison between ACDLP, CBMC and 
+Astr{\'e}e is presented in Appendix~\ref{appendix:extended_result}.  
 
 
 Our experimental evaluation suggest that ACDLP can be seen as a
