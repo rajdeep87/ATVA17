@@ -33,10 +33,12 @@ using Astr{\'e}e, all bounded loops in the program are completely unwound up
 to a given bound before passing to Astr{\'e}e.  This prevents Astr{\'e}e
 from widening loops.
 %
-ACDLP is instantiated to a product of the Booleans
-and the interval or octagon domain instance of template polyhedra.  ACDLP is
-also configured with a decision heuristic (ordered, random, activity
-based), propagation (forward, backward and multi-way), and conflict-analysis (learning UIP, DPLL-style).  The timeout for our experiments is set to one hour.  
+ACDLP is instantiated to a product of the Booleans and the interval or
+octagon domain instance of template polyhedra.  ACDLP is also
+configured with a decision heuristic (ordered, random,
+activity-based), propagation (forward, backward and multi-way), and
+conflict-analysis (learning UIP, DPLL-style).  The timeout for our
+experiments is set to one hour.
 %
 \Omit {
 To enable precise analysis using Astr{\'e}e, all our benchmarks are 
@@ -58,7 +60,7 @@ The points on the extreme right below the diagonal in
 Fig.~\ref{fig:results}(b) show that the number of propagations in the SAT based 
 analysis is maximal for benchmarks that exhibit relational behaviour.  These
 benchmarks are solved by octagon domain in ACDLP.  We see a reduction of at 
-least two order of magnitude in the total number of decisions, propagations 
+least two orders of magnitude in the total number of decisions, propagations 
 and conflicts compared to analysis using CBMC.  
 
 Out of 85 benchmarks, SAT based analysis could prove only 26
