@@ -80,11 +80,14 @@ complementable meet irreducibles and a set of meet irreducibles $\conflictset
 Rule (1) shows $\aunit$ returns $\bot$ since 
 $\absval \sqsubseteq \bigsqcap \conflictset$ is conflicting.  
 Rule (2) of $\aunit$ infer a valid meet irreducible, 
-which implies that $\conflictset$ is unit.  However, if 
-$\aunit$ returns $\top$, then the learnt clause is not 
-asserting after backtracking.  This would prevent any new 
-deductions from the learnt clause. Progress is then made by decisions.
+which implies that $\conflictset$ is unit.  Rule (3) of  
+$\aunit$ returns $\top$ which implies that the learnt clause is not 
+{\em asserting} after backtracking.  This would prevent any new 
+deductions from the learnt clause. Progress is then made by decisions. An 
+example of $\aunit$ for $\conflictset = \{x \geq 2, x \leq 5, y \leq 7 \}$ is
+shown below. \\
 %
+\Omit{
 Let us consider an example, where $\conflictset = \{x \geq 2, x \leq 5, y
 \leq 7 \}$ and $\absval = (x \geq 3\wedge\allowbreak x \leq
 4\wedge\allowbreak y \geq 5\wedge y \leq 6)$.  Then
@@ -92,9 +95,27 @@ $\aunit_\conflictset(\absval) = \bot$ using the rule (1), since $\absval
 \sqsubseteq \bigsqcap\conflictset$.  Now, consider another abstract value
 $\absval = (x \geq 3\wedge x \leq 4)$ and the same $\conflictset$ as above,
 then $\aunit_\conflictset(\absval) = (y \geq 8)$ using rule (2), since
-$\absval \sqsubseteq (x \geq 2)$ and $\absval \sqsubseteq (x \leq 5)$.  
+$\absval \sqsubseteq (x \geq 2)$ and $\absval \sqsubseteq (x \leq 5)$. \\ 
+}
+Rule 1: 
+%$\conflictset = \{x \geq 2, x \leq 5, y \leq 7 \}$ 
+For $\absval = (x \geq 3\wedge\allowbreak x \leq
+4\wedge\allowbreak y \geq 5\wedge y \leq 6)$, 
+$\aunit_\conflictset(\absval) = \bot$, since $\absval
+\sqsubseteq \bigsqcap\conflictset$.  \\ 
+Rule 2:  
+%$\conflictset = \{x \geq 2, x \leq 5, y \leq 7 \}$ and 
+For $\absval = (x \geq 3\wedge x \leq 4)$,  
+$\aunit_\conflictset(\absval) = (y \geq 8)$, since
+$\absval \sqsubseteq (2 \leq x \leq 5)$. \\ 
 %
-\subsubsection{Backjumping}
+Rule 3: 
+%$\conflictset = \{x \geq 2, x \leq 5, y \leq 7 \}$ and 
+For $\absval = (x \geq 1\wedge y \leq 10)$, 
+$\aunit_\conflictset(\absval) = \top$. \\
+
+
+\noindent \textbf{Backjumping}
 A backjumping procedure removes all the meet irreducibles from 
 the trail up to a decision level that restores the analysis to a
 non-conflicting state.  The backjumping level is defined by the

@@ -7,8 +7,8 @@ Table~\ref{detailed_result} gives a detailed comparison between CBMC version
 name of the tool, the benchmark category, the number of lines of code (LOC),
 and the total number of safe and unsafe benchmarks in the respective
 categories (labelled as Safe/Unsafe).  The solver statistics ({\em
-Decisions, Propagations, Conflicts, Conflict Literals, Restarts}) per
-category for CBMC and ACDLP are in columns~5--9.
+Decisions, Propagations, Conflicts, Conflict Literals, Restarts}) 
+for CBMC and ACDLP are in columns~5--9.
 %
 %Column~10 reports the total time for verification per category.  
 
@@ -104,12 +104,11 @@ tool, the benchmark category, the total number of instances proved safe or
 unsafe (labelled as safe/unsafe), the total number of inconclusive
 benchmarks and total number of false positives per category.
 
-Table~\ref{ai-result} shows that ACDLP proved twice more benchmarks than
+Table~\ref{ai-result} shows that ACDLP solved twice more benchmarks than
 Astr{\'e}e.  The total number of inconclusive results in
 ACDLP is~4.  The inconclusive results is because of timeout.  By
 contrast, Astr{\'e}e reports a total of~53 false positives among~85
-benchmarks with manual trace partitioning.  Clearly, ACDLP is more
-precise than Astr{\'e}e.
+benchmarks.  Clearly, ACDLP is more precise than Astr{\'e}e.
 %
 %
 \section{Decision Heuristics in ACDLP}~\label{decision}
