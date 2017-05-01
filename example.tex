@@ -5,15 +5,14 @@ of ACDLP for bounded verification.  For each example, we apply three
 analysis techniques: \textit{abstract interpretation} (AI), SAT-based
 \textit{bounded model checking} (BMC) and ACDLP. \\ 
 %
-\textbf{First Example}
-The simple Control-Flow Graph (CFG) in Fig.~\ref{fig:example1} squares
-a machine integer and checks that the result is positive.  To avoid
-overflow, we assume the input~v has an upper bound~N.  This example 
-demonstrates that a) interval analysis in ACDLP is more precise than a 
-forward AI in the interval domain, and b) ACDLP with intervals 
-can achieve a precision similar to that of octagonal AI without 
-employing more sophisticated mechanisms such as trace partitioning~\cite{toplas07}.
-%
+\textbf{First Example} The simple Control-Flow Graph (CFG) in
+Fig.~\ref{fig:example1} squares a machine integer and checks that the result
+is positive.  To avoid overflow, we assume the input~v has an upper bound~N. 
+This example demonstrates that a) interval analysis in ACDLP is more precise
+than a forward AI in the interval domain, and b) ACDLP with intervals can
+achieve a precision similar to that of AI with octagons without employing
+more sophisticated mechanisms such as trace partitioning~\cite{toplas07}.
+
 \begin{figure}[t]
 \centering
 \begin{tabular}{c|c|c}
@@ -51,11 +50,11 @@ CFG and corresponding Abstract Conflict Graphs for Interval and Octagon Analysis
 
 
 \noindent \textbf{AI versus ACDLP}
-Conventional forward interval AI is too imprecise to verify safety of this program
-owing to the control-flow join at node~n4.  For example, the
-state-of-the-art AI tool Astr{\'e}e requires external hints, provided
-by manually annotating the code with partition directives at n1.  This 
-informs Astr{\'e}e to analyse program paths separately.
+Conventional forward interval AI is too imprecise to verify safety of this
+program owing to the control-flow join at node~$n_4$.  For example, the
+state-of-the-art AI tool Astr{\'e}e requires external hints, provided by
+manually annotating the code with partition directives at $n_1$.  This
+tells Astr{\'e}e to analyse the program paths separately.
 
 %\textbf{General Working Mechanism of ACDLP}
 However, ACDLP can be understood as an algorithm to automatically infer such

@@ -9,12 +9,12 @@
   \fontfamily{#3}\fontseries{#4}\fontshape{#5}%
   \selectfont}%
 \fi\endgroup%
-\begin{picture}(3129,1959)(34,-2683)
+\begin{picture}(3129,1983)(34,-2683)
+\put(676,-1186){\makebox(0,0)[b]{\smash{{\SetFigFont{12}{14.4}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$n_4$: $-5\leq\mbox{x}\leq 5$}%
+}}}}
 \put(181,-2536){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{.69,0,0}Error: $\bot$}%
 }}}}
-\put(136,-1186){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}n4: -5 $\leq$ x $\leq$ 5}%
-}}}}
-\put(136,-1726){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}n5: (0 $\leq$ z $\leq$ 25) $\wedge$ (x-z $\leq$ 5)}%
+\put(136,-1726){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$n_5$: (0 $\leq$ z $\leq$ 25) $\wedge$ (x-z $\leq$ 5)}%
 }}}}
 \put(136,-1951){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$\wedge$ (x-z $\geq$ -30) $\wedge$ (-5 $\leq$ x+z $\leq$ 30)}%
 }}}}
