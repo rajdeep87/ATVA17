@@ -2,29 +2,28 @@
 
 %%%%%%%%%%%%%%%%%%%%%%% AI %%%%%%%%%%%%%%%%%%%%%%%%
 %
-Static program analysis with abstract interpretation has been widely 
-used to verify properties of safety-critical systems~\cite{CC77}.  
-Static analyses commonly aim to compute program invariants as 
-fixed-points of abstract transformers.  Abstract states are chosen 
-from a lattice that has meet $(\sqcap)$ and join $(\sqcup)$ operations; 
-the meet precisely models set intersection (or conjunction, taking a 
-logical view), and the join over-approximates set union (or disjunction).  
-Over-approximation in the join operation is one of the sources of 
-precision loss that can yield false alarms.  Typical abstract domains 
-are non-distributive; suppose $a$ and $b$ together represent the
-abstract semantics of a program and $c$ represents a set of abstract
-behaviours that violate the specification.  In a non-distributive domain,
-$(a \sqcup b) \sqcap c$ can be strictly less precise than $(a \sqcap c)
-\sqcup (b \sqcap c)$.  This means that in typical abstract domains,
-analysing program behaviours separately can improve the precision of the
-analysis.  Usual means to address false alarms therefore include not only
-the use of richer abstract domains, but also of refinements that delay joins
-or perform some form of case-splitting.  Such techniques trade off higher
-precision against lower efficiency and may be susceptible to case
-enumeration behaviour.
+Static program analysis with abstract interpretation~\cite{CC77} is widely
+used to verify properties of safety-critical systems.  Static analyses
+commonly aim to compute program invariants as fixed-points of abstract
+transformers.  Abstract states are chosen from a lattice that has meet
+$(\sqcap)$ and join $(\sqcup)$ operations; the meet precisely models set
+intersection (or conjunction, taking a logical view), and the join
+over-approximates set union (or disjunction).  Over-approximation in the
+join operation is one of the sources of precision loss, which causes false
+alarms.  Typical abstract domains are non-distributive; suppose $a$ and $b$
+together represent the abstract semantics of a program and $c$ represents a
+set of abstract behaviours that violate the specification.  In a
+non-distributive domain, $(a \sqcup b) \sqcap c$ can be strictly less
+precise than $(a \sqcap c) \sqcup (b \sqcap c)$.  This means that in typical
+abstract domains, analysing program behaviours separately can improve the
+precision of the analysis.  Usual means to address false alarms therefore
+include not only the use of richer abstract domains, but also of refinements
+that delay joins or perform some form of case-splitting.  Such techniques
+trade off higher precision against lower efficiency and may be susceptible
+to case enumeration behaviour.
 
 %%%%%%%%%%%%%%%%%%%%%%% CDCL %%%%%%%%%%%%%%%%%%%%%
-By contrast, model checking (MC)~\cite{mc-book} can be seen to operate on
+By contrast, Model Checking (MC)~\cite{mc-book} can be seen to operate on
 distributive lattice structures that represent disjunction without loss
 of precision.  Classical MC directly operates on distributive
 representations, such as BDDs, while more recent implementations use SAT
@@ -39,22 +38,21 @@ are referred to as \emph{Conflict Driven Clause Learning}
 partial assignments to other non-distributive domains.
 
 %%%%%%%%%%%%%%%%%%%%%%% ACDCL %%%%%%%%%%%%%%%%%%%%%
-Abstract Conflict Driven Clause Learning (ACDCL,~\cite{dhk2013-popl}) is one 
-such lattice-based generalization of CDCL.  ACDCL is a general algorithmic 
-framework, parameterized by a concrete domain $C$  and an abstract domain
-$A$. Classical CDCL can be viewed as an instance of ACDCL 
-in which $C$ is the set of propositional truth assignments and $A$ the 
-domain of propositional partial assignments~\cite{leo-thesis}.  Since 
-the concrete domain of interest is a parameter to the framework, 
-ACDCL can in principle be used to build both 
-\emph{logical decision procedures}~\cite{DBLP:journals/fmsd/BrainDGHK14} 
-and \emph{program analyzers}.  In the former case, the concrete domain is the 
-set of candidate models for the formula; in the latter case, it is the 
-set of program traces that may lead to an error.  Haller et. al. 
-in~\cite{DBLP:journals/fmsd/BrainDGHK14} illustrate the 
-first idea by presenting a floating-point decision procedure that uses interval 
-constraint propagation.
-%
+Abstract Conflict Driven Clause Learning (ACDCL)~\cite{dhk2013-popl} is one
+such lattice-based generalization of CDCL.  ACDCL is a general algorithmic
+framework, parameterized by a concrete domain~$C$ and an abstract
+domain~$A$.  Classical CDCL can be viewed as an instance of ACDCL in which
+$C$ is the set of propositional truth assignments and $A$ the domain of
+propositional partial assignments~\cite{leo-thesis}.  Since the concrete
+domain of interest is a parameter to the framework, ACDCL can in principle
+be used to build both \emph{logical decision
+procedures}~\cite{DBLP:journals/fmsd/BrainDGHK14} and \emph{program
+analyzers}.  In the former case, the concrete domain is the set of candidate
+models for the formula; in the latter case, it is the set of program traces
+that may lead to an error.  Haller
+et~al.~in~\cite{DBLP:journals/fmsd/BrainDGHK14} illustrate the first idea by
+presenting a floating-point decision procedure that uses interval constraint
+propagation.
 
 %%%%%%%%%%%%%%%%%%%%%%% ACDLP %%%%%%%%%%%%%%%%%%%%%
 
