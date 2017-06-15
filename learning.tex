@@ -6,7 +6,7 @@ set of models that do not satisfy a formula~\cite{sas12,dhk2013-popl}.
 Below, we present an abstract conflict analysis procedure, $\analyzeconflict$ of 
 Algorithm~\ref{Alg:acdcl}, that uses a 
 domain-specific abductive transformer for effective learning. 
-A conflict analysis procedure involves two steps: {\em abduction} 
+A~conflict analysis procedure involves two steps: {\em abduction} 
 and {\em heuristic choice for generalisation}. Abduction infers 
 possible generalisations for a conflict which is followed by 
 heuristically selecting a generalisation.  The main idea of abductive reasoning is to 
@@ -45,7 +45,7 @@ bottom of Fig.~\ref{uip}.  For the partial abstract value,
 $\absval=\{x\leq0 \wedge x+z\leq4 \wedge z\leq4\}$, 
 obtained from the trail, the result of the abstract deduction transformer is
 $\abstrans{\octagons}{y=(x+z)/2}(\absval)=\{x+y\leq2, y\leq2, y+z\leq6\}$.
-A conflict ($\bot$) is reached for the decision ${x{\leq}0}$.   
+A~conflict ($\bot$) is reached for the decision ${x{\leq}0}$.   
 Note that there exist multiple incomparable reasons for conflict,
 marked as {\em cut0} and {\em cut1} in Fig.~\ref{uip}.  Here, cut0 is 
 the first UIP (node closest to conflict node).  Choosing cut0 yields 
