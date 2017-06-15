@@ -1,0 +1,204 @@
+Dear Rajdeep Mukherjee,
+
+We are glad to inform you that your submission titled
+"Lifting CDCL to Template-based Abstract Domains for Program Verification" (Paper Number 34) has been accepted for
+presentation at ATVA 2017.
+
+The detailed referee reports are appended below.
+
+The final version of your paper for the proceedings is due
+on the 10th of July, 2017 (AoE). This deadline is firm.
+
+Please take into account the comments and suggestions of the referees
+while preparing the final version. The page limit remains the same as
+at submission. However, if you need to use a page or two extra in
+order to address the issues raised in the reports, please feel free to
+do so.
+
+The final version of your paper should be uploaded via Easychair. We
+will send you detailed instructions regarding this shortly.
+
+Best regards,
+
+Deepak D'Souza and K. Narayan Kumar
+PC Chairs for ATVA 2017.
+
+
+----------------------- REVIEW 1 ---------------------
+PAPER: 34
+TITLE: Lifting CDCL to Template-based Abstract Domains for Program Verification
+AUTHORS: Rajdeep Mukherjee, Peter Schrammel, Leopold Haller, Daniel Kroening and Tom Melham
+
+Overall evaluation: 2 (accept)
+
+----------- Overall evaluation -----------
+Summary:
+=======
+
+This paper addresses the verification problem of safety properties for C programs. This is done through the extension of the Abstract Conflict Driven Clause Learning  (ACDCL) framework to program analysis. The ACDCL algorithm has been proposed as a generalization of Conflict Driven Clause Learning (CDCL) algorithm to richer lattice structures than the Boolean one. In fact, the CDCL algorithm has been effectively used in many SAT solvers and largely contributed to their success.
+In this paper, the authors instantiate the ACDCL framework with an abstract domain of template polyhedra  (such as the Interval and Octagon abstract domains).
+
+The proposed CDCL framework consists of two procedures, namely, the abstract model search procedure and the abstract conflict analysis procedure.  Roughly, the abstract model search procedure over-approximates the set of behaviors of the program in order to search for a counter-example. If the found counter-example is a real one, then the program is declared to be unsafe. Otherwise, the proposed CDCL framework calls the abstract conflict analysis procedure to learn the reason behind this spurious counter-example. Then, the execution of the abstract search procedure is repeated with a more precise abstraction  (using the information returned by the abstract conflict analysis procedure).
+
+Finally, the authors have experimented their technique on several examples and the results are very promising. The experiments show: (1) the efficiency of the proposed technique compared to CBMC (an SAT-Solver bounded Model-Checker) and (3) its precision compared to Astrée (an abstract interpretation based tool).
+
+
+Evaluation:
+========
+
+The high-level goals of the paper are laudable. The presented framework combines techniques from abstract interpretation and Sat-solvers in order to develop a more efficient and precise analysis for C programs. The experiments are promising. The developed tool ACDLP seems to have a better performance than CBMC and  Astrée.  Furthermore, the technical ideas seem to be sound and intriguing. In particular, I liked the idea of alternating between the abstract model search procedure and the abstract conflict analysis procedure.
+
+On the negative side, the paper is extremely dense and not easy to follow for someone without a certain degree of familiarity with abstract interpretation and CDCL. Many used concepts and techniques are not well-explained and the reader is often referred to some previous works. This seems to be unavoidable given the page limit.
+
+Another negative point is the novelty of the proposed technique compared to some previous works. It is unclear how hard and difficult to lift the ACDCL framework to program analysis and what are the encountered challenges (at least from the theoretical point of view). Nevertheless, the paper makes a clear contribution from the practical point of view.  
+
+Overall, the work is interesting and advances the state-of-the-art. Therefore, I recommend its acceptance.
+
+
+Added after the PC discussions:
+=======================
+
+The inclusion of an example explaining step by step the algorithms is strongly recommended.
+
+
+----------------------- REVIEW 2 ---------------------
+PAPER: 34
+TITLE: Lifting CDCL to Template-based Abstract Domains for Program Verification
+AUTHORS: Rajdeep Mukherjee, Peter Schrammel, Leopold Haller, Daniel Kroening and Tom Melham
+
+Overall evaluation: 1 (weak accept)
+
+----------- Overall evaluation -----------
+This paper presents a new method for the static analysis of
+bounded programs (i.e., programs with bounded loops). The method 
+increases the precision of classical analyses, i.e.,
+returns less false positive, by adapting the principles of
+conflict driven clause learning (CDCL) used in SAT checking to
+improve the precision of abstract transformers used by abstract domains.
+
+The method starts like a classic bounded model checking where
+each (finite) annotated behaviour is encoded into a big conjunction
+of atomic formula. The formulas encoding program statements are
+obtained by applying the imprecise (but efficiently computed)
+abstract transformers of the underlying abstract domain. A
+deduction step allows to saturate the formula obtained after each
+application of the abstract transformer. If a conflict is generated
+(i.e., unsat is deduced), the algorithm returns on the decisions
+and abstract transformers employed to consider other cases resp. to
+improve their precision by an abduction step.
+
+The difficult point is to keep track of decisions and deductions
+done during this process and to relate them with the abstract transformers.
+Also, an important role is played by the heuristics employed to
+propagate clauses, to choose decisions to be made, and to
+choose the abduced clauses issued from conflict analysis.
+These heuristics are given as parameters of the method and
+they are not at all discussed. Especially the subdomain
+chosen to obtain the parameterised abstract transformer
+which seems to be very important during the deduction phase.
+This omission is a lack of this paper, IMO.
+
+The method is instantiated with the template abstract domain
+but the authors provide a sufficient condition for the
+abstract domains to be used in this setting. This condition is
+not satisfied by the existing libraries of domains (e.g. APRON)
+but the authors claim that such libraries may be adapted to
+their method. This condition consists in providing a
+a precise complementation operation for meet irreducible values.
+
+The authors implemented the template abstract domain (and the
+requested complementation operation) together with the general analysis
+algorithm. They applied the analyser on a benchmark of 85
+bounded programs and compared the results obtained with CBMC
+and Astree. The results are very good. However, I would like to
+find more details for this comparison, for example the heuristics
+employed by the method for the parameterised abstract transformers
+and what are the domains used for Astree.
+
+
+Typos and other comments:
+
+p1, abstract: Please be more precise by replacing “solves twice as many”
+   with “is more precise in twice as many”.
+
+p5, equation (1): the text below this equation mention g_3 but it should
+   be g_2.
+
+p6, efficient closure of values in template domain: Another method to
+   obtain efficiency of this operations is to fix clusters of variables
+   which are related and to compute the closure only for them.
+   Could you be more precise why you choose the lazy method and not
+   another existing method?
+
+p6, line -2: “using the abstract domain”
+   Also, you use two notions “safety equation” and “safety formula” for the
+   same thing. I prefer the second one.
+
+p7, Definition 3: I prefer “complemented concretisation” to “negated”
+   because the concretisation is a set of vectors.
+   At this point, you shall be more precise concerning the type of variables
+   dealt, i.e., integer variables. Ideally, discuss how it extends
+   to floating point variables.
+
+p8, line -6: “an empty R”
+   The procedure “deduce” looks more like a saturation procedure
+   than a refinement. Could you be more explicit here?
+
+p9, Algorithm 2: It seems very odd that L appears here without being a parameter.
+   This means that L changes during this algorithm because it is attached
+   to some deduction done in onlyNew function?
+
+p11, line 8 of Sec 5.2: It is not clear at this point where the MakeL function
+   is called during the Algorithm2.
+
+p11, line -5: Could you also be more precise on the template domain used?
+   Is it fixed using the program/annotation syntax?
+
+
+----------------------- REVIEW 3 ---------------------
+PAPER: 34
+TITLE: Lifting CDCL to Template-based Abstract Domains for Program Verification
+AUTHORS: Rajdeep Mukherjee, Peter Schrammel, Leopold Haller, Daniel Kroening and Tom Melham
+
+Overall evaluation: -1 (weak reject)
+
+----------- Overall evaluation -----------
+This paper presents a method for safety verification of loop-free
+programs that mimics CDCL. It appears to me that it unfolds the
+program and computes abstract reachable states in some abstract domain.
+If spurious counterexample is found, it (unsoundly) restricts the abstract
+states and tries to eliminate the counterexample. If the counterexample
+is eliminated, it goes back to the last restriction that caused
+the elimination and flips the restriction in the domain, i.e, choosing
+complementary abstract state. If no flips are left to do, the
+program is safe.
+
+The authors have implemented the algorithms and experiments
+favors the algorithm.
+
+The idea is interesting but the main criticism of the paper
+is the presentation. I am afraid to say that the paper is highly
+unreadable and I could not understand all the details. The presentation
+is more focused on drawing parallel with CDCL than the presentation of
+the proposed algorithm. Here are a couple of specific points related to
+the presentation.
+
+- Several objects are informally defined, for example abstract conflict
+graphs. They are referred in the motivating examples, but never formally
+defined in the whole paper.
+
+- Some of the key details of the algorithms are vaguely discussed.
+It is not clear to me what trail means. For example, in fig 4., the
+reason trail seems to contain program statements. However, they should
+contain abstract transformers with the L parameter.  Also in the same
+figure, the trail includes predicate over program variables without
+reference to program locations.
+
+- abd has no formal definition and how it is used on the parameters
+of analyzeConflict
+
+Therefore, I conclude that the paper should not be accepted in the current form.
+
+I think step by step presentation of a simple example will clarify the
+algorithm a lot. If the paper is accepted, the authors must include such an example
+and only use terms in the motivating example that are defined in rest of the paper.
