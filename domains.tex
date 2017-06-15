@@ -35,8 +35,8 @@ Control flow is encoded using guard variables, e.g.~$g_1=g_0\wedge c$.
 %
 Data flow joins become conditional expressions, e.g.~$x_3=g_1?x_1:x_2$.
 %
-The assertions $\assertions$ are constraints such as $g_3
-\Rightarrow z\geq 0$, meaning that if $g_3$ holds
+The assertions $\assertions$ are constraints such as $g_2
+\Rightarrow z\geq 0$, meaning that if $g_2$ holds
 (i.e.,~the assertion is reachable) then the assertion must hold.
 %
 We~write $\vars$ for the set of variables occurring in $\constraints$.  
@@ -152,8 +152,8 @@ For example, we can deduce $\abstrans{\domain}{x=2(y+z)}(\absval)=(0\leq y
 for the abstract value $\absval=(0\leq y \leq 2 \wedge\allowbreak 1 \leq y-z
 \leq 1)$.
 %
-We~denote the set of abstract transformers for a safety equation
-$\formula$ using abstract domain $\domain$ by
+We~denote the set of abstract transformers for a safety formula
+$\formula$ using the abstract domain $\domain$ by
 $\abstransset=\{\abstrans{\domain}{\constraint}\mid
 \constraint\in\constraints\}$.
 
@@ -206,7 +206,7 @@ the set $\{x\geq 2, x\leq 4, y\geq 3, y\leq 5\}$.
 An element $\absval\in \domain$ is called \emph{precisely complementable}
 iff there exists $\bar{\absval} \in \domain$ such that 
 $\neg\gamma(\bar{\absval})=\gamma(\absval)$.
-That is, there is an element whose negated concretisation equals
+That is, there is an element whose complemented concretisation equals
 the concretisation of $\absval$.
 \end{definition}
 %
