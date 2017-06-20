@@ -205,18 +205,30 @@ the presentation.
 graphs. They are referred in the motivating examples, but never formally
 defined in the whole paper.
 
+TODO
+
 - Some of the key details of the algorithms are vaguely discussed.
 It is not clear to me what trail means. For example, in fig 4., the
 reason trail seems to contain program statements. However, they should
-contain abstract transformers with the L parameter.  Also in the same
+contain abstract transformers with the L parameter.
+
+TODO: add an explanation for the notation
+
+Also in the same
 figure, the trail includes predicate over program variables without
 reference to program locations.
 
+NOT NEEDED
+
 - abd has no formal definition and how it is used on the parameters
 of analyzeConflict
+
+TODO
 
 Therefore, I conclude that the paper should not be accepted in the current form.
 
 I think step by step presentation of a simple example will clarify the
 algorithm a lot. If the paper is accepted, the authors must include such an example
 and only use terms in the motivating example that are defined in rest of the paper.
+
+TODO
