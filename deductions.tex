@@ -288,8 +288,9 @@ functions $\initworklist$ and $\updateworklist$.
 The order of the elements in the worklist and the subdomain $\subdomain$ 
 associated with each ADT ($\abstransel{\subdomain}$) 
 determine the propagation strategy (forward, backward, multi-way).
-A subdomain ($\subdomain$) is constructed for $\abstransel{\subdomain}$ 
-via the function $\makesubdomain$ such that 
+These two functions construct a subdomain ($\subdomain$)
+for $\abstransel{\subdomain}$ 
+by calling the function $\makesubdomain$ such that 
 $\subdomain=\makesubdomain_\domain(\subvars)$, where $\subvars$ are 
 the variables that appear in $\abstransel{\subdomain}$. 
 \Omit{
@@ -338,7 +339,7 @@ the abstract transformers $\abstransset$ are $\gamma$-complete~\cite{dhk2013-pop
 (shown in line~15).
 %
 Intuitively, this checks whether all concrete values in 
-$\gamma(\abs(\trail))$ satisfy the safety equation $\formula$, where 
+$\gamma(\abs(\trail))$ satisfy the safety formula $\formula$, where 
 $\formula:= \bigwedge_{\constraint\in\constraints} \constraint$ is obtained 
 from the program transformation (as defined in Section~\ref{sec:program}).
 %
