@@ -74,26 +74,24 @@ Daniel Kroening\inst{1} \and Tom Melham\inst{1}}
 %===============================================================================
 %
 The success of Conflict Driven Clause Learning (CDCL) for Boolean
-satisfiability has inspired its adoption in other domains.  We~present a
-novel lifting of the CDCL to program analysis called \emph{Abstract Conflict
-Driven Learning for Programs} (ACDLP).  ACDLP alternates between \emph{model
+satisfiability has inspired adoption in other domains.  We~present a novel
+lifting of CDCL to program analysis called \emph{Abstract Conflict Driven
+Learning for Programs} (ACDLP).  ACDLP alternates between \emph{model
 search}, which performs over-approximate deduction with constraint
 propagation, and \emph{conflict analysis}, which performs under-approximate
-abduction with heuristic choice.  We instantiate the model search and
+abduction with heuristic choice.  We~instantiate the model search and
 conflict analysis algorithms to an abstract domain of \textit{template
-polyhedra}, strictly generalizing CDCL from the Boolean lattice to richer
-lattice structures.  Our domain of template polyhedra can express intervals,
-octagons, and certain restricted polyhedral constraints over program
-variables.  We have implemented ACDLP for automatic bounded safety verification 
-of C programs.  We~evaluate the performance of our
-analyser by comparing with the CBMC program verifier, which uses
-propositional solvers, and Astr{\'e}e, a commercial abstract
-interpretation tool.  We observe a two orders of magnitude reduction in the
-number of decisions, propagations, and conflicts as well as a~1.5x speedup 
-in runtime compared to CBMC.  Compared to Astr{\'e}e, ACDLP solves 
-twice as many benchmarks and has much higher precision.
-This is the first instantiation of CDCL with a template polyhedra 
-abstract domain for safety verification of programs.
+polyhedra}, strictly generalizing CDCL from the Boolean lattice to a richer
+lattice structure.  Our template polyhedra can express intervals, octagons
+and restricted polyhedral constraints over program variables.  We have
+implemented ACDLP for automatic bounded safety verification of C programs. 
+We~evaluate the performance of our analyser by comparing with CBMC, which
+uses CDCL, and Astr{\'e}e, a commercial abstract interpretation tool. 
+We~observe two orders of magnitude reduction in the number of decisions,
+propagations, and conflicts as well as a~1.5x speedup in runtime compared to
+CBMC.  Compared to Astr{\'e}e, ACDLP solves twice as many benchmarks and has
+much higher precision.  This is the first instantiation of CDCL with a
+template polyhedra abstract domain.
 %
 \end{abstract}
 
