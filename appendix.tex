@@ -22,25 +22,25 @@ benchmarks as {\em Control-Flow} category.  The total number of benchmarks in
 our experiments is set to~200 seconds.  All times in Table~\ref{detailed_result} 
 and Table~\ref{ai-result} are in seconds. 
 
-The Bit-vector category contains a total of~13 benchmarks, out of which~6 
-are safe and the remaining~7 are unsafe benchmarks.  The benchmarks in the control-flow
-category contains simple bounded loop analysis with relational properties 
-to more complex controller code containing nested loops with varying loop bounds.  
-Out of~55 benchmarks in this category, 35 are safe and 20 are
-unsafe.  We verified a total of~17 hardware benchmarks, which are given in
-Verilog RTL language.  Out of these~17 benchmarks,~10 are safe and the 
-remaining~7 are unsafe.  The software models (in ANSI-C) for the Verilog 
-circuits are obtained via a Verilog to C translator tool, {\em v2c}.  These 
-software models are then fed to CBMC and ACDLP.  The hardware benchmarks 
-include an implementation of a Instruction buffer logic, FIFO arbiter, traffic light
-controller, cache coherence protocol, Dekker's mutual exclusion algorithm
-among others.  The largest benchmark is the cache coherence protocol which
-consists of~890 LOC and the smallest benchmark is TicTacToe with~67 LOC. 
-The software models of these Verilog circuits uses several complex bit-wise
-logic to map hardware operations into an equivalent C syntax.  It is worth
-emphasizing that our abstract domain implementation can automatically handle
-bit-wise operations out-of-the-box.
-%
+The Bit-vector category contains a total of~13 benchmarks, out of which~6
+are safe and the remaining~7 are unsafe benchmarks.  The benchmarks in the
+control-flow category contains simple bounded loop analysis with relational
+properties to more complex controller code containing nested loops with
+varying loop bounds.  Out of~55 benchmarks in this category, 35 are safe and
+20 are unsafe.  We verified a total of~17 hardware benchmarks, which are
+given in Verilog RTL language.  Out of these~17 benchmarks,~10 are safe and
+the remaining~7 are unsafe.  The software models (in ANSI-C) for the Verilog
+circuits are obtained via a Verilog to C translator tool, {\em v2c}.  These
+software models are then fed to CBMC and ACDLP.  The hardware benchmarks
+include an implementation of a Instruction buffer logic, FIFO arbiter,
+traffic light controller, cache coherence protocol, Dekker's mutual
+exclusion algorithm among others.  The largest benchmark is the cache
+coherence protocol which consists of~890 LOC and the smallest benchmark is
+TicTacToe with~67 LOC.  The software models of these Verilog circuits uses
+several complex bit-wise logic to map hardware operations into an equivalent
+C syntax.  We emphasize that our implementation can handle bit-wise
+operations out-of-the-box.
+
 \begin{table}[!b]
 \begin{center}
 {
@@ -63,20 +63,17 @@ bit-wise operations out-of-the-box.
 \caption{CBMC versus ACDLP}
 \label{detailed_result}
 \end{table}
-%
 
+The statistics for ACDLP in Table~\ref{detailed_result} is obtained using an
+ordered decision heuristic, multi-way propagation heuristic and a first-UIP
+learning heuristic.  Note that the deductions using a multi-way heuristic is
+more precise than forward or backward heuristics, but multi-way heuristic
+takes longer time to reach the fixed-point.  Furthermore, multi-way
+heuristic significantly reduces the total number of decisions, propagations
+and learning iterations due to higher precision of the deductions made in
+the abstract domain.  Overall, ACDLP reduces the total number of decisions,
+propagations, conflicts and restarts by a factor of~20X compared to CBMC.
 
-The statistics for ACDLP in Table~\ref{detailed_result} is obtained 
-using an ordered decision heuristic, multi-way propagation heuristic and a
-first-UIP learning heuristic.  Note that the deductions using a 
-multi-way heuristic is more precise than forward or backward heuristics, 
-but multi-way heuristic takes longer time to reach the fixed-point.
-Furthermore, multi-way heuristic significantly reduces the total number of 
-decisions, propagations and learning iterations due to higher precision of the 
-deductions made in the abstract domain. Overall, ACDLP reduces the total number
-of decisions, propagations, conflicts and restarts by a factor of~20X compared 
-to CBMC.   
-%
 \begin{table}[t]
 \begin{center}
 {
@@ -95,8 +92,6 @@ to CBMC.
   \caption{Astr{\'e}e versus ACDLP}
 \label{ai-result}
 \end{table}
-%
-
 
 Table~\ref{ai-result} gives a detailed comparison between Astr{\'e}e and
 ACDLP.  Columns~1--5 in Table~\ref{ai-result} gives the name of the
@@ -105,12 +100,11 @@ unsafe (labelled as safe/unsafe), the total number of inconclusive
 benchmarks and total number of false positives per category.
 
 Table~\ref{ai-result} shows that ACDLP solved twice more benchmarks than
-Astr{\'e}e.  The total number of inconclusive results in
-ACDLP is~4.  The inconclusive results is because of timeout.  By
-contrast, Astr{\'e}e reports a total of~53 false positives among~85
-benchmarks.  Clearly, ACDLP is more precise than Astr{\'e}e.
-%
-%
+Astr{\'e}e.  The total number of inconclusive results in ACDLP is~4.  The
+inconclusive results is because of timeout.  By~contrast, Astr{\'e}e reports
+a total of~53 false positives among~85 benchmarks.  Clearly, ACDLP is more
+precise than Astr{\'e}e.
+
 \section{Decision Heuristics in ACDLP}~\label{decision}
 %
 We have implemented several decision heuristics in ACDLP: {\em ordered}, 
