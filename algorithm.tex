@@ -50,28 +50,28 @@ $\mathit{result} \leftarrow \deduce_{\propheur}(\abstransset,\trail,\reasons)$ \
 \caption{Abstract Conflict Driven Learning $\mathit{ACDLP}_{\propheur,\decheur,\confheur}(\abstransset)$\label{Alg:acdcl}}
 \end{algorithm2e}
 
-Figure~\ref{acdlp-top} present our framework called \emph{Abstract Conflict 
-Driven Learning for Programs} that uses abstract model search and abstract 
-conflict analysis procedures for safety verification of C programs.  The model
-search procedure operates on an over-approximate domain of program
-traces through repeated application of abstract deduction transformer, 
-$\abstransel{}$, and decisions in order to search for a counterexample trace.  
-If the model search finds a satisfying assignment
-(corresponding deduction transformer is $\gamma$-complete), then ACDLP 
-terminates with a counterexample trace, and the program is \emph{unsafe}.  
-Else, if a conflict is encountered, then it implies that the corresponding 
-program trace is either not valid or safe.  ACDLP then moves to the conflict 
-analysis phase where it learns the reason for the conflict from 
-partial safety proof using an
-abstract abductive transformer, $\abd{}{}$, followed by a heuristic choice of conflict 
-reason.  Similar to SAT solver, ACDLP picks one conflict reason from multiple
-incomparable reasons for conflict for efficiency reasons. Hence, it operates over 
-an underapproximate domain of conflict reasons.  A~conflict reason
-underapproximates a set of invalid or safe traces. The conflict analysis returns a 
-learnt transformer (negation of conflict reason) that over-approximate a set of 
-valid and unsafe traces. Model search is repeated with this new transformer.  
-Else, if no further backtracking is possible, then ACDLP terminates and returns
-\emph{safe}.  We~present the ACDLP algorithm in subsequent section.
+Figure~\ref{acdlp-top} present our framework called \emph{Abstract Conflict
+Driven Learning for Programs} that uses abstract model search and abstract
+conflict analysis procedures for safety verification of C programs.  The
+model search procedure operates on an over-approximate domain of program
+traces through repeated application of abstract deduction transformer,
+$\abstransel{}$, and decisions in order to search for a counterexample
+trace.  If the model search finds a satisfying assignment (corresponding
+deduction transformer is $\gamma$-complete), then ACDLP terminates with a
+counterexample trace, and the program is \emph{unsafe}.  Else, if a conflict
+is encountered, then it implies that the corresponding program trace is
+either not valid or safe.  ACDLP then moves to the conflict analysis phase
+where it learns the reason for the conflict from partial safety proof using
+an abstract abductive transformer, $\abd{}{}$, followed by a heuristic
+choice of conflict reason.  Similar to a SAT solver, ACDLP picks one
+conflict reason from multiple incomparable reasons for conflict for
+efficiency reasons.  Hence, it operates over an underapproximate domain of
+conflict reasons.  A~conflict reason underapproximates a set of invalid or
+safe traces.  The conflict analysis returns a learnt transformer (negation
+of conflict reason) that over-approximate a set of valid and unsafe traces. 
+Model search is repeated with this new transformer.  Else, if no further
+backtracking is possible, then ACDLP terminates and returns \emph{safe}. 
+We~present the ACDLP algorithm in subsequent section.
 
 The input to ACDLP (Algorithm~\ref{Alg:acdcl}) is a
 program in the form of a set of abstract transformers
