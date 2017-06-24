@@ -9,12 +9,12 @@
   \fontfamily{#3}\fontseries{#4}\fontshape{#5}%
   \selectfont}%
 \fi\endgroup%
-\begin{picture}(8349,4587)(1654,-6238)
+\begin{picture}(8349,4497)(1654,-6148)
 \put(5761,-1816){\makebox(0,0)[b]{\smash{{\SetFigFont{12}{14.4}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}\it Learn new transformer}%
 }}}}
 \put(5761,-5596){\makebox(0,0)[b]{\smash{{\SetFigFont{12}{14.4}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}\it Partial Safety Proof}%
 }}}}
-\put(3466,-5956){\makebox(0,0)[b]{\smash{{\SetFigFont{12}{14.4}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}\textbf{UNSAFE}}%
+\put(3466,-5956){\makebox(0,0)[b]{\smash{{\SetFigFont{12}{14.4}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}\bf UNSAFE}%
 }}}}
 \put(3646,-4516){\makebox(0,0)[b]{\smash{{\SetFigFont{12}{14.4}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}Decision}%
 }}}}
