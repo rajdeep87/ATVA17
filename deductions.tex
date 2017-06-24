@@ -1,6 +1,6 @@
 \section{Abstract Model Search in the Template Polyhedra Domain}\label{sec:deduce}
-%
-\Omit {
+
+\Omit{
 \begin{figure}[t]
 \scriptsize
 \begin{tabular}{l|l|l}
@@ -45,8 +45,7 @@ C &\iff& ((x' > 1) \land (-x'-y < -2) \land \\
 \label{ssa}
 \end{figure}
 }
-%
-%    
+
 \begin{algorithm2e}[t]
 \DontPrintSemicolon
 \SetKw{return}{return}
@@ -90,11 +89,15 @@ $\worklist \leftarrow \initworklist_{\propheur}(\abstransset)$ \;
 \end{small}
 \caption{Abstract Model Search $\mathit{deduce}_{\propheur}(\abstransset,\trail,\reasons)$ \label{Alg:ms}}
 \end{algorithm2e}
-%  
-A model search procedure in a SAT solver involves two steps: {\em deductions} 
-using repeated application of the unit rule (also called Boolean Constraint Propagation (BCP)) 
-to refine current partial assignments, and {\em decisions} to heuristically guess a value for 
-an unassigned literal. BCP can be seen to compute greatest fixed point over the partial assignment  domain~\cite{dhk2013-popl}.  Below, we present an abstract model search procedure that computes a greatest fixed point over abstract transformers $\abstrans{\domain}{\constraint}$.
+
+A model search procedure in a SAT solver involves two steps: {\em
+deductions} using repeated application of the unit rule (also called Boolean
+Constraint Propagation (BCP)) to refine current partial assignments, and
+{\em decisions} to heuristically guess a value for an unassigned literal. 
+BCP can be seen to compute greatest fixed point over the partial assignment
+domain~\cite{dhk2013-popl}.  Below, we present an abstract model search
+procedure that computes a greatest fixed point over abstract transformers
+$\abstrans{\domain}{\constraint}$.
  
 %The unit rule overapproximates a model transformer and deduction 
 %computes a greatest fixed point over the partial assignments
@@ -176,6 +179,7 @@ $\abstrans{\intervals[\{x,y,z\}]}{x=y+z}^{\intervals[\{y,z\}]}=\absval\meet (z\l
 This performs an lhs-to-rhs propagation and hence emulates a backward analysis.  
 
 \paragraph{Multi-way Transformer.} 
+%
 \Omit{We call the propagation with arbitrary subdomains,e.g. 
 $\subdomain=\domain$, \emph{multi-way propagation}, which is able
 to simultaneously perform forward and backward propagation.}
@@ -184,6 +188,7 @@ $\constraint=((c = (x=y)) \wedge y=y+1)$ and $L={\intervals[\{c,x,y\}]}$, we hav
 $\abstrans{\intervals[\{c,x,y\}]}{\constraint}^{\intervals[\{c,x,y\}]}=\absval\meet(y\leq6
 \wedge y\geq6)$.  This performs an lhs-to-rhs propagation for $c=(x=y)$ and rhs to lhs propagation
 for $y=y+1$ and hence emulates a multi-way analysis.  
+%
 % $\abstrans{\intervals[\{c,x,y\}]}{y=y+1}^{\intervals[\{c,x,y\}]}=\absval\meet(y\leq6 \wedge y\leq6)$.  
 % We apply the ADTs in sequence for the
 % constraints $\constraint=(c == (x==y))$ and $\constraint=(y=y+1)$ with the
@@ -346,4 +351,4 @@ from the program transformation (as defined in Section~\ref{sec:program}).
 If it is indeed 
 $\gamma$-complete, then $\mathit{deduce}$ returns \textsf{sat}.  Otherwise, the 
 algorithm returns \textsf{unknown} and ACDLP makes a new decision.    
-  
+
