@@ -114,13 +114,13 @@ To make our algorithm efficient, we have to focus the abstract
 transformers on performing only the minimally necessary
 work. 
 }
-The key considerations for building an abstract transformer are 
-precision and efficiency.  A~precise transformer is usually 
-less efficient than a more imprecise one.  
-In this paper, we present a specialised 
-variant of the abstract transformer to compute deductions called 
-\emph{Abstract Deduction Transformer} (ADT), which is 
-parametrised by a given \emph{subdomain} $\subdomain\subseteq \domain$.  
+
+The key considerations for an abstract transformer are precision and
+efficiency.  A~precise transformer is usually less efficient than a more
+imprecise one.  In this paper, we present a specialised variant of the
+abstract transformer to compute deductions called \emph{Abstract Deduction
+Transformer} (ADT), which is parametrised by a given \emph{subdomain}
+$\subdomain\subseteq \domain$.
 %
 A subdomain contains a chosen subset of the elements in $\domain$ including
 $\bot$ and $\top$ that forms a lattice.
