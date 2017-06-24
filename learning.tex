@@ -1,20 +1,19 @@
-\section{Abstract Conflict Analysis in Template Polyhedra Domain}\label{sec:conflict}
-%
-Propositional conflict analysis with FIRST-UIP~\cite{cdcl} can be seen 
-as abductive reasoning that under-approximates a 
-set of models that do not satisfy a formula~\cite{sas12,dhk2013-popl}.  
-Below, we present an abstract conflict analysis procedure, $\analyzeconflict$ of 
-Algorithm~\ref{Alg:acdcl}, that uses a 
-domain-specific abductive transformer for effective learning. 
-A~conflict analysis procedure involves two steps: {\em abduction} 
-and {\em heuristic choice for generalisation}. Abduction infers 
-possible generalisations for a conflict which is followed by 
-heuristically selecting a generalisation.  The main idea of abductive reasoning is to 
-iteratively replace a singleton assignment $s$ in the conflict 
-reason by a partial assignment that is sufficient to infer $s$.  
-Informally, an abstract abductive transformer, $\abd{}{}(A)$, 
-for a given formula $\formula$ adds abstract models to the input set
-$\allval$, that do not satisfy $\formula$. 
+\section{Abstract Conflict Analysis for Template Polyhedra}\label{sec:conflict}
+
+Propositional conflict analysis with FIRST-UIP~\cite{cdcl} can be seen as
+abductive reasoning that under-approximates a set of models that do not
+satisfy a formula~\cite{sas12,dhk2013-popl}.  Below, we present an abstract
+conflict analysis procedure, $\analyzeconflict$ of
+Algorithm~\ref{Alg:acdcl}, that uses a domain-specific abductive transformer
+for effective learning.  A~conflict analysis procedure involves two steps:
+{\em abduction} and {\em heuristic choice for generalisation}.  Abduction
+infers possible generalisations for a conflict which is followed by
+heuristically selecting a generalisation.  The main idea of abductive
+reasoning is to iteratively replace a singleton assignment $s$ in the
+conflict reason by a partial assignment that is sufficient to infer $s$. 
+Informally, an abstract abductive transformer, $\abd{}{}(A)$, for a given
+formula $\formula$ adds abstract models to the input set $\allval$, that do
+not satisfy $\formula$.
 %
 For example, an abstract abductive transformer for $\formula=\{x=y+1\}$ 
 is given by, $\abd{x=y+1}{\intervals}(x \geq 0)=(x \geq 0 \cup y \leq -2)$.
@@ -22,53 +21,48 @@ is given by, $\abd{x=y+1}{\intervals}(x \geq 0)=(x \geq 0 \cup y \leq -2)$.
 Conflict abduction is performed by obtaining cuts through markings in the 
 trail $\trail$, by the application of abstract Unique Implication Point (UIP) 
 search algorithm~\cite{cdcl}.  Every cut in the graph is a reason for
-conflict.\\ 
-%
+conflict.\\
+
 \begin{figure}[t]
 \centering
 \scalebox{.55}{\import{figures/}{oct_implgraph.pspdftex}}
 \caption{\label{uip} Finding Abstract UIP in Octagon Domain}
 \end{figure}  
-%
-
 
 \noindent \textbf{Abstract UIP Search}
-An abstract UIP algorithm~\cite{DBLP:journals/fmsd/BrainDGHK14} 
-traverses the trail $\trail$ starting from the conflict node and 
-computes a cut that suffices to produce a conflict.  
-For example, consider a formula $\formula:= \{x{+}4{=}z \wedge 
-x{+}z{=}2y \wedge z{+}y>10\}$.  The ACG in Fig.~\ref{uip} records the 
-sequence of deductions in the octagon domain that are inferred from 
-a decision $(x{\leq}0)$ for the formula $\formula$.  The arrows (in red) 
-shows the relationship between the reason trail and propagation trail in 
-bottom of Fig.~\ref{uip}.  For the partial abstract value, 
-$\absval=\{x\leq0 \wedge x+z\leq4 \wedge z\leq4\}$, 
-obtained from the trail, the result of the abstract deduction transformer is
-$\abstrans{\octagons}{y=(x+z)/2}(\absval)=\{x+y\leq2, y\leq2, y+z\leq6\}$.
-A~conflict ($\bot$) is reached for the decision ${x{\leq}0}$.   
-Note that there exist multiple incomparable reasons for conflict,
-marked as {\em cut0} and {\em cut1} in Fig.~\ref{uip}.  Here, cut0 is 
-the first UIP (node closest to conflict node).  Choosing cut0 yields 
-a learnt clause $(y+z>6)$, which is obtained by 
-negating the reason for conflict.  The abstract UIP algorithm returns a learnt 
-transformer $\aunit$, which is described next.\\ 
-%    
-
+An abstract UIP algorithm~\cite{DBLP:journals/fmsd/BrainDGHK14} traverses
+the trail $\trail$ starting from the conflict node and computes a cut that
+suffices to produce a conflict.  For example, consider a formula $\formula:=
+\{x{+}4{=}z \wedge x{+}z{=}2y \wedge z{+}y>10\}$.  The ACG in Fig.~\ref{uip}
+records the sequence of deductions in the octagon domain that are inferred
+from a decision $(x{\leq}0)$ for the formula $\formula$.  The arrows (in
+red) shows the relationship between the reason trail and propagation trail
+in bottom of Fig.~\ref{uip}.  For the partial abstract value,
+$\absval=\{x\leq0 \wedge x+z\leq4 \wedge z\leq4\}$, obtained from the trail,
+the result of the abstract deduction transformer is
+$\abstrans{\octagons}{y=(x+z)/2}(\absval)=\{x+y\leq2, y\leq2, y+z\leq6\}$. 
+A~conflict ($\bot$) is reached for the decision ${x{\leq}0}$.  Note that
+there exist multiple incomparable reasons for conflict, marked as {\em cut0}
+and {\em cut1} in Fig.~\ref{uip}.  Here, cut0 is the first UIP (node closest
+to conflict node).  Choosing cut0 yields a learnt clause $(y+z>6)$, which is
+obtained by negating the reason for conflict.  The abstract UIP algorithm
+returns a learnt transformer $\aunit$, which is described next.\\
+%
 
 \noindent \textbf{Learning in Template Polyhedra Domain}
 %
-Learning in a propositional solvers yields an asserting
-clause~\cite{cdcl} that expresses the negation of the conflict
-reasons.  We present a lattice-theoretic generalisation of the 
-{\em unit rule} for template-based abstract domains that learns a new 
-transformer called {\em abstract unit transformer} $(\aunit)$.    
-We add $\aunit$ to the set of abstract transformers $\abstransset$. 
-$\aunit$ is a generalisation of the propositional unit rule to
-numerical domains.  For an abstract lattice $\domain$ with
-complementable meet irreducibles and a set of meet irreducibles $\conflictset
-\subseteq \domain$ such that $\bigsqcap
-\conflictset$ does not satisfy $\formula$, $\aunit_\conflictset: \domain \rightarrow
-\domain$ is formally defined as follows.
+Learning in a propositional solvers yields an asserting clause~\cite{cdcl}
+that expresses the negation of the conflict reasons.  We present a
+lattice-theoretic generalisation of the {\em unit rule} for template-based
+abstract domains that learns a new transformer called {\em abstract unit
+transformer} $(\aunit)$.  We add $\aunit$ to the set of abstract
+transformers $\abstransset$.  $\aunit$ is a generalisation of the
+propositional unit rule to numerical domains.  For an abstract lattice
+$\domain$ with complementable meet irreducibles and a set of meet
+irreducibles $\conflictset \subseteq \domain$ such that $\bigsqcap
+\conflictset$ does not satisfy $\formula$, $\aunit_\conflictset: \domain
+\rightarrow \domain$ is formally defined as follows.
+%
 \[ \aunit_\conflictset(\absval) =
  \left\{\begin{array}{l@{\quad}l@{\qquad}l}
   \bot       & \text{if } \absval \sqsubseteq \bigsqcap \conflictset & (1)\\
@@ -77,15 +71,15 @@ complementable meet irreducibles and a set of meet irreducibles $\conflictset
   \top & \text{otherwise} & (3) \\
  \end{array}\right.
 \]
-Rule (1) shows $\aunit$ returns $\bot$ since 
-$\absval \sqsubseteq \bigsqcap \conflictset$ is conflicting.  
-Rule (2) of $\aunit$ infer a valid meet irreducible, 
-which implies that $\conflictset$ is unit.  Rule (3) of  
-$\aunit$ returns $\top$ which implies that the learnt clause is not 
-{\em asserting} after backtracking.  This would prevent any new 
-deductions from the learnt clause. Progress is then made by decisions. An 
-example of $\aunit$ for $\conflictset = \{x \geq 2, x \leq 5, y \leq 7 \}$ is
-shown below. \\
+%
+Rule (1) shows $\aunit$ returns $\bot$ since $\absval \sqsubseteq \bigsqcap
+\conflictset$ is conflicting.  Rule (2) of $\aunit$ infer a valid meet
+irreducible, which implies that $\conflictset$ is unit.  Rule (3) of
+$\aunit$ returns $\top$ which implies that the learnt clause is not {\em
+asserting} after backtracking.  This would prevent any new deductions from
+the learnt clause.  Progress is then made by decisions.  An example of
+$\aunit$ for $\conflictset = \{x \geq 2, x \leq 5, y \leq 7 \}$ is shown
+below.  \\
 %
 \Omit{
 Let us consider an example, where $\conflictset = \{x \geq 2, x \leq 5, y
