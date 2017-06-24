@@ -1,4 +1,4 @@
-\section{Abstract Model Search in the Template Polyhedra Domain}\label{sec:deduce}
+\section{Abstract Model Search for Template Polyhedra}\label{sec:deduce}
 
 \Omit{
 \begin{figure}[t]
@@ -90,14 +90,14 @@ $\worklist \leftarrow \initworklist_{\propheur}(\abstransset)$ \;
 \caption{Abstract Model Search $\mathit{deduce}_{\propheur}(\abstransset,\trail,\reasons)$ \label{Alg:ms}}
 \end{algorithm2e}
 
-A model search procedure in a SAT solver involves two steps: {\em
-deductions} using repeated application of the unit rule (also called Boolean
-Constraint Propagation (BCP)) to refine current partial assignments, and
-{\em decisions} to heuristically guess a value for an unassigned literal. 
-BCP can be seen to compute greatest fixed point over the partial assignment
+Model search in a SAT solver has two steps: {\em deductions}, which are
+repeated application of the unit rule (also called Boolean Constraint
+Propagation, or BCP), to refine current partial assignments, and {\em
+decisions} to heuristically guess a value for an unassigned literal.  BCP
+can be seen to compute greatest fixed point over the partial assignment
 domain~\cite{dhk2013-popl}.  Below, we present an abstract model search
-procedure that computes a greatest fixed point over abstract transformers
-$\abstrans{\domain}{\constraint}$.
+procedure that computes a greatest fixed point over abstract
+transformers~$\abstrans{\domain}{\constraint}$.
  
 %The unit rule overapproximates a model transformer and deduction 
 %computes a greatest fixed point over the partial assignments
