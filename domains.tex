@@ -155,6 +155,21 @@ We~denote the set of abstract transformers for a safety formula
 $\formula$ using the abstract domain $\domain$ by
 $\abstransset=\{\abstrans{\domain}{\constraint}\mid
 \constraint\in\constraints\}$.
+%
+\rmcmt{
+\begin{definition}
+  An Abstract Conflict Graph (ACG) is a directed acyclic graph in which the 
+  vertices are defined by all deduced elements or a decision node and a special 
+  conflict node $(\bot)$.  The edges in ACG are obtained from the abstract
+  transformer of each deduced element: if $\abstrans{\domain}{\constraint}(a) = 
+  u$, where $u$ is an unique deduction from $\abstrans{\domain}{\constraint}$
+  and $a$ is an initial abstract value, then there is a directed edge from each 
+  elements of $a$, whose variable set has non-empty intersection with the variable 
+  set of $\constraint$, to $u$. 
+\end{definition}
+}
+
+
 
 %-------------------------------------------------------------------------------
 \subsection{Properties of Abstract Domains}
