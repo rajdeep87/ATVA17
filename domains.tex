@@ -105,7 +105,7 @@ For notational convenience we will use conjunctions of linear
 inequalities, for example $x_1\geq 0 \wedge x_1-z\leq 30$, to write the
 abstract domain value $\vec{\numabsval}=\vecv{0}{30}$,
 with $\mat{C}=\qmat{-1}{0}{1}{-1}$ and $\vec{\numvar}=\vecv{x_1}{z}$. 
-$\true$ corresponds to $\top$ and $\false$ to $\bot$.
+\rmcmt{$\true$ corresponds to $\top$ and $\false$ to $\bot$}.
 %
 For a program with $N=|\numvars|$ variables, the template 
 matrix $\mat{C}$ for the interval domain $\intervals[\numvars]$, 
@@ -181,12 +181,12 @@ structure $A$ is an element with the following property.
 \end{equation}
 \end{definition}
 %
-The meet irreducibles in the Boolean domain $\booldomain$ 
+\rmcmt{The meet irreducibles in the Boolean domain $\booldomain$ 
 for a variable $x$ are $x$ and $\neg x$. The meet 
 irreducibles in the template polyhedra domain are all elements 
 that concretise to half-spaces, i.e., they can be represented 
 by a single inequality. For the interval domain, these are 
-$x \leq d$ or $x \geq d$ for constants $d$. 
+$x \leq d$ or $x \geq d$ for constants $d$. (Refer thesis definition)}
 %
 \begin{definition}
 A \emph{meet decomposition} $\decomp(\absval)$ of an abstract
