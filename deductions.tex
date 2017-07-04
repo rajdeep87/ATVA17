@@ -134,11 +134,14 @@ The use of a subdomain serves two purposes --
   in turn affects the analysis precision, and 
 %\item
   b) It makes deductions more efficient, for example by performing lazy closure
-  in template polyhedra domain. \rmcmt{For space reasons, we refer the reader to 
-  Appendix~\ref{appendix:lazyclosure} for details of the lazy closure
-  operation.} 
+  in template polyhedra domain. 
+  %\rmcmt{For space reasons, we refer the reader to Appendix~\ref{appendix:lazyclosure} 
+  %for details of the lazy closure operation.} 
 %\end{compactenum}
 %
+
+
+
 An ADT is defined formally  as follows. 
 \begin{equation}\label{eq:at2}
 \abstrans{\domain}{\constraint}^\subdomain(\absval)=\absval\meet_\domain \alpha_\subdomain(\{\val\mid \val\in\gamma_\domain(\absval), \val\models \constraint\})
@@ -354,19 +357,14 @@ If it is indeed
 $\gamma$-complete, then $\mathit{deduce}$ returns \textsf{sat}.  Otherwise, the 
 algorithm returns \textsf{unknown} and ACDLP makes a new decision.    
 %
-\Omit{
 \subsection{Computing Lazy Closure for Template Polyhedra}\label{lazyclosure}
 %
-Computing the closure for relational domains, such as octagons, is
-expensive.  An~advantage of our formalism in
-Eq.~(\ref{eq:at2}) is that the \emph{closure} operation for relational
-domains can be computed in a lazy manner through the construction of a
-subdomain.  A subdomain $\subdomain$ is constructed from domain $\domain$
-for a abstract deduction transformer $\abstransel{\subdomain}$, such that
-$\subdomain=\makesubdomain_\domain(\subvars)$, where $\subvars$ are
-variables that appears in $\abstransel{\subdomain}$.  The construction of
-$\subdomain$ allows us to perform one step of the closure operation when
-$\abstransel{\subdomain}$ is applied.
+%Computing the closure for relational domains, such as octagons, is expensive.  
+An advantage of our formalism in Eq.~(\ref{eq:at2}) is that the 
+\emph{closure} operation for relational domains can be computed 
+in a lazy manner through the construction of a subdomain, $\subdomain$.  
+The construction of $\subdomain$ allows us to perform one step of the 
+closure operation when $\abstransel{\subdomain}$ is applied.
 %
 For example, let us consider $\domain=\octagons[\{x,y,z\}]$ and
 $\subvars=\{y\}$. An octagonal inequality relates at 
@@ -388,78 +386,7 @@ Hence, an application of abstract deduction transformer does not
 compute the full closure in the full domain, but compute only a 
 single step of the closure in a restricted domain, which makes each 
 deduction step more efficient.  Thus, we delay the closure operation 
-until the point where it is absolutely necessary.  
+until the point where it is absolutely necessary. \rmcmt{Do we eventually 
+compute all closure in gfp}.
 %This makes our deductions in relational domain more efficient.  
 %
-
-Let us demonstrate the idea of lazy closure with a concrete example.  Assume
-the program in the left of Figure~\ref{fig:lazyclosure}.  The corresponding
-locations are marked L1 and L2.  We~analyze the program with an octagon
-domain ($\octagons$), which computes the closure in lazy manner.  The lazy
-closure computation in octagon domain is shown in the right of
-Figure~\ref{fig:lazyclosure}.
-
-Recall that a closure in octagon domain achieves a normal form by computing all
-implied constraints among numerical variables. The closure operation is 
-necessary to perform precise domain operations.  The ACDLP analysis in
-Figure~\ref{fig:lazyclosure} performs forward propagation in $\octagons$ by creating a 
-subdomain $\subdomain$ for every transformer using the function $\makesubdomain$.  
-Note that the choice of subdomain over lhs variables of the transformers guides the 
-analysis in forward direction in this example. The subdomain 
-corresponding to L1 over $y$ is given by 
-$\octagons[\{y\}]\cup\octagons[\{y,z\}]$.  This means, only those deductions 
-which are implied by the domain $\octagons[\{y\}]\cup\octagons[\{y,z\}]$ can be
-inferred at L1.  No deductions over $\octagons[\{y,x\}]$ is performed at L1.  
-Thus, we delay the deductions over $\{y,x\}$ until we encounter an abstract 
-transformer over these variables.  This does not admit a normal form for 
-octagonal constraints after the application of the transformer at L1, but it 
-makes the deduction step at L1 more efficient.  
-
-Assume that the initial abstract value $(\absval)$ is $\absval=(x=y)$. 
-Then, the deduction at L1 infers ${y=z}$.  Thus, the updated abstract value
-is $\absval=\{x=y \wedge y=z\}$.  We now analyze the transformer at L2.  The
-subdomain for L2 over variable $x$ (for forward propagation) is given by
-$\octagons[\{x\}]\cup\octagons[\{x,y\}]\cup\octagons[\{x,z\}]\cup\octagons[\{x,w\}]$. 
-Note that we delayed the deduction over $\octagons[\{x,y\}]$ at L1, but only
-perform the deductions over $\octagons[\{x,y\}]$ at L2.  This is the notion
-of lazy closure computation.  The new deductions at L2 are $\{x=z, x-w \leq
-1, x-w \geq 1\}$ and the final abstract value is $\absval=\{x=y
-\wedge\allowbreak y=z \wedge\allowbreak x=z \wedge\allowbreak x-w \leq 1
-\wedge x-w \geq 1\}$.  Thus, the normal form over $\octagons{\{x,y,z\}}$ is
-only achieved at L2.  However, we do not perform deductions over
-$\octagons{\{w,z\}}$ at L2, which is delayed until the point where we
-encounter an abstract transformer that forces us to infer such deductions.
-%
-\begin{figure}[htbp]
-\centering
-\begin{tabular}{c|c}
-\hline
-C program & Lazy Closure Computation \\
-\hline
-\scriptsize
-\begin{lstlisting}[mathescape=true,language=C]
-int main() {
-  L1: y=z;
-  L2: x=w+1;
-}
-\end{lstlisting}
-&
-\begin{lstlisting}[mathescape=true,language=C]
-L1: $\makesubdomain_\domain(\{y\})=\octagons[\{y\}]\cup\octagons[\{y,z\}]$
-    New Deductions: $\{y=z\}$
-    Abstract Value: $\absval=\{x=y \wedge y=z\}$
-L2: $\makesubdomain_\domain(\{x\})=\octagons[\{x\}]\cup\octagons[\{x,y\}]\cup \\
-                                   \octagons[\{x,z\}]\cup\octagons[\{x,w\}]$
-    New Deductions: $\{x=z, x-w \leq 1, x-w \geq 1\}$
-    Abstract Value: $\absval=\{x=y \wedge y=z \wedge x=z \wedge \\
-                              x-w \leq 1 \wedge x-w \geq 1\}$
-\end{lstlisting}
-\\
-\hline
-\end{tabular}
-\caption{\label{fig:lazyclosure}
-C Program and Lazy closure operation for Octagons}
-\end{figure}
-%
-}
-
