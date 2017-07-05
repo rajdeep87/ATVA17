@@ -49,7 +49,7 @@ $\mathit{result} \leftarrow \deduce_{\propheur}(\abstransset,\trail,\reasons)$ \
 \caption{Abstract Conflict Driven Learning $\mathit{ACDLP}_{\propheur,\decheur,\confheur}(\abstransset)$\label{Alg:acdcl}}
 \end{algorithm2e}
 
-Figure~\ref{acdlp-top} present our framework called \emph{Abstract Conflict
+Figure~\ref{acdlp-top} presents our framework called \emph{Abstract Conflict
 Driven Learning for Programs} that uses abstract model search and abstract
 conflict analysis procedures for safety verification of C programs.  The
 model search procedure operates on an over-approximate domain of program
@@ -67,7 +67,7 @@ conflict reason from multiple incomparable reasons for conflict for
 efficiency reasons.  Hence, it operates over an underapproximate domain of
 conflict reasons.  A~conflict reason underapproximates a set of invalid or
 safe traces.  The conflict analysis returns a learnt transformer (negation
-of conflict reason) that over-approximate a set of valid and unsafe traces. 
+of conflict reason) that overapproximates a set of valid and unsafe traces. 
 Model search is repeated with this new transformer.  Else, if no further
 backtracking is possible, then ACDLP terminates and returns \emph{safe}. 
 We~present the ACDLP algorithm in subsequent section.
@@ -138,7 +138,7 @@ either \textsf{sat} or \textsf{conflict}.
 
 If  $\deduce$ returns  \textsf{sat}, then we have found an abstract value 
 that represents models of the safety formula, which are counterexamples 
-to the required safety property, and so ACDLP return \textsf{unsafe}.
+to the required safety property, and so ACDLP returns \textsf{unsafe}.
 %
 % has found an abstract value that represents a set of models of $\formula$ or the
 % deduction leads to a \textsf{conflict}.  Checking whether the abstract
