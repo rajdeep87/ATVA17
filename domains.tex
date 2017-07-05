@@ -35,7 +35,7 @@ Control flow is encoded using guard variables, e.g.~$g_1=g_0\wedge c$.
 %
 Data flow joins become conditional expressions, e.g.~$x_3=g_1?x_1:x_2$.
 %
-The assertions $\assertions$ are constraints such as $g_2
+The assertions in $\assertions$ are constraints such as $g_2
 \Rightarrow z\geq 0$, meaning that if $g_2$ holds
 (i.e.,~the assertion is reachable) then the assertion must hold.
 %
@@ -167,13 +167,13 @@ An important property of a clause-learning SAT solver is that each
 non-singleton element of the partial assignment domain can be 
 decomposed into a set of \textit{precisely complementable} singleton
 elements~\cite{dhk2013-popl}.  This property of domain elements
-are necessary to learn elements that help to guide the model search away from the
+is necessary to learn elements that help to guide the model search away from the
 conflicting region of the search space.  
 %
 Most numerical abstract domains, such as intervals and octagons lack
 complements in general, i.e., not every element in the domain has a
 precise complement.  However, these domain elements can be represented
-as intersections of half-spaces, each of which admit a precise complement.
+as intersections of half-spaces, each of which admits a precise complement.
 We formalise this in the sequel.
 %
 \begin{definition} 
