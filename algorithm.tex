@@ -64,10 +64,10 @@ where it learns the reason for the conflict from partial safety proof using
 an abstract abductive transformer, $\abd{}{}$, followed by a heuristic
 choice of conflict reason.  Similar to a SAT solver, ACDLP picks one
 conflict reason from multiple incomparable reasons for conflict for
-efficiency reasons.  Hence, it operates over an underapproximate domain of
-conflict reasons.  A~conflict reason underapproximates a set of invalid or
+efficiency reasons.  Hence, it operates over an under-approximate domain of
+conflict reasons.  A~conflict reason under-approximates a set of invalid or
 safe traces.  The conflict analysis returns a learnt transformer (negation
-of conflict reason) that overapproximates a set of valid and unsafe traces. 
+of conflict reason) that over-approximates a set of valid and unsafe traces. 
 Model search is repeated with this new transformer.  Else, if no further
 backtracking is possible, then ACDLP terminates and returns \emph{safe}. 
 We~present the ACDLP algorithm in subsequent section.
