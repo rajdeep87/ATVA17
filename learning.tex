@@ -12,13 +12,13 @@ heuristically selecting a generalisation.
 \Omit{The main idea of abductive
 reasoning is to iteratively replace a singleton assignment $s$ in the
 conflict reason by a partial assignment that is sufficient to infer $s$.} 
-An abstract abductive transformer, $\abd{}{}(A)$ is defined below.
+An abstract abductive transformer, $\abd{}{}(a)$ is defined below.
 \rmcmt{
 \begin{definition}
   Given formula $\formula$, an initial abstract value $a$ and domain 
   $\domain$, $\abd{\formula}{\domain}(a) = \{u \mid u \in decomp(a) 
   \vee u \not\models \formula \}$, that is, it adds abstract models to 
-  the input set $\allval$, that do not satisfy $\formula$.
+  the input set $a$, that do not satisfy $\formula$.
 \end{definition}
 }
 %
