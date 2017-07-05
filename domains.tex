@@ -104,9 +104,9 @@ i.e., the empty polyhedron.
 For notational convenience we will use conjunctions of linear
 inequalities, for example $x_1\geq 0 \wedge x_1-z\leq 30$, to write the
 abstract domain value $\vec{\numabsval}=\vecv{0}{30}$,
-with $\mat{C}=\qmat{-1}{0}{1}{-1}$ and $\vec{\numvar}=\vecv{x_1}{z}$. 
-\rmcmt{$\true$ corresponds to abstract value $\top$ and $\false$ to 
-abstract value $\bot$}.
+with $\mat{C}=\qmat{-1}{0}{1}{-1}$ and $\vec{\numvar}=\vecv{x_1}{z}$; 
+$\true$ corresponds to abstract value $\top$ and $\false$ to 
+abstract value $\bot$.
 %
 For a program with $N=|\numvars|$ variables, the template 
 matrix $\mat{C}$ for the interval domain $\intervals[\numvars]$, 
@@ -127,7 +127,7 @@ $\mathit{closure}((x-y \leq 4) \wedge (y-z \leq 5))=((x-y \leq 4) \wedge (y-z
 For octagons, closure is the most critical and expensive operator; it has  
 cubic complexity in the number of program variables.  We therefore compute 
 closure lazily in template polyhedra domain in our abstract model search 
-procedure, \rmcmt{which is described in section~\ref{lazyclosure}.} 
+procedure, which is described in section~\ref{lazyclosure}. 
 %We refer the reader to Appendix~\ref{appendix:lazyclosure} 
 %for details of lazy closure computation. 
 %-------------------------------------------------------------------------------
@@ -157,19 +157,6 @@ $\formula$ using the abstract domain $\domain$ by
 $\abstransset=\{\abstrans{\domain}{\constraint}\mid
 \constraint\in\constraints\}$.
 %
-\rmcmt{
-\begin{definition}
-  An Abstract Conflict Graph (ACG) is a directed acyclic graph in which the 
-  vertices are defined by all deduced elements or a decision node and a special 
-  conflict node $(\bot)$.  The edges in ACG are obtained from the abstract
-  transformer of each deduced element: if $\abstrans{\domain}{\constraint}(a) = 
-  u$, where $u$ is an unique deduction from $\abstrans{\domain}{\constraint}$
-  and $a$ is an initial abstract value, then there is a directed edge from each 
-  elements of $a$, whose variable set has non-empty intersection with the variable 
-  set of $\constraint$, to $u$. 
-\end{definition}
-}
-
 
 
 %-------------------------------------------------------------------------------

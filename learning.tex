@@ -15,10 +15,10 @@ conflict reason by a partial assignment that is sufficient to infer $s$.}
 An abstract abductive transformer, $\abd{}{}(A)$ is defined below.
 \rmcmt{
 \begin{definition}
-  Given formula $\formula$, an initial abstract value $\allval$ and domain 
-  $\domain$, $\abd{\formula}{\domain}(A) = \{u \mid u \in A \vee u \not\models
-  \formula \}$, that is, it adds abstract models to the input set $\allval$, that do
-  not satisfy $\formula$.
+  Given formula $\formula$, an initial abstract value $a$ and domain 
+  $\domain$, $\abd{\formula}{\domain}(A) = \{u \mid u \in decomp(a) 
+  \vee u \not\models \formula \}$, that is, it adds abstract models to 
+  the input set $\allval$, that do not satisfy $\formula$.
 \end{definition}
 }
 %
@@ -27,8 +27,22 @@ is given by, $\abd{x=y+1}{\intervals}(x \geq 0)=(x \geq 0 \cup y \leq -2)$.
 %
 Conflict abduction is performed by obtaining cuts through markings in the 
 trail $\trail$, by the application of abstract Unique Implication Point (UIP) 
-search algorithm~\cite{cdcl}.  Every cut in the graph is a reason for
-conflict.\\
+search algorithm~\cite{cdcl}.  \rmcmt{Every cut in the graph is a reason for
+conflict.} \\
+\rmcmt{
+\begin{definition}
+  An Abstract Conflict Graph (ACG) is a directed acyclic graph in which the 
+  vertices are defined by all deduced elements or a decision node and a special 
+  conflict node $(\bot)$.  The edges in ACG are obtained from the abstract
+  transformer of each deduced element: if $\abstrans{\domain}{\constraint}(a) = 
+  u$, where $u$ is an unique deduction from $\abstrans{\domain}{\constraint}$
+  and $a$ is an initial abstract value, then there is a directed edge from each 
+  elements of $a$, whose variable set has non-empty intersection with the variable 
+  set of $\constraint$, to $u$. 
+\end{definition}
+}
+\rmcmt{Nodes are the elements of the propagation trail, edges -- Move to Section
+6 page 13}.
 
 \begin{figure}[t]
 \centering

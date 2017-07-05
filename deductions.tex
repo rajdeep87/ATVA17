@@ -373,7 +373,7 @@ $\makesubdomain_\domain(\{y\})=\octagons[\{y\}]\cup\octagons[\{x,y\}]\cup\octago
 which will compute the one-step transitive relations of~$y$ with each
 of the other variables. 
 %
-Only if a abstract deduction transformer subsequently makes new deductions 
+Only if any subsequent abstract deduction transformer makes new deductions 
 on $x$ or $z$, then the next step of the closure will be computed through 
 the subdomain $\octagons[\{x,z\}]$.
 \Omit{
@@ -382,11 +382,12 @@ compute the full closure in the full domain,
 but we compute only a single step of the closure in a restricted
 domain, which makes single deduction steps more efficient.
 }
-Hence, an application of abstract deduction transformer does not 
-compute the full closure in the full domain, but compute only a 
-single step of the closure in a restricted domain, which makes each 
-deduction step more efficient.  Thus, we delay the closure operation 
-until the point where it is absolutely necessary. \rmcmt{Do we eventually 
-compute all closure in gfp}.
+Hence, an application of each abstract deduction transformer does not 
+compute the full closure in the full domain, but compute only a single 
+step of the closure in a subdomain. This makes each deduction step more 
+efficient but may require more steps to reach the fixed point.  
+
+%Thus, we delay the full closure operation 
+%until it is absolutely necessary to reach the fixed-point. 
 %This makes our deductions in relational domain more efficient.  
 %
