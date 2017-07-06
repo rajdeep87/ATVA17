@@ -7,20 +7,23 @@ conflict analysis procedure, $\analyzeconflict$ of
 Algorithm~\ref{Alg:acdcl}, that uses a domain-specific abductive transformer
 for effective learning.  A~conflict analysis procedure involves two steps:
 {\em abduction} and {\em heuristic choice for generalisation}.  Abduction
-infers possible generalisations for a conflict which is followed by
-heuristically selecting a generalisation.  
-\Omit{The main idea of abductive
+infers possible generalised reasons for a conflict which is followed by
+heuristically selecting a generalisation.  The main idea of abductive
 reasoning is to iteratively replace a singleton assignment $s$ in the
-conflict reason by a partial assignment that is sufficient to infer $s$.} 
-An abstract abductive transformer, $\abd{}{}(a)$ is defined below.
+conflict reason by a partial assignment that is sufficient to infer $s$.
+Below, we define a global conflict transformer that gives set of models that 
+do not satisfy a formula.  
 \rmcmt{
 \begin{definition}
   Given formula $\formula$, an initial abstract value $a$ and domain 
-  $\domain$, $\abd{\formula}{\domain}(a) = \{u \mid u \in decomp(a) 
+  $\domain$, $\conf{\formula}{\domain}(a) = \{u \mid u \in decomp(a) 
   \vee u \not\models \formula \}$, that is, it adds abstract models to 
   the input set $a$, that do not satisfy $\formula$.
 \end{definition}
 }
+%
+An abstract abductive transformer, $\abd{}{}(a)$, corresponds to the 
+under-approximatation of the global conflict transformer, $\conf{}{}$.
 %
 For example, an abstract abductive transformer for $\formula=\{x=y+1\}$ 
 is given by, $\abd{x=y+1}{\intervals}(x \geq 0)=(x \geq 0 \cup y \leq -2)$.
