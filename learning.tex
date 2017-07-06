@@ -1,5 +1,5 @@
 \section{Abstract Conflict Analysis for Template Polyhedra}\label{sec:conflict}
-
+%
 Propositional conflict analysis with FIRST-UIP~\cite{cdcl} can be seen as
 abductive reasoning that under-approximates a set of models that do not
 satisfy a formula~\cite{sas12,dhk2013-popl}.  Below, we present an abstract
@@ -8,57 +8,70 @@ Algorithm~\ref{Alg:acdcl}, that uses a domain-specific abductive transformer
 for effective learning.  A~conflict analysis procedure involves two steps:
 {\em abduction} and {\em heuristic choice for generalisation}.  Abduction
 infers possible generalised reasons for a conflict which is followed by
-heuristically selecting a generalisation.  The main idea of abductive
-reasoning is to iteratively replace a singleton assignment $s$ in the
-conflict reason by a partial assignment that is sufficient to infer $s$.
-Below, we define a global conflict transformer that gives set of models that 
-do not satisfy a formula.  
-\rmcmt{
+heuristically selecting a generalisation.  Below, we define a global 
+conflict transformer that gives a set of models that do not satisfy a 
+formula.  
 \begin{definition}
   Given formula $\formula$, an initial abstract value $a$ and domain 
   $\domain$, $\conf{\formula}{\domain}(a) = \{u \mid u \in decomp(a) 
   \vee u \not\models \formula \}$, that is, it adds abstract models to 
   the input set $a$, that do not satisfy $\formula$.
 \end{definition}
-}
 %
-An abstract abductive transformer, $\abd{}{}(a)$, corresponds to the 
-under-approximatation of the global conflict transformer, $\conf{}{}$.
+For formula $\formula$ and domain $\domain$, an abstract abductive transformer, 
+$\abd{\formula}{\domain}(a)$, corresponds 
+to the under-approximation of the global conflict transformer,
+$\conf{\formula}{\domain}$.  
 %
-For example, an abstract abductive transformer for $\formula=\{x=y+1\}$ 
-is given by, $\abd{x=y+1}{\intervals}(x \geq 0)=(x \geq 0 \cup y \leq -2)$.
+For example, given a formula $\formula=\{x=y+1\; \&\&\; x\geq 0\}$, and an interval 
+abstract element $a=(y\leq-5)$, $\conf{\formula}{\intervals}(a) = \{(y\leq-5), 
+(y \leq -4, x \leq -3), (y \leq -3, x \leq -2), (y \leq -2, x < 0)\}$.
+Informally, $\conf{\formula}{\intervals}$  computes the most general set of
+incomparable reasons under which $\formula$ implies the truth of $a$ (or $\bot$
+since $formula$ is unsatisfiable under $a$). 
 %
-Conflict abduction is performed by obtaining cuts through markings in the 
-trail $\trail$, by the application of abstract Unique Implication Point (UIP) 
-search algorithm~\cite{cdcl}.  \rmcmt{Every cut in the graph is a reason for
-conflict.} \\
-\rmcmt{
+Now, an abstract abductive transformer for $\formula=\{x=y+1\; \&\&\; x \geq 0\}$ 
+is given by, $\abd{\formula}{\intervals}(y \leq -5)=(y \leq -2, x < 0)$,
+which clearly underapproximates $\conf{\formula}{Itvs}$ as well as strictly
+generalizes the reason for $y \leq -5$. 
+%
+
+
+The main idea of abductive  reasoning is to iteratively replace a singleton 
+assignment $s$ in the conflict reason by a partial assignment that is sufficient 
+to infer $s$.  Conflict abduction is performed by obtaining cuts through markings 
+in the trail $\trail$, by the application of abstract Unique Implication Point (UIP) 
+search algorithm~\cite{cdcl}.  Every cut is a reason for conflict.  The UIP
+search can also be understood through graph cutting in an Abstract Conflict
+Graph, which is defined next. 
 \begin{definition}
   An Abstract Conflict Graph (ACG) is a directed acyclic graph in which the 
   vertices are defined by all deduced elements or a decision node and a special 
-  conflict node $(\bot)$.  The edges in ACG are obtained from the abstract
-  transformer of each deduced element: if $\abstrans{\domain}{\constraint}(a) = 
+  conflict node $(\bot)$ in the trail $\trail$.  The edges in ACG are obtained 
+  from the reason trail $\reasons$ that maps the elements in $\trail$ to the abstract
+  transformers that are used to derive the deduced elements.  
+  \Omit{
+  if $\abstrans{\domain}{\constraint}(a) = 
   u$, where $u$ is an unique deduction from $\abstrans{\domain}{\constraint}$
   and $a$ is an initial abstract value, then there is a directed edge from each 
   elements of $a$, whose variable set has non-empty intersection with the variable 
   set of $\constraint$, to $u$. 
+  }
 \end{definition}
-}
-\rmcmt{Nodes are the elements of the propagation trail, edges -- Move to Section
-6 page 13}.
-
+%
 \begin{figure}[t]
 \centering
 \scalebox{.6}{\import{figures/}{oct_implgraph.pspdftex}}
 \caption{\label{uip}Finding the Abstract UIP in the Octagon Domain}
 \end{figure}  
-
+%
 \noindent \textbf{Abstract UIP Search}
 An abstract UIP algorithm~\cite{DBLP:journals/fmsd/BrainDGHK14} traverses
 the trail $\trail$ starting from the conflict node and computes a cut that
 suffices to produce a conflict.  For example, consider a formula $\formula:=
-\{x{+}4{=}z \wedge x{+}z{=}2y \wedge z{+}y>10\}$.  The ACG in Fig.~\ref{uip}
-records the sequence of deductions in the octagon domain that are inferred
+\{x{+}4{=}z \wedge x{+}z{=}2y \wedge z{+}y>10\}$.  As before, the trail can be
+viewed to represent an ACG, shown in Fig.~\ref{uip}, that records the 
+sequence of deductions in the octagon domain that are inferred
 from a decision $(x{\leq}0)$ for the formula $\formula$.  The arrows (in
 red) shows the relationship between the reason trail and propagation trail
 in bottom of Fig.~\ref{uip}.  For the partial abstract value,
