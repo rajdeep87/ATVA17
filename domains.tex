@@ -37,11 +37,11 @@ Data flow joins become conditional expressions, e.g.~$x_3=g_1?x_1:x_2$.
 %
 The assertions in $\assertions$ are constraints such as $g_2
 \Rightarrow z\geq 0$, meaning that if $g_2$ holds
-(i.e.,~the assertion is reachable) then the assertion must hold.
+(i.e.,~the assertion is reachable) then $z \geq 0$ must hold.
 %
 We~write $\vars$ for the set of variables occurring in $\constraints$.  
-Based on the above program representation, we define a \textit{safety formula}
-($\formula$) as the conjunction of everything in $\constraints$, that is,  
+Based on this representation, we define a \textit{safety formula}
+($\formula$) as the conjunction of everything in $\constraints$, i.e.\
 $\formula:= \bigwedge_{\constraint\in\constraints} \constraint$. The formula 
 $\formula$ is unsatisfiable if and only if the program is safe.
 %
@@ -73,11 +73,10 @@ program, and $\reldomain$ is a \textit{template polyhedra}~\cite{vmcai05}
 domain over the numerical (bitvector) variables $\numvars$.  Our template
 polyhedra domain can express various relational and non-relational templates
 over $\numvars$, as given in Table~\ref{domain}.
-% 
-%-------------------------------------------------------------------------------
-\subsubsection{Template Polyhedra Abstract Domain}
-%-------------------------------------------------------------------------------
-%
+
+\bigskip
+
+\noindent\textbf{Template Polyhedra Abstract Domain.}
 An abstract value of the template polyhedra domain~\cite{vmcai05}
 represents a set $\numconcval$ of values of the vector $\vec{\numvar}$ 
 of numerical (bitvector) variables $\numvars$ of their respective
@@ -90,8 +89,7 @@ $\mat{C}\vec{\numvar}\leq\vec{\numabsval}$, for a fixed coefficient
 matrix $\mat{C}$.  The domain containing $\vec{\numabsval}$ is augmented 
 by a special element $\bot$ to denote the minimal element of the lattice.  
 %
-There are several optimisation-based 
-techniques~\cite{vmcai05} for computing the domain operations, 
+There are several optimisation techniques~\cite{vmcai05} for computing the domain operations, 
 such as meet ($\meet$) and join ($\sqcup$), in the template polyhedra domain.  
 In our implementation, we use the strategy iteration approach of~\cite{BJKS15}.
 %
@@ -117,7 +115,7 @@ For octagons $\octagons[\numvars]$, we have at most $2N^2$
 inequalities, one for the upper and lower bounds of each variable and
 sums and differences for each pair of variables. 
 Unlike a non-relational domain, a relational domain such as octagons 
-requires the computation of a \emph{closure} in order to obtain a normal 
+requires the computation of a \emph{closure} to obtain a normal 
 form, necessary for precise domain operation. 
 The closure computes all implied domain constraints.  
 An example of a closure computation for octagonal inequalities is
@@ -130,9 +128,10 @@ closure lazily in template polyhedra domain in our abstract model search
 procedure, which is described in section~\ref{lazyclosure}. 
 %We refer the reader to Appendix~\ref{appendix:lazyclosure} 
 %for details of lazy closure computation. 
-%-------------------------------------------------------------------------------
-\subsubsection{Abstract Transformers}
-%
+
+\bigskip
+
+\noindent\textbf{Abstract Transformers.}
 An abstract transformer $\abstrans{\domain}{\constraint}$ transforms an
 abstract value $\absval$ through a constraint $\constraint$; it
 \emph{deduces} information from $\absval$ and $\constraint$.  The best
@@ -166,13 +165,12 @@ $\abstransset=\{\abstrans{\domain}{\constraint}\mid
 An important property of a clause-learning SAT solver is that each
 non-singleton element of the partial assignment domain can be 
 decomposed into a set of \textit{precisely complementable} singleton
-elements~\cite{dhk2013-popl}.  This property of domain elements
-is necessary to learn elements that help to guide the model search away from the
+elements~\cite{dhk2013-popl}.  This property is necessary to learn elements that guide the model search away from the
 conflicting region of the search space.  
 %
-Most numerical abstract domains, such as intervals and octagons lack
-complements in general, i.e., not every element in the domain has a
-precise complement.  However, these domain elements can be represented
+Most numerical abstract domains, such as intervals and octagons, lack
+complements in general: not every domain element has a
+precise complement.  But these domain elements can be represented
 as intersections of half-spaces, each of which admits a precise complement.
 We formalise this in the sequel.
 %
@@ -187,7 +185,7 @@ structure $A$ is an element with the following property.
 The meet irreducibles in the Boolean domain $\booldomain$ 
 for a variable $x$ are $x$ and $\neg x$. The meet 
 irreducibles in the template polyhedra domain are all elements 
-that concretise to half-spaces, i.e., they can be represented 
+that concretise to half-spaces; i.e., they can be represented 
 by a single inequality. For the interval domain, these are 
 $x \leq d$ or $x \geq d$ for constants $d$.
 %
@@ -197,7 +195,7 @@ element $\absval \in \domain$ is a set of meet irreducibles $M \subseteq \domain
 $\absval=\bigsqcap_{m\in M} m$.
 \end{definition}
 
-\noindent For polyhedra this intuitively means that each polyhedron can be
+\noindent For polyhedra this means that each polyhedron can be
 written as an intersection of half-spaces.
 %
 For example, the meet decomposition of the interval domain element
@@ -218,9 +216,9 @@ be generalised to other lattice structures.
 For example, the precise complement of a meet irreducible $(x \leq 2)$ in
 the interval domain over integers is $(x \geq 3)$, or the precise complement
 of the meet irreducible $(x+y \leq 1)$ in the octagon domain over integers
-is $(x+y \geq 2)$.  Our domain implementation supports precise
-complementation operation.  However, standard abstract interpretation does
-not require a complementation operator.  Hence, abstract domain libraries,
+is $(x + y \geq 2)$.  Our domain implementation supports precise
+complementation operation.  Standard abstract interpretation does
+not require a complementation operator, so abstract domain libraries,
 such as APRON~\cite{apron}, do not provide it.  But it can be implemented
 with the help of a meet decomposition as explained above.
 %
