@@ -14,7 +14,7 @@ formula.
 \begin{definition}
   Given formula $\formula$, an initial abstract value $a$ and domain 
   $\domain$, $\conf{\formula}{\domain}(a) = \{u \mid u \in decomp(a) 
-  \vee u \not\models \formula \}$, that is, it adds abstract models to 
+  \vee u \not\models \formula \}$, \pscmt{TODO: I do not understand what the domain of $u$ is. Also, it is unclear what the co-domain of $\conf{}{}$ is.}that is, it adds abstract models to 
   the input set $a$, that do not satisfy $\formula$.
 \end{definition}
 %
@@ -23,40 +23,39 @@ $\abd{\formula}{\domain}(a)$, corresponds
 to the under-approximation of the global conflict transformer,
 $\conf{\formula}{\domain}$.  
 %
-For example, given a formula $\formula=\{x=y+1\; \&\&\; x\geq 0\}$, and an interval 
+For example, given a formula $\formula=(x=y+1\; \wedge\; x\geq 0)$, and an interval 
 abstract element $a=(y\leq-5)$, $\conf{\formula}{\intervals}(a) = \{(y\leq-5), 
-(y \leq -4, x \leq -3), (y \leq -3, x \leq -2), (y \leq -2, x < 0)\}$.
+(y \leq -4, x \leq -3), (y \leq -3, x \leq -2), (y \leq -2, x < 0)\}$ \pscmt{TODO: I do not understand the notation (..,..). Please clarify.}.
 Informally, $\conf{\formula}{\intervals}$  computes the most general set of
 incomparable reasons under which $\formula$ implies the truth of $a$ (or $\bot$
 since $\formula$ is unsatisfiable under $a$). 
 %
-Now, an abstract abductive transformer for $\formula=\{x=y+1\; \&\&\; x \geq 0\}$ 
-is given by, $\abd{\formula}{\intervals}(y \leq -5)=(y \leq -2, x < 0)$,
+Now, an abstract abductive transformer for $\formula=(x=y+1\; \wedge x \geq 0)$ 
+is given by, $\abd{\formula}{\intervals}(y \leq -5)=(y \leq -2, x < 0)$ \pscmt{TODO: again, the notation is mysterious},
 which clearly underapproximates $\conf{\formula}{\intervals}$ as well as strictly
 generalizes the reason for $y \leq -5$. 
 %
 
 
 The main idea of abductive  reasoning is to iteratively replace a singleton 
-assignment $s$ in the conflict reason by a partial assignment that is sufficient 
+assignment $s$ \pscmt{TODO: Have you defined this terms in the context of domains? I don't understand the word ``assignment'' in the context of a relational domain.} in the conflict reason by a partial assignment that is sufficient 
 to infer $s$.  Conflict abduction is performed by obtaining cuts through markings 
 in the trail $\trail$, by the application of abstract Unique Implication Point (UIP) 
 search algorithm~\cite{cdcl}.  Every cut is a reason for conflict.  The UIP
 search can also be understood through graph cutting in an Abstract Conflict
 Graph, which is defined next. 
 \begin{definition}
-  An Abstract Conflict Graph (ACG) is a directed acyclic graph in which the 
-  vertices are defined by all deduced elements or a decision node and a special 
-  conflict node $(\bot)$ in the trail $\trail$.  The edges in ACG are obtained 
-  from the reason trail $\reasons$ that maps the elements in $\trail$ to the abstract
-  transformers that are used to derive the deduced elements.  
-  \Omit{
-  if $\abstrans{\domain}{\constraint}(a) = 
-  u$, where $u$ is an unique deduction from $\abstrans{\domain}{\constraint}$
-  and $a$ is an initial abstract value, then there is a directed edge from each 
-  elements of $a$, whose variable set has non-empty intersection with the variable 
-  set of $\constraint$, to $u$. 
-  }
+  An Abstract Conflict Graph (ACG) is a directed acyclic graph in
+  which the vertices are defined by all deduced elements (including a
+  special conflict node $(\bot)$) or a decision node in the trail
+  $\trail$.  The edges in ACG are obtained from the reason trail
+  $\reasons$ that maps the elements in $\trail$ to the abstract
+  transformers that are used to derive the deduced elements.  \Omit{
+    if $\abstrans{\domain}{\constraint}(a) = u$, where $u$ is an
+    unique deduction from $\abstrans{\domain}{\constraint}$ and $a$ is
+    an initial abstract value, then there is a directed edge from each
+    elements of $a$, whose variable set has non-empty intersection
+    with the variable set of $\constraint$, to $u$.  }
 \end{definition}
 %
 \begin{figure}[t]
