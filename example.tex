@@ -6,12 +6,13 @@ analysis techniques: \textit{abstract interpretation} (AI), SAT-based
 \textit{bounded model checking} (BMC) and ACDLP. \\ 
 %
 \textbf{First Example} The simple Control-Flow Graph (CFG) in
-Fig.~\ref{fig:example1} squares a machine integer and checks that the result
-is positive.  To avoid overflow, we assume the input~v has an upper bound~N. 
-This example demonstrates that a) interval analysis in ACDLP is more precise
-than a forward AI in the interval domain, and b) ACDLP with intervals can
-achieve a precision similar to that of AI with octagons without employing
-more sophisticated mechanisms such as trace partitioning~\cite{toplas07}.
+Fig.~\ref{fig:example1} squares a machine integer and checks whether
+that the result is positive.  To avoid overflow, we assume the input~v
+has an upper bound~N.  This example demonstrates that a) interval
+analysis in ACDLP is more precise than a forward AI in the interval
+domain, and b) ACDLP with intervals can achieve a precision similar to
+that of AI with octagons without employing more sophisticated
+mechanisms such as trace partitioning~\cite{toplas07}.
 
 \begin{figure}[t]
 \centering
@@ -177,8 +178,8 @@ sufficient to prove safety. \\ \\
 ACDLP can require many fewer iterations than SAT-based BMC due to its
 ability to reason over much richer lattice structures.
 %in terms of number of {\em decisions}, {\em propagations}, and {\em conflicts}. 
-A~SAT-based BMC converts the program into a bit-vector equation 
-and passes that to a CDCL-based SAT solver for proving safety.  
+A~SAT-based BMC converts the program into a bit-vector formula 
+and passes it to a CDCL-based SAT solver for proving safety.  
 Table~\ref{solver} compares the statistics for BMC with 
 MiniSAT~\cite{minisat} solver to those for interval and octagon 
 analysis in ACDLP. In the column labelled $\textrm{Domains}$, 
