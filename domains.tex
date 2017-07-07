@@ -70,7 +70,7 @@ $\domain[\vars]=\booldomain^{|\boolvars|}\times\reldomain[\numvars]$ where
 $\booldomain$ is the Boolean domain that permits abstract values
 $\{\true,\false,\bot,\top\}$ over boolean variables $\boolvars$ in the
 program, and $\reldomain$ is a \textit{template polyhedra}~\cite{vmcai05}
-domain over the numerical (bitvector) variables $\numvars$.  Our template
+domain over the numerical (bit-vector) variables $\numvars$.  Our template
 polyhedra domain can express various relational and non-relational templates
 over $\numvars$, as given in Table~\ref{domain}.
 % 
@@ -80,7 +80,7 @@ over $\numvars$, as given in Table~\ref{domain}.
 %
 An abstract value of the template polyhedra domain~\cite{vmcai05}
 represents a set $\numconcval$ of values of the vector $\vec{\numvar}$ 
-of numerical (bitvector) variables $\numvars$ of their respective
+of numerical (bit-vector) variables $\numvars$ of their respective
 data types. (Currently, signed and unsigned integers are supported.)
 For example, in the program given by Eq.~(\ref{eq:ssa}), we have four 
 numerical variables, written as the vector $\vec{\numvar} = (x_0,x_1,x_2,z)$.  
