@@ -2,7 +2,8 @@
 %
 We have implemented ACDLP for bounded safety verification of C programs.  
 ACDLP is implemented in C++ on top of the
-\textsc{CPROVER}~\cite{cprover} framework and consists of around 9~KLOC. 
+\textsc{CPROVER}~\cite{cprover} framework as an extension of 2LS~\cite{2ls}
+and consists of around 9~KLOC. 
 The template polyhedra domain is implemented in C++ in 10~KLOC.  Templates
 can be intervals, octagons, zones, equalities, or restricted polyhedra.  Our
 domain handles all C operators, including bit-wise ones, and supports
@@ -72,7 +73,7 @@ The runtime comparison between ACDLP and CBMC are shown in
 Figure~\ref{fig:runtimes}.  ACDLP is~1.5X faster than CBMC. 
 The superior performance of ACDLP is attributed to the decision heuristics, 
 which exploit the high-level structure of the program, combined with the 
-precise deduction by multi-way transformer and stronger learnt clause aided 
+precise deduction by multi-way transformesr and stronger learnt clauses aided 
 by the richer abstract domains. 
 %
 
@@ -81,8 +82,8 @@ by the richer abstract domains.
 %
 To enable precise analysis using Astr{\'e}e, we manually instrument 
 the benchmarks with partition directives \texttt{\_\_ASTREE\_partition\_control} 
-at various control-flow joins.  These directives provide external hint to
-Astr{\'e}e to guide its internal trace partition domain. 
+at various control-flow joins.  These directives provide external hints to
+Astr{\'e}e to guide its internal trace partitioning domain. 
 Figure~\ref{fig:runtimes} demonstrates that Astr{\'e}e is~2X faster 
 than ACDLP for {37}\% cases (32 out of 85); but the analysis using 
 Astr{\'e}e shows a high degree of imprecision (marked as timeout in 
