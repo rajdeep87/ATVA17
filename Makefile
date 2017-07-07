@@ -1,4 +1,4 @@
-SRC=algorithm.tex deductions.tex related_work.tex definitions.tex learning.tex domains.tex conclusion.tex example.tex paper.tex contributions.tex experiments.tex decision.tex introduction.tex symbols.tex appendix.tex result.tex plot-runtimes.tex graph1.tex graph2.tex graphs.tex
+SRC=algorithm.tex deductions.tex related_work.tex learning.tex domains.tex conclusion.tex example.tex paper.tex contributions.tex experiments.tex decision.tex introduction.tex symbols.tex result.tex plot-runtimes.tex graph1.tex graph2.tex graphs.tex
 TARGET=paper
 BIB=biblio.bib
 

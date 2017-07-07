@@ -15,8 +15,8 @@ A similar technique that lifts DPLL(T) to programs is Satisfiability Modulo
 Path Programs (SMPP)~\cite{SMPP}. SMPP enumerates program paths using a SAT 
 formula, which are then verified using abstract interpretation.  
 %
-The work of \cite{DBLP:conf/esop/MineBR16} proposes an algorithm inspired by 
-constraint solvers for inferring disjunctive invariants using intervals.
+%The work of \cite{DBLP:conf/esop/MineBR16} proposes an algorithm inspired by 
+%constraint solvers for inferring disjunctive invariants using intervals.
 %
 The lifting of CDCL to first-order theories is proposed
 in~\cite{dpll,ndsmt,vmcai13}.
@@ -24,10 +24,13 @@ in~\cite{dpll,ndsmt,vmcai13}.
 \Omit{ operates on a fixed first-order partial assignment lattice
   structure, where first-order variables are mapped to domain values,
   similar to constants lattice in program analysis.  } 
-  Unlike previous work that operates on a fixed first-order lattice,
-  ACDLP can be instantiated with different abstract domains as well as {product
-  domains}.  
-  \Omit{This involves model search and learning in abstract lattices.  A similar
+  More recently, ~\cite{cade17} proposed a calculus for extending theory of
+  finite sets to theory of finite relations in CVC4 solver, which allows
+  relational constraint solving in SMT.  
+  \Omit{Unlike previous work that operates on a fixed first-order lattice,
+  ACDLP can be instantiated with different abstract domains as well as product
+  domains.  
+  This involves model search and learning in abstract lattices.  A similar
   technique that lifts decisions, propagations and learning to theory variables
   is Model-Constructing Satisfiability Calculus (mcSAT)~\cite{vmcai13}.}
   
