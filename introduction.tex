@@ -9,8 +9,8 @@ transformers.  Abstract states are chosen from a lattice that has meet
 $(\sqcap)$ and join $(\sqcup)$ operations; the meet precisely models set
 intersection (or conjunction, taking a logical view), and the join
 over-approximates set union (or disjunction).  Over-approximation in the
-join operation is one of the sources of precision loss, which causes false
-alarms.  Typical abstract domains are non-distributive; suppose $a$ and $b$
+join operation is one of the sources of precision loss, which can cause false
+alarms.  Typical abstract domains are \textit{non-distributive}; suppose $a$ and $b$
 together represent the abstract semantics of a program and $c$ represents a
 set of abstract behaviours that violate the specification.  In a
 non-distributive domain, $(a \sqcup b) \sqcap c$ can be strictly less
@@ -34,7 +34,7 @@ are often able to avoid enumerating cases.  The impressive performance of
 modern solvers is credited to well-tuned decision heuristics and
 sophisticated clause learning algorithms.  Collectively, these algorithms
 are referred to as \emph{Conflict Driven Clause Learning}
-(CDCL)~\cite{cdcl}.  An obvious idea is to lift CDCL from the domain of 
+(CDCL)~\cite{cdcl}.  An appealing idea is to lift CDCL from the domain of 
 partial assignments to other non-distributive domains.
 
 %%%%%%%%%%%%%%%%%%%%%%% ACDCL %%%%%%%%%%%%%%%%%%%%%
@@ -44,7 +44,7 @@ framework, parameterized by a concrete domain~$C$ and an abstract
 domain~$A$.  Classical CDCL can be viewed as an instance of ACDCL in which
 $C$ is the set of propositional truth assignments and $A$ the domain of
 propositional partial assignments~\cite{leo-thesis}.  Since the concrete
-domain of interest is a parameter to the framework, ACDCL can in principle
+domain is a parameter to the framework, ACDCL can in principle
 be used to build both \emph{logical decision
 procedures}~\cite{DBLP:journals/fmsd/BrainDGHK14} and \emph{program
 analyzers}.  In the former case, the concrete domain is the set of candidate
@@ -59,8 +59,8 @@ propagation.
 In this paper, we explore the second idea by presenting an extension of 
 ACDCL to program analysis.  We call our 
 framework \emph{Abstract Conflict Driven Learning for Programs}
-(ACDLP).  The key insight of ACDLP is to use decisions and learning to precisely 
-reason about disjunctions in non-distributive domains, thereby automatically 
+(ACDLP).  The key insight of ACDLP is to use decisions and learning to reason 
+precisely about disjunctions in non-distributive domains, thereby automatically 
 refining the precision of analysis for safety checking of C programs.  
 We~introduce two central components of our framework: an abstract
 model search algorithm that uses decisions and propagations to 
@@ -73,7 +73,7 @@ using a \textit{template polyhedra abstract domain}~\cite{vmcai05},
 which includes most of the commonly used abstract domains, such as boxes, 
 octagons, zones and TCMs.  
 
-We present an experimental evaluation of our analyser compared 
+We give an experimental evaluation of our analyser compared 
 to CBMC~\cite{cbmc.tacas:2004}, which uses propositional solvers, and to 
 Astr{\'e}e~\cite{DBLP:conf/pldi/BlanchetCCFMMMR03}, a commercial abstract 
 interpretation tool.  In this paper, we make the following contributions.
