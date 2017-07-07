@@ -36,6 +36,12 @@
 \usepackage[subnum]{cases}
 \makeatother
 
+% Settings to do with figures
+% \renewcommand{\topfraction}{1.0}	  % 1.0 of the top page can be fig.
+% \renewcommand{\dbltopfraction}{1.0}	  % 1.0 of the top page can be fig.
+% \renewcommand{\bottomfraction}{1,0}	  % 1.0 of the bottom page can be fig.
+% \renewcommand{\textfraction}{0.0}	  % 0.0 of the page must contain text
+
 \newcommand{\extendedonly}[1]{}
 \newcommand{\paperonly}[1]{#1}
 \newtheorem{exmp}{Example}
@@ -88,7 +94,7 @@ lattice structure.  Our template polyhedra can express intervals, octagons
 and restricted polyhedral constraints over program variables.  We have
 implemented ACDLP for automatic bounded safety verification of C programs. 
 We~evaluate the performance of our analyser by comparing with CBMC, which
-uses CDCL, and Astr{\'e}e, a commercial abstract interpretation tool. 
+uses Boolean CDCL, and Astr{\'e}e, a commercial abstract interpretation tool. 
 We~observe two orders of magnitude reduction in the number of decisions,
 propagations, and conflicts as well as a~1.5x speedup in runtime compared to
 CBMC.  Compared to Astr{\'e}e, ACDLP solves twice as many benchmarks and has
@@ -140,14 +146,8 @@ template polyhedra abstract domain.
 %===============================================================================
 \input{conclusion}
 %===============================================================================
-%\newpage
+
 \bibliographystyle{splncs03}
 \bibliography{biblio.bib}
-
-%\newpage
-%\input{appendix}
-%\extendedonly{
-%\input{appendix}
-%}
 
 \end{document}
