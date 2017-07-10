@@ -2,7 +2,9 @@
 %
 Propositional conflict analysis with FIRST-UIP~\cite{cdcl} can be seen as
 abductive reasoning that under-approximates a set of models that do not
-satisfy a formula~\cite{sas12,dhk2013-popl}.  Below, we present an abstract
+satisfy a formula~\cite{sas12,dhk2013-popl}.  Thus, we view abduction as 
+De Morgan dual of deduction whose result don't require to be consistent with respect
+to a background theory.  Below, we present an abstract
 conflict analysis procedure, $\analyzeconflict$ of
 Algorithm~\ref{Alg:acdcl}, that uses a domain-specific abductive transformer
 for effective learning.  A~conflict analysis procedure involves two steps:
@@ -12,7 +14,7 @@ heuristically selecting a generalisation.  Below, we define a global
 conflict transformer that gives a set of models that do not satisfy a 
 formula.  
 \begin{definition}
-  Given formula $\formula$, an initial abstract value $a$ and domain 
+  Given a formula $\formula$, an initial abstract value $a$ and domain 
   $\domain$, $\conf{\formula}{\domain}(a) = \{u \in \domain \mid u \in a 
   \vee u \not\models \formula \}$, that is, it returns the set of abstract models 
   that do not satisfy $\formula$ or are approximated by $a$.
@@ -45,10 +47,10 @@ search can also be understood through graph cutting in an Abstract Conflict
 Graph, which is defined next. 
 \begin{definition}
   An Abstract Conflict Graph (ACG) is a directed acyclic graph in
-  which the vertices are defined by all deduced elements (including a
+  which the vertices are defined by deduced elements (including a
   special conflict node $(\bot)$) or a decision node in the trail
   $\trail$.  The edges in ACG are obtained from the reason trail
-  $\reasons$ that maps the elements in $\trail$ to the abstract
+  $\reasons$ that maps pairs of elements in $\trail$ to the abstract
   transformers that are used to derive the deduced elements.  \Omit{
     if $\abstrans{\domain}{\constraint}(a) = u$, where $u$ is an
     unique deduction from $\abstrans{\domain}{\constraint}$ and $a$ is
@@ -64,18 +66,22 @@ Graph, which is defined next.
 \end{figure}  
 %
 \noindent \textbf{Abstract UIP Search}
+An abstract UIP is a node in the ACG that must be traversed on every path between a 
+decision node and the conflict. An abstract UIP cut is necessary to ensure that
+the learnt clauses are asserting after backtracking and prevent cyclic algorithm
+behavior. 
 An abstract UIP algorithm~\cite{DBLP:journals/fmsd/BrainDGHK14} traverses
 the trail $\trail$ starting from the conflict node and computes a cut that
 suffices to produce a conflict.  For example, consider a formula $\formula:=
-\{x{+}4{=}z \wedge x{+}z{=}2y \wedge z{+}y>10\}$.  As before, the trail can be
+(x{+}4{=}z \wedge x{+}z{=}2y \wedge z{+}y{>}10)$.  As before, the trail can be
 viewed to represent an ACG, shown in Fig.~\ref{uip}, that records the 
 sequence of deductions in the octagon domain that are inferred
 from a decision $x {\leq} 0$ for the formula $\formula$.  The arrows (in
 red) shows the relationship between the reason trail and propagation trail
 in bottom of Fig.~\ref{uip}.  For the partial abstract value,
-$\absval=\{x\leq0 \wedge x+z\leq4 \wedge z\leq4\}$, obtained from the trail,
+$\absval=(x\leq0 \wedge x+z\leq4 \wedge z\leq4)$, obtained from the trail,
 the result of the abstract deduction transformer is
-$\abstrans{\octagons}{y=(x+z)/2}(\absval)=\{x+y\leq2, y\leq2, y+z\leq6\}$. 
+$\abstrans{\octagons}{y=(x+z)/2}(\absval)=(x+y\leq2 \wedge y\leq2 \wedge y+z\leq6)$. 
 A~conflict ($\bot$) is reached for the decision ${x{\leq}0}$.  Note that
 there exist multiple incomparable reasons for conflict, marked as {\em cut~0}
 and {\em cut~1} in Fig.~\ref{uip}.  Here, cut~0 is the first UIP (node closest
