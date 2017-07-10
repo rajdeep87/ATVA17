@@ -13,11 +13,9 @@ conflict transformer that gives a set of models that do not satisfy a
 formula.  
 \begin{definition}
   Given formula $\formula$, an initial abstract value $a$ and domain 
-  $\domain$, \rmcmt{$\conf{\formula}{\domain}(a) = \{u \in \domain \mid u \in decomp(a) 
-  \vee u \not\models \formula \}$}, \pscmt{TODO: I do not understand what the
-  domain of $u$ is. Also, it is unclear what the co-domain of $\conf{}{}$
-  is.}that is, it returns the set of abstract models that do not satisfy 
-  $\formula$ or are approximated by $a$.
+  $\domain$, $\conf{\formula}{\domain}(a) = \{u \in \domain \mid u \in a 
+  \vee u \not\models \formula \}$, that is, it returns the set of abstract models 
+  that do not satisfy $\formula$ or are approximated by $a$.
 \end{definition}
 %
 For formula $\formula$ and domain $\domain$, an abstract abductive transformer, 
@@ -25,24 +23,21 @@ $\abd{\formula}{\domain}(a)$, corresponds to the under-approximation of the
 global conflict transformer, $\conf{\formula}{\domain}$.  
 %
 For example, given a formula $\formula=(x=y+1\; \wedge\; x\geq 0)$, and an interval 
-abstract element \rmcmt{$a=(y\leq-5)$, $\conf{\formula}{\intervals}(a) = \{(y\leq-5), 
+abstract element $a=(y\leq-5)$, $\conf{\formula}{\intervals}(a) = \{(y\leq-5), 
 (y \leq -4 \land x \leq -3), (y \leq -3 \land x \leq -2), (y \leq -2 \land x <
-0)\}$}.  
-\pscmt{TODO: I do not understand the notation (..,..). Please clarify.}.
-Informally, $\conf{\formula}{\intervals}$  computes the most general set of
+0)\}$.  Informally, $\conf{\formula}{\intervals}$  computes the most general set of
 incomparable reasons under which $\formula$ implies the truth of $a$ (or $\bot$
 since $\formula$ is unsatisfiable under $a$). 
 %
 Now, an abstract abductive transformer for $\formula=(x=y+1\; \wedge x \geq 0)$ 
-is given by, \rmcmt{$\abd{\formula}{\intervals}(y \leq -5)=(y \leq -2 \land x <
-0)$} \pscmt{TODO: again, the notation is mysterious},
-which clearly underapproximates $\conf{\formula}{\intervals}$ as well as strictly
-generalizes the reason for $y \leq -5$. 
+is given by, $\abd{\formula}{\intervals}(y \leq -5)=(y \leq -2 \land x <
+0)$, which clearly underapproximates $\conf{\formula}{\intervals}$ as well as 
+strictly generalizes the reason for $\bot$. 
 %
 
 
-The main idea of abductive  reasoning is to iteratively replace \rmcmt{an abstract
-element} $s$ \pscmt{TODO: Have you defined this terms in the context of domains? I don't understand the word ``assignment'' in the context of a relational domain.} in the conflict reason by a partial assignment that is sufficient 
+The main idea of abductive  reasoning is to iteratively replace an abstract
+element $s$ in the conflict reason by a partial assignment that is sufficient 
 to infer $s$.  Conflict abduction is performed by obtaining cuts through markings 
 in the trail $\trail$, by the application of abstract Unique Implication Point (UIP) 
 search algorithm~\cite{cdcl}.  Every cut is a reason for conflict.  The UIP
