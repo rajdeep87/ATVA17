@@ -178,7 +178,8 @@ this performs a right-hand side (rhs) to left-hand side (lhs) propagation and
 hence emulates a forward analysis. 
 
 \paragraph{Backward Transformer.} 
-For an abstract value $\absval=(0\leq x \leq 10 \wedge 0\leq y \leq 1 \wedge 5\leq z)$, 
+For an abstract value $\absval=(0\leq x \leq 10 \wedge\allowbreak
+0\leq y \leq 1 \wedge\allowbreak 5\leq z)$, 
 $\constraint=(x=y+z)$, and $L={\intervals[\{y,z\}]}$, we have
 $\abstrans{\intervals[\{x,y,z\}]}{x=y+z}^{\intervals[\{y,z\}]}=\absval\meet (z\leq 10)$. 
 This performs an lhs-to-rhs propagation and hence emulates a backward analysis.  
