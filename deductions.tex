@@ -81,9 +81,7 @@ $\worklist \leftarrow \initworklist_{\propheur}(\abstransset)$ \;
     $\updateworklist_{\propheur}(\worklist, \newdeductions, \abstransel{\subdomain},  \abstransset)$ \; 
   }
 }
-\lIf{$\abstransset$ is $\gamma$-complete at $\abs(\trail)$} {
-  \return \sat
-}
+\lIf{$\abstransset$ is $\gamma$-complete at $\abs(\trail)$} {\return \sat}
  \return \unknown \;
 
 \end{small}
