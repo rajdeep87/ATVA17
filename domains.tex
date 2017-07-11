@@ -83,7 +83,7 @@ of numerical (bit-vector) variables $\numvars$ of their respective
 data types. (Currently, signed and unsigned integers are supported.)
 For example, in the program given by Eq.~(\ref{eq:ssa}), we have four 
 numerical variables, written as the vector $\vec{\numvar} = (x_0,x_1,x_2,z)$.  
-An abstract value is a constant vector $\vec{\numabsval}$ that represents 
+An~abstract value is a constant vector $\vec{\numabsval}$ that represents 
 sets of values for $\vec{\numvar}$ for which 
 $\mat{C}\vec{\numvar}\leq\vec{\numabsval}$, for a fixed coefficient 
 matrix $\mat{C}$.  The domain containing $\vec{\numabsval}$ is augmented 
@@ -91,9 +91,9 @@ by a special element $\bot$ to denote the minimal element of the lattice.
 %
 There are several optimisation techniques~\cite{vmcai05} for computing the domain operations, 
 such as meet ($\meet$) and join ($\sqcup$), in the template polyhedra domain.  
-In our implementation, we use the strategy iteration approach of~\cite{BJKS15}.
+In~our implementation, we use the strategy iteration approach of~\cite{BJKS15}.
 %
-The abstraction function is defined by $\alpha(\numconcval) = \min \{\vec{\numabsval}\mid
+The abstraction function is $\alpha(\numconcval) = \min \{\vec{\numabsval}\mid
 \mat{C}\vec{\numvar}\leq\vec{\numabsval}, \vec{\numvar}\in \numconcval\}$, where 
 $\min$ is applied component-wise.  The concretisation $\gamma(\vec{\numabsval})$ is the set $\{\vec{\numvar}\mid
 \mat{C}\vec{\numvar}\leq\vec{\numabsval}\}$ and $\gamma(\bot)=\emptyset$,
