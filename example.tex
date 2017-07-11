@@ -101,7 +101,8 @@ able to prove safety.
 {
 \begin{tabular}{l|l|r|r|r|r|r}
 \hline
-  Solver & Domain & decisions & propagations & conflicts & conflict literals & restarts \\ \hline
+  Solver & Domain & Total & Total & Total & conflict & Total \\
+  & & decisions & propagations & conflicts & literals & restarts \\ \hline
   \multicolumn{7}{c}{Solver statistics for Fig.~\ref{fig:example1} (For N = 46000)} \\ \hline
   MiniSAT & $\boolvars \rightarrow \{t,f,?\} $ & 233 & 36436 & 162 & 2604 & 2 \\ \hline
   ACDLP & $\mathit{nodes} \rightarrow \intervals[\numvars]$ & 1 & 17 & 1 & 1 & 0 \\ \hline
@@ -131,7 +132,7 @@ CFG & ACDLP with Octagons \\
 %\caption{\label{fig:cfg}}
 \end{minipage}
 &
-\begin{minipage}{7.5cm}
+\begin{minipage}{6.8cm}
 %\centering
 \vspace*{0.3cm}
 \scalebox{.5}{\import{figures/}{oct_partition.pspdftex}}\vspace*{0.1cm}
@@ -207,7 +208,7 @@ of using richer abstract domains within the CDCL-style analysis}.
 {
 \begin{tabular}{l|r|r|r|r|r|r}
 \hline
-  Solver & Domain & decisions & propagations & conflicts & conflict literals & restarts \\ \hline
+  Solver & Domain & decisions & propagations & conflicts & conflict & restarts \\ \hline
   MiniSAT & $\boolvars \rightarrow \{t,f,?\} $ & 4844 & 32414 & 570 & 4750 & 5 \\ \hline
   ACDLP & $\mathit{nodes} \rightarrow $ & 4 & 412 & 2 & 2 & 0 \\ 
 \hline
