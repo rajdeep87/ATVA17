@@ -35,11 +35,10 @@ using Astr{\'e}e, all bounded loops in the program are completely unwound up
 to a given bound before passing to Astr{\'e}e.  This prevents Astr{\'e}e
 from widening loops.
 %
-ACDLP is instantiated to a product of the Booleans and the interval or
-octagon domain instance of template polyhedra.  ACDLP is also
-configured with a decision heuristic (ordered, random,
-activity-based), propagation (forward, backward and multi-way), and
-conflict-analysis (learning UIP, DPLL-style).  The timeout for our
+ACDLP is instantiated to a product of the Booleans and the Interval or
+Octagon domain.  ACDLP is also configured with a decision heuristic 
+(ordered, random, activity-based), propagation (forward, backward and multi-way), 
+and conflict-analysis (learning UIP, DPLL-style).  The timeout for our
 experiments is set to~200 seconds.
 %
 \Omit {
@@ -55,7 +54,7 @@ analysis using Astr{\'e}e shows high degree of imprecision.
 \input{plot-runtimes}
 %
 \noindent \textbf{ACDLP versus CBMC}
-Fig.~\ref{fig:results} presents a comparison of the analyses using CBMC
+Fig.~\ref{fig:results} presents a comparison between CBMC
 and ACDLP.  Fig.~\ref{fig:results}(a) clearly shows that the SAT based analysis 
 made significantly more decisions compared to ACDLP for all the benchmarks. 
 The points on the extreme right below the diagonal in
