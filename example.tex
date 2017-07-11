@@ -77,7 +77,7 @@ These do not prove safety, as shown in ACG1.  So ACDLP makes a
 heuristic decision, at DL1, to refine the analysis.  With the decision
 $c=[1,1]$, interval analysis then concludes $x=[0,5]$ at node~$n_4$, which
 leads to $(\mathrm{Error}{:}\;\bot)$ in ACG2, indicating that the error
-location is unreachable and the program is safe when $c=[1,1]$.
+location is unreachable and that the program is safe when $c=[1,1]$.
 
 Reaching $(\mathrm{Error}{:}\;\bot)$ is analogous to reaching a conflict in
 a propositional SAT solver.  At this point, a clause-learning SAT solver
@@ -145,7 +145,7 @@ CFG and corresponding Abstract Conflict Graphs for Octagon Analysis}
 
 \bigskip
 
-\noindent \textbf{Second Example.} Fig.~\ref{fig:example2}, shows that 
+\noindent \textbf{Second Example.} Fig.~\ref{fig:example2} shows that 
 octagon analysis in ACDLP is more precise than forward AI in the octagon domain.
 % LATER, b) \emph{ACDLP with octagons can outperform SAT-based BMC}.  
 The CFG in Fig.~\ref{fig:example2} computes the absolute 
@@ -156,8 +156,9 @@ $(x=y) \lor (x=-y)$.
 
 \noindent \textbf{AI versus ACDLP.}
 Forward AI in the octagon domain infers 
-the octagonal constraint $\mathrm{Error}{:}\;(p\geq0 \wedge p+q\geq0 \wedge q\geq0 \wedge p+x\geq0 \wedge 
-p-x\geq0 \wedge q+y\geq0 \wedge q-y\geq0)$. Clearly this is too 
+the octagonal constraint
+$\mathrm{Error}{:}\;(p\geq0 \wedge p+q\geq0 \wedge q\geq0 \wedge p+x\geq0 \wedge 
+p-x\geq0 \wedge\allowbreak q+y\geq0 \wedge\allowbreak q-y\geq0)$. Clearly this is too 
 imprecise to prove safety. 
 %
 The octagonal analysis in ACDLP is illustrated by the ACGs in
