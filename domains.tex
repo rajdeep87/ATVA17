@@ -37,7 +37,7 @@ Data flow joins become conditional expressions, e.g.~$x_3=g_1?x_1:x_2$.
 %
 The assertions in $\assertions$ are constraints such as $g_2
 \Rightarrow z\geq 0$, meaning that if $g_2$ holds
-(i.e.,~the assertion is reachable) then $z \geq 0$ must hold.
+(i.e.,~the assertion is reachable), then $z \geq 0$ must hold.
 %
 We~write $\vars$ for the set of variables occurring in $\constraints$.  
 Based on this representation, we define a \textit{safety formula}
@@ -83,7 +83,7 @@ of numerical (bit-vector) variables $\numvars$ of their respective
 data types. (Currently, signed and unsigned integers are supported.)
 For example, in the program given by Eq.~(\ref{eq:ssa}), we have four 
 numerical variables, written as the vector $\vec{\numvar} = (x_0,x_1,x_2,z)$.  
-An abstract value is a constant vector $\vec{\numabsval}$ that represents 
+An~abstract value is a constant vector $\vec{\numabsval}$ that represents 
 sets of values for $\vec{\numvar}$ for which 
 $\mat{C}\vec{\numvar}\leq\vec{\numabsval}$, for a fixed coefficient 
 matrix $\mat{C}$.  The domain containing $\vec{\numabsval}$ is augmented 
@@ -91,9 +91,9 @@ by a special element $\bot$ to denote the minimal element of the lattice.
 %
 There are several optimisation techniques~\cite{vmcai05} for computing the domain operations, 
 such as meet ($\meet$) and join ($\sqcup$), in the template polyhedra domain.  
-In our implementation, we use the strategy iteration approach of~\cite{BJKS15}.
+In~our implementation, we use the strategy iteration approach of~\cite{BJKS15}.
 %
-The abstraction function is defined by $\alpha(\numconcval) = \min \{\vec{\numabsval}\mid
+The abstraction function is $\alpha(\numconcval) = \min \{\vec{\numabsval}\mid
 \mat{C}\vec{\numvar}\leq\vec{\numabsval}, \vec{\numvar}\in \numconcval\}$, where 
 $\min$ is applied component-wise.  The concretisation $\gamma(\vec{\numabsval})$ is the set $\{\vec{\numvar}\mid
 \mat{C}\vec{\numvar}\leq\vec{\numabsval}\}$ and $\gamma(\bot)=\emptyset$,
@@ -125,7 +125,7 @@ $\mathit{closure}((x-y \leq 4) \wedge (y-z \leq 5))=((x-y \leq 4) \wedge (y-z
 For octagons, closure is the most critical and expensive operator; it has  
 cubic complexity in the number of program variables.  We therefore compute 
 closure lazily in template polyhedra domain in our abstract model search 
-procedure, which is described in section~\ref{lazyclosure}. 
+procedure, which is described in Section~\ref{lazyclosure}. 
 %We refer the reader to Appendix~\ref{appendix:lazyclosure} 
 %for details of lazy closure computation. 
 

@@ -10,22 +10,25 @@ analysis techniques: \textit{abstract interpretation} (AI), SAT-based
 \noindent\textbf{First Example.} The simple Control-Flow Graph (CFG) in
 Fig.~\ref{fig:example1} squares a machine integer and checks whether the result
 is positive.  To avoid overflow, we assume the input~v has an upper bound~N. 
-This example shows that a) interval analysis in ACDLP is more precise
-than a forward AI in the interval domain, and b) ACDLP with intervals can
+This example shows that a)~interval analysis in ACDLP is more precise
+than a forward AI in the interval domain, and b)~ACDLP with intervals can
 achieve a precision similar to that of AI with octagons without employing
 more sophisticated mechanisms such as trace partitioning~\cite{toplas07}.
 
 \begin{figure}[t]
 \centering
 \begin{tabular}{c|c|c}
-\hline
-Control-Flow Graph & Interval Analysis in ACDLP & Octagon Analysis in ACDLP\\
+CFG & ACDLP with Intervals &
+\begin{minipage}{2cm}
+\centering
+ACDLP with Octagons
+\end{minipage} \\
 \hline
 \scriptsize
-\begin{minipage}{3.3cm}
+\begin{minipage}{3.5cm}
 %\centering
 %\vspace*{0.3cm}
-\scalebox{.52}{\import{figures/}{example.pspdftex}}
+\scalebox{.6}{\import{figures/}{example.pspdftex}}
 %\caption{\label{fig:cfg}}
 \end{minipage}
 &
@@ -36,19 +39,18 @@ Control-Flow Graph & Interval Analysis in ACDLP & Octagon Analysis in ACDLP\\
 %\caption{\label{fig:itv}}
 \end{minipage}
 &
-\begin{minipage}{3.6cm}
+\begin{minipage}{1.75cm}
 %\centering
 \vspace*{0.3cm}
 \scalebox{.5}{\import{figures/}{acdl_oct.pspdftex}}
 %\caption{\label{fig:oct}}
 \end{minipage}
 \\
-\hline
 \end{tabular}
 \caption{\label{fig:example1}
-CFG and corresponding Abstract Conflict Graphs for Interval and Octagon Analysis}
+CFG and corresponding Abstract Conflict Graphs
+for intervals and octagons}
 \end{figure}
-%
 
 \medskip
 
@@ -75,7 +77,7 @@ These do not prove safety, as shown in ACG1.  So ACDLP makes a
 heuristic decision, at DL1, to refine the analysis.  With the decision
 $c=[1,1]$, interval analysis then concludes $x=[0,5]$ at node~$n_4$, which
 leads to $(\mathrm{Error}{:}\;\bot)$ in ACG2, indicating that the error
-location is unreachable and the program is safe when $c=[1,1]$.
+location is unreachable and that the program is safe when $c=[1,1]$.
 
 Reaching $(\mathrm{Error}{:}\;\bot)$ is analogous to reaching a conflict in
 a propositional SAT solver.  At this point, a clause-learning SAT solver
@@ -97,9 +99,9 @@ able to prove safety.
 %\scriptsize
 \begin{center}
 {
-\begin{tabular}{l|r|r|r|r|r|r}
+\begin{tabular}{l|l|r|r|r|r|r}
 \hline
-  Solver & Domains & decisions & propagations & conflicts & conflict literals & restarts \\ \hline
+  Solver & Domain & decisions & propagations & conflicts & conflict literals & restarts \\ \hline
   \multicolumn{7}{c}{Solver statistics for Fig.~\ref{fig:example1} (For N = 46000)} \\ \hline
   MiniSAT & $\boolvars \rightarrow \{t,f,?\} $ & 233 & 36436 & 162 & 2604 & 2 \\ \hline
   ACDLP & $\mathit{nodes} \rightarrow \intervals[\numvars]$ & 1 & 17 & 1 & 1 & 0 \\ \hline
@@ -119,8 +121,7 @@ able to prove safety.
 \begin{figure}[t]
 \centering
 \begin{tabular}{c|c}
-\hline
-Control-Flow Graph & Octagon Analysis in ACDLP \\
+CFG & ACDLP with Octagons \\
 \hline
 \scriptsize
 \begin{minipage}{5.28cm}
@@ -137,7 +138,6 @@ Control-Flow Graph & Octagon Analysis in ACDLP \\
 %\caption{\label{fig:itv}}
 \end{minipage}
 \\
-\hline
 \end{tabular}\caption{\label{fig:example2}
 CFG and corresponding Abstract Conflict Graphs for Octagon Analysis}
 \end{figure}
@@ -145,7 +145,7 @@ CFG and corresponding Abstract Conflict Graphs for Octagon Analysis}
 
 \bigskip
 
-\noindent \textbf{Second Example.} Fig.~\ref{fig:example2}, shows that 
+\noindent \textbf{Second Example.} Fig.~\ref{fig:example2} shows that 
 octagon analysis in ACDLP is more precise than forward AI in the octagon domain.
 % LATER, b) \emph{ACDLP with octagons can outperform SAT-based BMC}.  
 The CFG in Fig.~\ref{fig:example2} computes the absolute 
@@ -156,8 +156,9 @@ $(x=y) \lor (x=-y)$.
 
 \noindent \textbf{AI versus ACDLP.}
 Forward AI in the octagon domain infers 
-the octagonal constraint $\mathrm{Error}{:}\;(p\geq0 \wedge p+q\geq0 \wedge q\geq0 \wedge p+x\geq0 \wedge 
-p-x\geq0 \wedge q+y\geq0 \wedge q-y\geq0)$. Clearly this is too 
+the octagonal constraint
+$\mathrm{Error}{:}\;(p\geq0 \wedge p+q\geq0 \wedge q\geq0 \wedge p+x\geq0 \wedge 
+p-x\geq0 \wedge\allowbreak q+y\geq0 \wedge\allowbreak q-y\geq0)$. Clearly this is too 
 imprecise to prove safety. 
 %
 The octagonal analysis in ACDLP is illustrated by the ACGs in

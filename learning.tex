@@ -27,16 +27,17 @@ formula.
 %lattice of $D$.
 %For formula $\formula$ and domain $\domain$, 
 %
-For example, given a formula $\formula=(x=y+1\; \wedge\; x\geq 0)$, and an interval 
-abstract element, $Q=(y\leq-5 \wedge x \leq -4)$, 
-$\conf{\formula}{\intervals}(Q) = \{(y\leq-5 \land x \leq -4), 
+For example, given a formula $\formula=(x=y+1\; \wedge\; x\geq 0)$ and an interval 
+abstract element $Q=(y\leq-5 \wedge x \leq -4)$, 
+$\conf{\formula}{\intervals}(Q) = \{(y\leq-5 \land x \leq -4),\linebreak 
 (y \leq -2 \land x < 0), \ldots, (y \leq 2 \land x \leq 10), \ldots \}$.  
 %Informally, $\conf{\formula}{\intervals}$ computes the most general set of
 %incomparable reasons under which $\formula$ implies $\bot$.
 %the truth of $Q$.
 %(or $\bot$ since $\formula$ is unsatisfiable under $a$). 
 %
-Now, an abstract abductive transformer for $\formula=(x=y+1\; \wedge x \geq 0)$ 
+Now, an abstract abductive transformer for $\formula$ 
+%=(x=y+1\; \wedge x \geq 0)$ 
 is given by, $\abd{\formula}{\intervals}(Q)=(y \leq -2 \land x < 0)$, 
 which clearly underapproximates $\conf{\formula}{\intervals}$ as well as 
 strictly generalizes the reason for $Q$. 
@@ -78,11 +79,11 @@ behavior.
 An abstract UIP algorithm~\cite{DBLP:journals/fmsd/BrainDGHK14} traverses
 the trail $\trail$ starting from the conflict node and computes a cut that
 suffices to produce a conflict.  For example, consider a formula $\formula:=
-(x{+}4{=}z \wedge x{+}z{=}2y \wedge z{+}y{>}10)$.  As before, the trail can be
-viewed to represent an ACG, shown in Fig.~\ref{uip}, that records the 
+(x{+}4{=}z \wedge x{+}z{=}2y \wedge z{+}y{>}10)$.  As~before, the trail can be
+viewed to represent an ACG, given in Fig.~\ref{uip}, that records the 
 sequence of deductions in the octagon domain that are inferred
 from a decision $x {\leq} 0$ for the formula $\formula$.  The arrows (in
-red) shows the relationship between the reason trail and propagation trail
+red) indicate the relationship between the reason trail and propagation trail
 in bottom of Fig.~\ref{uip}.  For the partial abstract value,
 $\absval=(x\leq0 \wedge x+z\leq4 \wedge z\leq4)$, obtained from the trail,
 the result of the abstract deduction transformer is
@@ -119,7 +120,7 @@ irreducibles $\conflictset \subseteq \domain$ such that $\bigsqcap
 \]
 %
 Rule (1) shows $\aunit$ returns $\bot$ since $\absval \sqsubseteq \bigsqcap
-\conflictset$ is conflicting.  Rule (2) of $\aunit$ infer a valid meet
+\conflictset$ is conflicting.  Rule (2) of $\aunit$ infers a valid meet
 irreducible, which implies that $\conflictset$ is unit.  Rule (3) of
 $\aunit$ returns $\top$ which implies that the learnt clause is not {\em
 asserting} after backtracking.  This would prevent any new deductions from

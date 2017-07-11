@@ -79,18 +79,19 @@ by the richer abstract domains.
 
 \noindent \textbf{ACDLP versus Astr{\'e}e}
 %
-To enable precise analysis with Astr{\'e}e, we manually instrument 
-the benchmarks with partition directives \texttt{\_\_ASTREE\_partition\_control} 
+To enable precise analysis with Astr{\'e}e, we manually instrument the
+benchmarks with partition directives \texttt{\_\_ASTREE\_partition\_control}
 at various control-flow joins.  These directives provide external hints to
 Astr{\'e}e to guide its internal trace partitioning domain. 
-Figure~\ref{fig:runtimes} demonstrates that Astr{\'e}e is~2X faster 
-than ACDLP for {37}\% cases (32 out of 85); but the analysis using 
-Astr{\'e}e shows a high degree of imprecision (marked as timeout in 
-Figure~\ref{fig:runtimes}).  Astr{\'e}e reported~53 false alarms 
-among~85 benchmarks.  Whereas, the analysis using ACDLP produces correct 
-results for~81 benchmarks.  ACDLP timed out for~4 benchmarks. Clearly, ACDLP has higher precision than 
-Astr{\'e}e. Detailed analysis of the comparison between ACDLP, CBMC and 
-Astr{\'e}e is available at~\cite{extended}.
+Figure~\ref{fig:runtimes} demonstrates that Astr{\'e}e is~2X faster than
+ACDLP for {37}\% cases (32 out of 85); but the analysis using Astr{\'e}e
+shows a high degree of imprecision (marked as timeout in
+Figure~\ref{fig:runtimes}).  Astr{\'e}e reported~53 false alarms among~85
+benchmarks.  By contrast, the analysis using ACDLP produces correct results
+for~81 benchmarks.  ACDLP times out for~4 benchmarks.  Clearly, ACDLP has
+higher precision than Astr{\'e}e.  Detailed analysis of the comparison
+between ACDLP, CBMC and Astr{\'e}e is available at~\cite{extended}.
+%
 %url{http://www.cprover.org/acdcl/}.
 %presented in \rmcmt{Appendix~\ref{appendix:extended_result}.}  
 
