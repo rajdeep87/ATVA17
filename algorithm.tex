@@ -28,20 +28,16 @@
 }
 $\trail \leftarrow \langle\rangle$, $\reasons \leftarrow []$ \;
 $\mathit{result} \leftarrow \deduce_{\propheur}(\abstransset,\trail,\reasons)$ \;
-\lIf{$\mathit{result}$ = \conflict} {
-  \return \safe}
+\lIf{$\mathit{result}$ = \conflict} {\return \safe}
 \While{$true$} 
 {
-\lIf{$\mathit{result}$ = \sat} {
-  \return \unsafe}
+\lIf{$\mathit{result}$ = \sat} {\return \unsafe}
   $\decisionvar \leftarrow \decide_{\decheur}(\abs(\trail))$ \;
   $\trail \leftarrow \trail \cdot \decisionvar$ \; 
   $\reasons[|\trail|] \leftarrow \top$ \;
   $\mathit{result} \leftarrow \deduce_{\propheur}(\abstransset,\trail,\reasons)$\;
   \Do{$\mathit{result} = \conflict$} {
-    \lIf{$\neg \analyzeconflict_{\confheur}(\abstransset,\trail,\reasons)$} {
-      \return \safe
-    }
+    \lIf{$\neg \analyzeconflict_{\confheur}(\abstransset,\trail,\reasons)$} {\return \safe}
     $\mathit{result} \leftarrow \deduce_{\propheur}(\abstransset,\trail,\reasons)$ \;
   }
 }
