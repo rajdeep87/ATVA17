@@ -49,7 +49,7 @@ element $s$ in the conflict reason by a partial assignment that is sufficient
 to infer $s$.  Conflict abduction is performed by obtaining cuts through markings 
 in the trail $\trail$, by the application of abstract Unique Implication Point (UIP) 
 search algorithm~\cite{cdcl}.  Every cut is a reason for conflict.  The UIP
-search can also be understood through graph cutting in an Abstract Conflict
+search can be understood through graph cutting in an Abstract Conflict
 Graph, which is defined next. 
 \begin{definition}
   An Abstract Conflict Graph (ACG) is a directed acyclic graph in
@@ -125,8 +125,7 @@ irreducible, which implies that $\conflictset$ is unit.  Rule (3) of
 $\aunit$ returns $\top$ which implies that the learnt clause is not {\em
 asserting} after backtracking.  This would prevent any new deductions from
 the learnt clause.  Progress is then made by decisions.  An example of
-$\aunit$ for $\conflictset = \{x \geq 2, x \leq 5, y \leq 7 \}$ is given
-below.  \\
+$\aunit$ for $\conflictset = \{x \geq 2, x \leq 5, y \leq 7 \}$ is below.  \\
 %
 \Omit{
 Let us consider an example, where $\conflictset = \{x \geq 2, x \leq 5, y

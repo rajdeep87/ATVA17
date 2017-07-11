@@ -101,15 +101,14 @@ able to prove safety.
 {
 \begin{tabular}{l|l|r|r|r|r|r}
 \hline
-  Solver & Domain & Total & Total & Total & conflict & Total \\
-  & & decisions & propagations & conflicts & literals & restarts \\ \hline
+  Solver & Domain & decisions & propagations & conflicts & conflict literals & restarts \\ \hline
   \multicolumn{7}{c}{Solver statistics for Fig.~\ref{fig:example1} (For N = 46000)} \\ \hline
   MiniSAT & $\boolvars \rightarrow \{t,f,?\} $ & 233 & 36436 & 162 & 2604 & 2 \\ \hline
-  ACDLP & $\mathit{nodes} \rightarrow \intervals[\numvars]$ & 1 & 17 & 1 & 1 & 0 \\ \hline
-  ACDLP & $\mathit{nodes} \rightarrow \octagons[\numvars]$ & 0 & 7 & 0 & 0 & 0 \\ \hline 
+  ACDLP & $\intervals[\numvars]$ & 1 & 17 & 1 & 1 & 0 \\ \hline
+  ACDLP & $\octagons[\numvars]$ & 0 & 7 & 0 & 0 & 0 \\ \hline 
   \multicolumn{7}{c}{Solver statistics for Fig.~\ref{fig:example2}} \\ \hline
   MiniSAT & $\boolvars \rightarrow \{t,f,?\} $ & 4844 & 32414 & 570 & 4750 & 5 \\ \hline
-  ACDLP & $\mathit{nodes} \rightarrow \octagons[\numvars]$ & 4 & 412 & 2 & 2 & 0 \\ 
+  ACDLP & $\octagons[\numvars]$ & 4 & 412 & 2 & 2 & 0 \\ 
 \hline
 \end{tabular}
 }
@@ -192,7 +191,8 @@ MiniSAT~\cite{minisat} solver to those for interval and octagon
 analysis in ACDLP. In the column labelled $\textrm{Domains}$, 
 $\boolvars$ is the set of propositional variables; each of these is mapped to
 {\em true} (t), {\em false} (f) or {\em unknown} $(?)$. $\numvars$ is the set of
-numerical variables, $\mathit{nodes}$ the set of nodes in the CFG;
+numerical variables;
+%$\mathit{nodes}$ the set of nodes in the CFG;
 $\intervals[\numvars]$ and $\octagons[\numvars]$ are the Interval and Octagon
 domains over $\numvars$. As can be seen, ACDLP outperforms BMC in the total number of 
 {\em decisions}, {\em propagations}, {\em learnt clauses} and {\em restarts} 
