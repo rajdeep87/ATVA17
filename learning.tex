@@ -79,11 +79,11 @@ behavior.
 An abstract UIP algorithm~\cite{DBLP:journals/fmsd/BrainDGHK14} traverses
 the trail $\trail$ starting from the conflict node and computes a cut that
 suffices to produce a conflict.  For example, consider a formula $\formula:=
-(x{+}4{=}z \wedge x{+}z{=}2y \wedge z{+}y{>}10)$.  As before, the trail can be
-viewed to represent an ACG, shown in Fig.~\ref{uip}, that records the 
+(x{+}4{=}z \wedge x{+}z{=}2y \wedge z{+}y{>}10)$.  As~before, the trail can be
+viewed to represent an ACG, given in Fig.~\ref{uip}, that records the 
 sequence of deductions in the octagon domain that are inferred
 from a decision $x {\leq} 0$ for the formula $\formula$.  The arrows (in
-red) shows the relationship between the reason trail and propagation trail
+red) indicate the relationship between the reason trail and propagation trail
 in bottom of Fig.~\ref{uip}.  For the partial abstract value,
 $\absval=(x\leq0 \wedge x+z\leq4 \wedge z\leq4)$, obtained from the trail,
 the result of the abstract deduction transformer is
@@ -120,7 +120,7 @@ irreducibles $\conflictset \subseteq \domain$ such that $\bigsqcap
 \]
 %
 Rule (1) shows $\aunit$ returns $\bot$ since $\absval \sqsubseteq \bigsqcap
-\conflictset$ is conflicting.  Rule (2) of $\aunit$ infer a valid meet
+\conflictset$ is conflicting.  Rule (2) of $\aunit$ infers a valid meet
 irreducible, which implies that $\conflictset$ is unit.  Rule (3) of
 $\aunit$ returns $\top$ which implies that the learnt clause is not {\em
 asserting} after backtracking.  This would prevent any new deductions from
