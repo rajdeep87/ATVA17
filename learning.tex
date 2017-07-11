@@ -29,9 +29,8 @@ formula.
 %
 For example, given a formula $\formula=(x=y+1\; \wedge\; x\geq 0)$, and an interval 
 abstract element, $Q=(y\leq-5 \wedge x \leq -4)$, 
-$\conf{\formula}{\intervals}(a) = \{(y\leq-5 \land x \leq -4), 
-(y \leq -4 \land x \leq -3), (y \leq -3 \land x \leq -2), (y \leq -2 \land x <
-0)\}$.  
+$\conf{\formula}{\intervals}(Q) = \{(y\leq-5 \land x \leq -4), 
+(y \leq -2 \land x < 0), \ldots, (y \leq 2 \land x \leq 10), \ldots \}$.  
 %Informally, $\conf{\formula}{\intervals}$ computes the most general set of
 %incomparable reasons under which $\formula$ implies $\bot$.
 %the truth of $Q$.
@@ -40,7 +39,7 @@ $\conf{\formula}{\intervals}(a) = \{(y\leq-5 \land x \leq -4),
 Now, an abstract abductive transformer for $\formula=(x=y+1\; \wedge x \geq 0)$ 
 is given by, $\abd{\formula}{\intervals}(Q)=(y \leq -2 \land x < 0)$, 
 which clearly underapproximates $\conf{\formula}{\intervals}$ as well as 
-strictly generalizes the reason for $\bot$. 
+strictly generalizes the reason for $Q$. 
 %
 
 
