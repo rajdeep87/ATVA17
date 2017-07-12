@@ -1,8 +1,9 @@
 %!PS-Adobe-3.0 EPSF-3.0
 %%Title: oct_implgraph.pstex
-%%Creator: fig2dev Version 3.2.6
-%%CreationDate: Mon Jul 10 23:15:42 2017
-%%BoundingBox: 0 0 556 204
+%%Creator: fig2dev Version 3.2 Patchlevel 5e
+%%CreationDate: Wed Jul 12 09:37:52 2017
+%%For: kroening@Daniels-New-MacBook-Pro.local (kroening)
+%%BoundingBox: 0 0 562 204
 %Magnification: 1.0000
 %%EndComments
 %%BeginProlog
@@ -11,8 +12,37 @@ $F2psDict begin
 $F2psDict /mtrx matrix put
 /col-1 {0 setgray} bind def
 /col0 {0.000 0.000 0.000 srgb} bind def
+/col1 {0.000 0.000 1.000 srgb} bind def
+/col2 {0.000 1.000 0.000 srgb} bind def
+/col3 {0.000 1.000 1.000 srgb} bind def
 /col4 {1.000 0.000 0.000 srgb} bind def
+/col5 {1.000 0.000 1.000 srgb} bind def
+/col6 {1.000 1.000 0.000 srgb} bind def
 /col7 {1.000 1.000 1.000 srgb} bind def
+/col8 {0.000 0.000 0.560 srgb} bind def
+/col9 {0.000 0.000 0.690 srgb} bind def
+/col10 {0.000 0.000 0.820 srgb} bind def
+/col11 {0.530 0.810 1.000 srgb} bind def
+/col12 {0.000 0.560 0.000 srgb} bind def
+/col13 {0.000 0.690 0.000 srgb} bind def
+/col14 {0.000 0.820 0.000 srgb} bind def
+/col15 {0.000 0.560 0.560 srgb} bind def
+/col16 {0.000 0.690 0.690 srgb} bind def
+/col17 {0.000 0.820 0.820 srgb} bind def
+/col18 {0.560 0.000 0.000 srgb} bind def
+/col19 {0.690 0.000 0.000 srgb} bind def
+/col20 {0.820 0.000 0.000 srgb} bind def
+/col21 {0.560 0.000 0.560 srgb} bind def
+/col22 {0.690 0.000 0.690 srgb} bind def
+/col23 {0.820 0.000 0.820 srgb} bind def
+/col24 {0.500 0.190 0.000 srgb} bind def
+/col25 {0.630 0.250 0.000 srgb} bind def
+/col26 {0.750 0.380 0.000 srgb} bind def
+/col27 {1.000 0.500 0.500 srgb} bind def
+/col28 {1.000 0.630 0.630 srgb} bind def
+/col29 {1.000 0.750 0.750 srgb} bind def
+/col30 {1.000 0.880 0.880 srgb} bind def
+/col31 {1.000 0.840 0.000 srgb} bind def
 
 end
 
@@ -52,8 +82,8 @@ end
 
 /pageheader {
 save
-newpath 0 204 moveto 0 0 lineto 556 0 lineto 556 204 lineto closepath clip newpath
-9.7 392.1 translate
+newpath 0 204 moveto 0 0 lineto 562 0 lineto 562 204 lineto closepath clip newpath
+11.7 392.1 translate
 1 -1 scale
 $F2psBegin
 10 setmiterlimit
@@ -92,16 +122,51 @@ gs col0 s gr
 % Polyline
 7.500 slw
 gs  clippath
-8483 3684 m 8625 3618 l 8600 3564 l 8458 3630 l 8458 3630 l 8580 3607 l 8483 3684 l cp
+8483 3684 m 8621 3620 l 8596 3566 l 8458 3630 l 8458 3630 l 8580 3607 l 8483 3684 l cp
 eoclip
 n 7425 4140 m
  8595 3600 l gs col0 s gr gr
 
 % arrowhead
 n 8483 3684 m 8580 3607 l 8458 3630 l 8483 3684 l  cp gs 0.00 setgray ef gr  col0 s
+% Polyline
+gs  clippath
+5759 4305 m 5910 4305 l 5910 4245 l 5759 4245 l 5759 4245 l 5879 4275 l 5759 4305 l cp
+eoclip
+n 5580 4275 m
+ 5895 4275 l gs col0 s gr gr
+
+% arrowhead
+n 5759 4305 m 5879 4275 l 5759 4245 l 5759 4305 l  cp gs 0.00 setgray ef gr  col0 s
+% Polyline
+gs  clippath
+6614 4305 m 6765 4305 l 6765 4245 l 6614 4245 l 6614 4245 l 6734 4275 l 6614 4305 l cp
+eoclip
+n 6435 4275 m
+ 6750 4275 l gs col0 s gr gr
+
+% arrowhead
+n 6614 4305 m 6734 4275 l 6614 4245 l 6614 4305 l  cp gs 0.00 setgray ef gr  col0 s
+% Arc
+30.000 slw
+ [120] 0 sd
+n 2676.5 3392.6 477.0 -127.6689 114.9885 arcn
+gs col0 s gr
+ [] 0 sd
+% Arc
+7.500 slw
+gs  clippath
+5227 5361 m 5141 5485 l 5191 5519 l 5277 5395 l 5277 5395 l 5184 5477 l 5227 5361 l cp
+eoclip
+n 5023.6 5301.8 241.5 -63.8689 51.1886 arc
+gs col4 s gr
+ gr
+
+% arrowhead
+n 5227 5361 m 5184 5477 l 5277 5395 l 5227 5361 l  cp gs col4 1.00 shd ef gr  col4 s
 % Arc
 gs  clippath
-4850 5264 m 4844 5108 l 4784 5111 l 4790 5267 l 4790 5267 l 4816 5146 l 4850 5264 l cp
+4850 5264 m 4844 5113 l 4784 5116 l 4790 5267 l 4790 5267 l 4816 5146 l 4850 5264 l cp
 eoclip
 n 4606.3 5205.3 221.9 118.6265 -19.8291 arcn
 gs col4 s gr
@@ -111,7 +176,52 @@ gs col4 s gr
 n 4850 5264 m 4816 5146 l 4790 5267 l 4850 5264 l  cp gs col4 1.00 shd ef gr  col4 s
 % Polyline
 gs  clippath
-1819 5928 m 1964 5870 l 1942 5814 l 1797 5872 l 1797 5872 l 1920 5856 l 1819 5928 l cp
+2564 3630 m 2715 3630 l 2715 3570 l 2564 3570 l 2564 3570 l 2684 3600 l 2564 3630 l cp
+eoclip
+n 1530 3600 m
+ 2700 3600 l gs col0 s gr gr
+
+% arrowhead
+n 2564 3630 m 2684 3600 l 2564 3570 l 2564 3630 l  cp gs 0.00 setgray ef gr  col0 s
+% Polyline
+gs  clippath
+3869 3630 m 4020 3630 l 4020 3570 l 3869 3570 l 3869 3570 l 3989 3600 l 3869 3630 l cp
+eoclip
+n 3690 3600 m
+ 4005 3600 l gs col0 s gr gr
+
+% arrowhead
+n 3869 3630 m 3989 3600 l 3869 3570 l 3869 3630 l  cp gs 0.00 setgray ef gr  col0 s
+% Polyline
+n 1260 4725 m 2295 4725 l 2295 5085 l 1260 5085 l
+ cp gs col0 s gr 
+% Polyline
+n 2295 4725 m 3330 4725 l 3330 5085 l 2295 5085 l
+ cp gs col0 s gr 
+% Polyline
+n 3330 4725 m 4365 4725 l 4365 5085 l 3330 5085 l
+ cp gs col0 s gr 
+% Polyline
+gs  clippath
+4450 4236 m 4599 4262 l 4609 4202 l 4460 4177 l 4460 4177 l 4574 4227 l 4450 4236 l cp
+eoclip
+n 1395 3690 m
+ 4590 4230 l gs col0 s gr gr
+
+% arrowhead
+n 4450 4236 m 4574 4227 l 4460 4177 l 4450 4236 l  cp gs 0.00 setgray ef gr  col0 s
+% Polyline
+gs  clippath
+4787 4110 m 4894 4216 l 4936 4174 l 4830 4067 l 4830 4067 l 4894 4174 l 4787 4110 l cp
+eoclip
+n 4410 3690 m
+ 4905 4185 l gs col0 s gr gr
+
+% arrowhead
+n 4787 4110 m 4894 4174 l 4830 4067 l 4787 4110 l  cp gs 0.00 setgray ef gr  col0 s
+% Polyline
+gs  clippath
+1819 5928 m 1960 5872 l 1937 5816 l 1797 5872 l 1797 5872 l 1920 5856 l 1819 5928 l cp
 eoclip
 n 1485 6030 m
  1935 5850 l gs col0 s gr gr
@@ -120,7 +230,7 @@ n 1485 6030 m
 n 1819 5928 m 1920 5856 l 1797 5872 l 1819 5928 l  cp gs 0.00 setgray ef gr  col0 s
 % Polyline
 gs  clippath
-7501 5382 m 7356 5440 l 7378 5496 l 7523 5438 l 7523 5438 l 7401 5455 l 7501 5382 l cp
+7501 5382 m 7360 5438 l 7383 5494 l 7523 5438 l 7523 5438 l 7401 5455 l 7501 5382 l cp
 eoclip
 n 7836 5281 m
  7386 5461 l gs col0 s gr gr
@@ -148,86 +258,6 @@ n 1350 5490 m 2385 5490 l 2385 5850 l 1350 5850 l
 % Polyline
 n 2385 5490 m 3420 5490 l 3420 5850 l 2385 5850 l
  cp gs col0 s gr 
-% Polyline
-gs  clippath
-5759 4305 m 5915 4305 l 5915 4245 l 5759 4245 l 5759 4245 l 5879 4275 l 5759 4305 l cp
-eoclip
-n 5580 4275 m
- 5895 4275 l gs col0 s gr gr
-
-% arrowhead
-n 5759 4305 m 5879 4275 l 5759 4245 l 5759 4305 l  cp gs 0.00 setgray ef gr  col0 s
-% Polyline
-gs  clippath
-6614 4305 m 6770 4305 l 6770 4245 l 6614 4245 l 6614 4245 l 6734 4275 l 6614 4305 l cp
-eoclip
-n 6435 4275 m
- 6750 4275 l gs col0 s gr gr
-
-% arrowhead
-n 6614 4305 m 6734 4275 l 6614 4245 l 6614 4305 l  cp gs 0.00 setgray ef gr  col0 s
-% Arc
-30.000 slw
- [120] 0 sd
-n 2676.5 3392.6 477.0 -127.6689 114.9885 arcn
-gs col0 s gr
- [] 0 sd
-% Arc
-7.500 slw
-gs  clippath
-5227 5361 m 5138 5489 l 5188 5523 l 5277 5395 l 5277 5395 l 5184 5477 l 5227 5361 l cp
-eoclip
-n 5023.6 5301.8 241.5 -63.8689 51.1886 arc
-gs col4 s gr
- gr
-
-% arrowhead
-n 5227 5361 m 5184 5477 l 5277 5395 l 5227 5361 l  cp gs col4 1.00 shd ef gr  col4 s
-% Polyline
-gs  clippath
-2564 3630 m 2720 3630 l 2720 3570 l 2564 3570 l 2564 3570 l 2684 3600 l 2564 3630 l cp
-eoclip
-n 1530 3600 m
- 2700 3600 l gs col0 s gr gr
-
-% arrowhead
-n 2564 3630 m 2684 3600 l 2564 3570 l 2564 3630 l  cp gs 0.00 setgray ef gr  col0 s
-% Polyline
-gs  clippath
-3869 3630 m 4025 3630 l 4025 3570 l 3869 3570 l 3869 3570 l 3989 3600 l 3869 3630 l cp
-eoclip
-n 3690 3600 m
- 4005 3600 l gs col0 s gr gr
-
-% arrowhead
-n 3869 3630 m 3989 3600 l 3869 3570 l 3869 3630 l  cp gs 0.00 setgray ef gr  col0 s
-% Polyline
-n 1260 4725 m 2295 4725 l 2295 5085 l 1260 5085 l
- cp gs col0 s gr 
-% Polyline
-n 2295 4725 m 3330 4725 l 3330 5085 l 2295 5085 l
- cp gs col0 s gr 
-% Polyline
-n 3330 4725 m 4365 4725 l 4365 5085 l 3330 5085 l
- cp gs col0 s gr 
-% Polyline
-gs  clippath
-4450 4236 m 4604 4262 l 4614 4203 l 4460 4177 l 4460 4177 l 4574 4227 l 4450 4236 l cp
-eoclip
-n 1395 3690 m
- 4590 4230 l gs col0 s gr gr
-
-% arrowhead
-n 4450 4236 m 4574 4227 l 4460 4177 l 4450 4236 l  cp gs 0.00 setgray ef gr  col0 s
-% Polyline
-gs  clippath
-4787 4110 m 4897 4220 l 4940 4177 l 4830 4067 l 4830 4067 l 4894 4174 l 4787 4110 l cp
-eoclip
-n 4410 3690 m
- 4905 4185 l gs col0 s gr gr
-
-% arrowhead
-n 4787 4110 m 4894 4174 l 4830 4067 l 4787 4110 l  cp gs 0.00 setgray ef gr  col0 s
 % here ends figure;
 pagefooter
 showpage
