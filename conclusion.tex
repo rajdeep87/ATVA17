@@ -1,25 +1,24 @@
 \section{Conclusions}
 
-In this paper, we present a general algorithmic framework for lifting the
-model search and conflict analysis procedures in satisfiability solvers to
-program analysis.  We embody these techniques in a tool, ACDLP, for
-automatic bounded safety verification of C programs over a template
-polyhedra abstract domains.
+We have present a general algorithmic framework for lifting the
+model search and conflict analysis procedures in DPLL-style satisfiability
+solvers to program analysis.  We embody these techniques in a tool, ACDLP,
+for automatic bounded safety verification of C programs over a template
+polyhedra abstract domain.
 
-We present an {\em abstract model search} procedure that uses a
+We present an \emph{abstract model search} procedure that uses a
 parameterised abstract transformer to flexibly control the precision and
 efficiency of the deductions in the template polyhedra abstract domain.  The
 underlying expressivity of the abstract domain helps our decision heuristics
 to exploit the high-level structure of the program for making effective
-decisions.  The {\em abstract conflict analysis} procedure learns abstract
+decisions.  Our \emph{abstract conflict analysis} learns abstract
 transformers over a given template following a UIP computation. 
-Experimental evaluation over a range of benchmarks shows~20x reduction in
-the total number of {\em decisions}, {\em propagations}, {\em conflicts} and
-{\em backtracking} iterations compared to CBMC.  Moreover, ACDLP is~1.5x
-faster than CBMC.  Compared to Astr{\'e}e, ACDLP solves twice as many
-benchmarks and has much higher precision.  In the future, we plan to extend
-our framework to unbounded verification through invariant generation.
-
+Experimental evaluation over a range of benchmarks shows a~20x reduction in
+the total number of \emph{decisions}, \emph{propagations}, \emph{conflicts}
+and \emph{backtracking} iterations compared to CBMC.  Moreover, ACDLP
+is~1.5x faster than CBMC.  Compared to Astr{\'e}e, ACDLP solves twice as
+many benchmarks and has much higher precision.  In the future, we plan to
+extend our framework to unbounded verification through invariant generation.
 
 %able to exploit the expressivity of richer abstract domains 
 %as well as the precision of the CDCL architecture.  \tmcmt{I don't understand this ``as well as'' business. Do we mean ``without giving up the precision of...''?}
