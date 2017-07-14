@@ -44,14 +44,14 @@ which clearly underapproximates $\conf{\formula}{\intervals}$ as well as
 strictly generalizes the reason for $Q$. 
 %
 
-
-The main idea of abductive  reasoning is to iteratively replace an abstract
-element $s$ in the conflict reason by a partial assignment that is sufficient 
+The main idea of abductive reasoning is to iteratively replace an abstract
+element~$s$ in the conflict reason by a partial assignment that is sufficient 
 to infer~$s$.  Conflict abduction is performed by obtaining cuts through markings 
-in the trail $\trail$, by the application of an abstract Unique Implication Point (UIP) 
+in the trail $\trail$ using an abstract Unique Implication Point (UIP) 
 search algorithm~\cite{cdcl}.  Every cut is a reason for a conflict.  The UIP
 search can be understood as graph cutting in an Abstract Conflict
 Graph, which is defined next. 
+%
 \begin{definition}
   An Abstract Conflict Graph (ACG) is a directed acyclic graph in
   which the vertices are defined by deduced elements (including a
@@ -65,13 +65,13 @@ Graph, which is defined next.
     elements of $a$, whose variable set has non-empty intersection
     with the variable set of $\constraint$, to $u$.  }
 \end{definition}
-%
+
 \begin{figure}[t]
 \centering
 \scalebox{.6}{\import{figures/}{oct_implgraph.pspdftex}}
-\caption{\label{uip}Finding the Abstract UIP in the Octagon Domain}
+\caption{\label{uip}Finding the Abstract UIP in the octagon domain}
 \end{figure}  
-%
+
 \noindent \textbf{Abstract UIP Search}
 An abstract UIP is a node in the ACG that must be traversed on every path between a 
 decision node and the conflict. An abstract UIP cut is necessary to ensure that
