@@ -16,7 +16,7 @@
 }}}}
 \put(136,-1951){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$\wedge$ (x-z $\leq$ 5)}%
 }}}}
-\put(136,-2176){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$\wedge$ (x-z $\geq$ -30)}%
+\put(136,-2176){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$\wedge$ (x-z $\geq$ $-$30)}%
 }}}}
 \put(136,-2401){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$\wedge$ (-5 $\leq$ x+z $\leq$ 30)}%
 }}}}
