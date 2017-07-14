@@ -83,10 +83,10 @@ Reaching $(\mathrm{Error}{:}\;\bot)$ is analogous to reaching a conflict in
 a propositional SAT solver.  At this point, a clause-learning SAT solver
 learns a reason for the conflict and backtracks to a level such that the
 learnt clause is \textit{unit}.  By a similar process, ACDLP learns that
-$c=[0,0]$.  That is, all error traces must satisfy $(c \neq 1)$.  The
+$c=[0,0]$.  That is, all error traces must satisfy $c \neq 1$.  The
 analysis discards all interval constraints that lead to the conflict and
 backtracks to DL0.  ACDLP then performs interval analysis with the learnt
-clause $(c \neq 1)$.  This also leads to a conflict, as shown in ACG3.  The
+clause $c \neq 1$.  This also leads to a conflict, as shown in ACG3.  The
 analysis cannot backtrack further and so terminates, proving the program
 safe.  Thus, {\em decision} and {\em clause learning} are used to infer the
 partitions necessary for a precise analysis.  Alternatively, the octagon
