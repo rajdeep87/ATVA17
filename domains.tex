@@ -159,14 +159,15 @@ $\abstransset=\{\abstrans{\domain}{\constraint}\mid
 
 
 %-------------------------------------------------------------------------------
-\subsection{Properties of Abstract Domains}
+\subsection{Precise Complementation in Abstract Domains}
 %-------------------------------------------------------------------------------
-%
+
 An important property of a clause-learning SAT solver is that each
-non-singleton element of the partial assignment domain can be 
-decomposed into a set of \textit{precisely complementable} singleton
-elements~\cite{dhk2013-popl}.  This property is necessary to learn elements that guide the model search away from the
-conflicting region of the search space.  
+non-singleton element of the partial assignment domain can be decomposed
+into a set of \textit{precisely complementable} singleton
+elements~\cite{dhk2013-popl}.  This property is necessary to learn elements
+that guide the model search away from the conflicting region of the search
+space.
 %
 Most numerical abstract domains, such as intervals and octagons, lack
 complements in general: not every domain element has a
