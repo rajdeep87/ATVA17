@@ -58,20 +58,20 @@ analysis using Astr{\'e}e shows high degree of imprecision.
 
 \noindent \textbf{ACDLP versus CBMC}
 Fig.~\ref{fig:results} presents a comparison between CBMC
-and ACDLP.  Fig.~\ref{fig:results}(a) clearly shows that the SAT based analysis 
+and ACDLP.  Fig.~\ref{fig:results}(a) clearly shows that the SAT-based analysis 
 made significantly more decisions compared to ACDLP for all the benchmarks. 
 The points on the extreme right below the diagonal in
-Fig.~\ref{fig:results}(b) show that the number of propagations in the SAT based 
+Fig.~\ref{fig:results}(b) show that the number of propagations in the SAT-based 
 analysis is maximal for benchmarks that exhibit relational behaviour.  These
-benchmarks are solved by octagon domain in ACDLP.  We see a reduction of at 
+benchmarks are solved by the octagon domain in ACDLP.  We see a reduction of at 
 least two orders of magnitude in the total number of decisions, propagations 
 and conflicts compared to analysis using CBMC.  
 
-Out of 85 benchmarks, SAT based analysis could prove only 26
+Out of 85 benchmarks, SAT-based analysis could prove only 26
 benchmarks without any restarts.  The solver was restarted in the other 59 
 cases to avoid spending too much time in ``hopeless'' branches.  By contrast, 
 ACDLP solved all 85 benchmarks without restarts.  
-The runtime comparison between ACDLP and CBMC are shown in 
+The runtime comparison between ACDLP and CBMC is shown in 
 Figure~\ref{fig:runtimes}.  ACDLP is~1.5X faster than CBMC. 
 The superior performance of ACDLP is attributed to the decision heuristics, 
 which exploit the high-level structure of the program, combined with the 
@@ -93,7 +93,7 @@ shows a high degree of imprecision (marked as timeout in
 Figure~\ref{fig:runtimes}).  Astr{\'e}e reported~53 false alarms among~85
 benchmarks.  By contrast, the analysis using ACDLP produces correct results
 for~81 benchmarks.  ACDLP times out for~4 benchmarks.  Clearly, ACDLP has
-higher precision than Astr{\'e}e.  Detailed comparison between ACDLP, 
+higher precision than Astr{\'e}e.  A detailed comparison between ACDLP, 
 CBMC and Astr{\'e}e is available at~\cite{extended}.
 %
 %url{http://www.cprover.org/acdcl/}.
@@ -103,5 +103,5 @@ CBMC and Astr{\'e}e is available at~\cite{extended}.
 Our experimental evaluation suggests that ACDLP can be seen as a
 technique to improve the efficiency of SAT-based BMC.  Additionally, ACDLP can
 also be perceived as an automatic way to improve the precision of conventional
-abstract interpretation over non-distributive lattices through automatic partition 
-generation techniques such as decisions and transformer learning.
+abstract interpretation over non-distributive lattices through automatic
+partitioning techniques such as decisions and transformer learning.

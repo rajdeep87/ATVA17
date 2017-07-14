@@ -1,18 +1,19 @@
 \section{Abstract Conflict Analysis for Template Polyhedra}\label{sec:conflict}
-%
+
 Propositional conflict analysis with FIRST-UIP~\cite{cdcl} can be seen as
 abductive reasoning that under-approximates a set of models that do not
 satisfy a formula~\cite{sas12,dhk2013-popl}.  Thus, we view abduction as 
-De Morgan dual of deduction whose result don't require to be consistent with respect
+De Morgan dual of deduction whose result does not need to be consistent with respect
 to a background theory.  Below, we present an abstract
 conflict analysis procedure, $\analyzeconflict$ of
 Algorithm~\ref{Alg:acdcl}, that uses a domain-specific abductive transformer
 for effective learning.  A~conflict analysis procedure involves two steps:
 {\em abduction} and {\em heuristic choice for generalisation}.  Abduction
-infers possible generalised reasons for a conflict which is followed by
+infers possible generalised reasons for a conflict, which is followed by
 heuristically selecting a generalisation.  Below, we define a global 
 conflict transformer that gives a set of models that do not satisfy a 
-formula.  
+formula.
+%
 \begin{definition}
   Given a formula $\formula$, a downwards closed set of abstract elements $Q$,
   and domain $\domain$, $\conf{\formula}{\domain}(Q) = \{u \in \domain \mid u \in
@@ -38,7 +39,7 @@ $\conf{\formula}{\intervals}(Q) = \{(y\leq-5 \land x \leq -4),\linebreak
 %
 Now, an abstract abductive transformer for $\formula$ 
 %=(x=y+1\; \wedge x \geq 0)$ 
-is given by, $\abd{\formula}{\intervals}(Q)=(y \leq -2 \land x < 0)$, 
+is given by $\abd{\formula}{\intervals}(Q)=(y \leq -2 \land x < 0)$, 
 which clearly underapproximates $\conf{\formula}{\intervals}$ as well as 
 strictly generalizes the reason for $Q$. 
 %
@@ -46,10 +47,10 @@ strictly generalizes the reason for $Q$.
 
 The main idea of abductive  reasoning is to iteratively replace an abstract
 element $s$ in the conflict reason by a partial assignment that is sufficient 
-to infer $s$.  Conflict abduction is performed by obtaining cuts through markings 
-in the trail $\trail$, by the application of abstract Unique Implication Point (UIP) 
-search algorithm~\cite{cdcl}.  Every cut is a reason for conflict.  The UIP
-search can be understood through graph cutting in an Abstract Conflict
+to infer~$s$.  Conflict abduction is performed by obtaining cuts through markings 
+in the trail $\trail$, by the application of an abstract Unique Implication Point (UIP) 
+search algorithm~\cite{cdcl}.  Every cut is a reason for a conflict.  The UIP
+search can be understood as graph cutting in an Abstract Conflict
 Graph, which is defined next. 
 \begin{definition}
   An Abstract Conflict Graph (ACG) is a directed acyclic graph in
@@ -84,15 +85,15 @@ viewed to represent an ACG, given in Fig.~\ref{uip}, that records the
 sequence of deductions in the octagon domain that are inferred
 from a decision $x {\leq} 0$ for the formula $\formula$.  The arrows (in
 red) indicate the relationship between the reason trail and propagation trail
-in bottom of Fig.~\ref{uip}.  For the partial abstract value,
+at the bottom of Fig.~\ref{uip}.  For the partial abstract value,
 $\absval=(x\leq0 \wedge x+z\leq4 \wedge z\leq4)$, obtained from the trail,
 the result of the abstract deduction transformer is
 $\abstrans{\octagons}{y=(x+z)/2}(\absval)=(x+y\leq2 \wedge y\leq2 \wedge y+z\leq6)$. 
 A~conflict ($\bot$) is reached for the decision ${x{\leq}0}$.  Note that
-there exist multiple incomparable reasons for conflict, marked as {\em cut~0}
+there exist multiple incomparable reasons for the conflict, marked as {\em cut~0}
 and {\em cut~1} in Fig.~\ref{uip}.  Here, cut~0 is the first UIP (node closest
-to conflict node).  Choosing cut~0 yields a learnt clause $(y+z>6)$, which is
-obtained by negating the reason for conflict.  The abstract UIP algorithm
+to conflict node).  Choosing cut~0 yields a learnt clause $y+z>6$, which is
+obtained by negating the reason for the conflict.  The abstract UIP algorithm
 returns a learnt transformer $\aunit$, which is described next.\\
 %
 
@@ -119,7 +120,7 @@ irreducibles $\conflictset \subseteq \domain$ such that $\bigsqcap
  \end{array}\right.
 \]
 %
-Rule (1) shows $\aunit$ returns $\bot$ since $\absval \sqsubseteq \bigsqcap
+Rule (1) shows $\aunit$ returns $\bot$ when $\absval \sqsubseteq \bigsqcap
 \conflictset$ is conflicting.  Rule (2) of $\aunit$ infers a valid meet
 irreducible, which implies that $\conflictset$ is unit.  Rule (3) of
 $\aunit$ returns $\top$ which implies that the learnt clause is not {\em
