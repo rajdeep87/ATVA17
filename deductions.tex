@@ -92,7 +92,7 @@ Model search in a SAT solver has two steps: {\em deductions}, which are
 repeated application of the unit rule (also called Boolean Constraint
 Propagation, or BCP), to refine current partial assignments, and {\em
 decisions} to heuristically guess a value for an unassigned literal.  BCP
-can be seen to compute greatest fixed point over the partial assignment
+can be seen to compute the greatest fixed point over the partial assignment
 domain~\cite{dhk2013-popl}.  Below, we present an abstract model search
 procedure that computes a greatest fixed point over abstract
 transformers~$\abstrans{\domain}{\constraint}$.
@@ -131,7 +131,7 @@ The use of a subdomain serves two purposes:
   {\em forward}, {\em backward} or {\em multi-way} direction, which 
   in turn affects the analysis precision, and 
 %\item
-  b) It makes deductions more efficient, for example by performing lazy closure
+  b) it makes deductions more efficient, for example by performing lazy closure
   in template polyhedra domain. 
   %\rmcmt{For space reasons, we refer the reader to Appendix~\ref{appendix:lazyclosure} 
   %for details of the lazy closure operation.} 
@@ -335,7 +335,7 @@ to include the variables in $\newdeductions$ (shown in line~13).
 %
 \Omit{
 If $\bot$ is deduced we return \textsf{conflict}.
-Otherwise, when eventually a fixed point has been reached, i.e.\ the worklist is empty, then the abstract value $\abs(\trail)$ is checked whether it is 
+Otherwise, when eventually a fixed point has been reached, i.e., the worklist is empty, then the abstract value $\abs(\trail)$ is checked whether it is 
 $\gamma$-complete~\cite{dhk2013-popl}. 
 %
 It is $\gamma$-complete if all concrete values in $\gamma(\abs(\trail))$ satisfy $\formula$.
@@ -343,7 +343,7 @@ Otherwise, the algorithm returns \textsf{unknown} and ACDLP makes a new decision
 
 If $\abstransel{\subdomain}$ deduces $\bot$, then 
 the procedure $\mathit{deduce}$ returns \textsf{conflict} (shown in line~8).
-Otherwise, when a fixed-point is reached, i.e.~the worklist is empty, we check whether
+Otherwise, when a fixed-point is reached, i.e.,~the worklist is empty, we check whether
 the abstract transformers $\abstransset$ are $\gamma$-complete~\cite{dhk2013-popl} for the current abstract value $\abs(\trail)$ 
 (shown in line~15).
 %
