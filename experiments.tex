@@ -1,5 +1,5 @@
 \section{Experimental Results}
-%
+
 We have implemented ACDLP for bounded safety verification of C programs.  
 ACDLP is implemented in C++ on top of the
 \textsc{CPROVER}~\cite{cprover} framework as an extension of 2LS~\cite{2ls}
@@ -10,8 +10,6 @@ domain handles all C operators, including bit-wise ones, and supports
 precise complementation of meet irreducibles, which is necessary for
 conflict-driven learning.  Our tool and benchmarks are available 
 at~\url{http://www.cprover.org/acdcl/}.
-%
-
 
 We verified a total of~85 ANSI-C benchmarks.  These are derived from:
 (1)~the bit-vector regression category in SV-COMP'16; (2)~ANSI-C models of
@@ -23,7 +21,6 @@ intensive programs with nested loops containing relational properties.
 %operations, which are handled out-of-the-box by our domain implementation. 
 All the programs with bounded loops are completely unrolled before
 analysis.  
-
 
 We~compare ACDLP with the state-of-the-art SAT-based bounded model checker
 CBMC (\cite{cbmc}, version 5.5) and a commercial static analysis tool,
@@ -59,7 +56,7 @@ analysis using Astr{\'e}e shows high degree of imprecision.
 \noindent \textbf{ACDLP versus CBMC}
 Fig.~\ref{fig:results} presents a comparison between CBMC
 and ACDLP.  Fig.~\ref{fig:results}(a) clearly shows that the SAT-based analysis 
-made significantly more decisions compared to ACDLP for all the benchmarks. 
+makes significantly more decisions than ACDLP for all the benchmarks. 
 The points on the extreme right below the diagonal in
 Fig.~\ref{fig:results}(b) show that the number of propagations in the SAT-based 
 analysis is maximal for benchmarks that exhibit relational behaviour.  These
