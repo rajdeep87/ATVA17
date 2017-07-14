@@ -157,8 +157,8 @@ $(x=y) \lor (x=-y)$.
 \noindent \textbf{AI versus ACDLP.}
 Forward AI in the octagon domain infers 
 the octagonal constraint
-$\mathrm{Error}{:}\;(p\geq0 \wedge p+q\geq0 \wedge q\geq0 \wedge p+x\geq0 \wedge 
-p-x\geq0 \wedge\allowbreak q+y\geq0 \wedge\allowbreak q-y\geq0)$. Clearly this is too 
+$\mathrm{Error}{:}\; p\geq0 \wedge p+q\geq0 \wedge q\geq0 \wedge p+x\geq0 \wedge 
+p-x\geq0 \wedge\allowbreak q+y\geq0 \wedge\allowbreak q-y\geq0$. Clearly this is too 
 imprecise to prove safety. 
 %
 The octagonal analysis in ACDLP is illustrated by the ACGs in
@@ -169,7 +169,7 @@ DL2, followed by forward propagation that infers $y<0$ at node~$n_5$.  This
 subsequently leads to safety ($\mathrm{Error}{:}\;\bot$), as shown in ACG2. 
 The analysis learns the reason for the conflict, discards all deductions in
 ACG2 and backtracks to DL1.  Octagon analysis is run with the learnt
-constraint $(x\geq0)$ and this infers $y\geq0$ at node~$n_5$, as shown in ACG3. 
+constraint $x\geq0$ and this infers $y\geq0$ at node~$n_5$, as shown in ACG3. 
 This also leads to safety ($\mathrm{Error}{:}\;\bot$).  The analysis now
 makes a new decision $x=-y$ at DL1.  The procedure is repeated leading to
 results shown in ACG4, ACG5, and ACG6.  Clearly, the decisions $x=-y$ and
