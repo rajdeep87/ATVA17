@@ -1,17 +1,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%% scatter plots %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[t]
   \centering
-\begin{tabular}{@{\hspace{-1.5em}}c@{\hspace{1em}}c}
-\begin{tikzpicture}[scale=0.60]
-	\begin{loglogaxis} [xmin=0.1,xmax=4000, ymin=0.1, ymax=4000, xlabel= SAT
-    (Decisions),
-			ylabel=ACDLP (Decisions), 
+\begin{tabular}{@{\hspace{-0.5em}}c@{\hspace{1.5em}}c}
+\begin{tikzpicture}[scale=1]
+\begin{loglogaxis} [xmin=0.1,xmax=4000, ymin=0.1, ymax=4000, xlabel= SAT (Decisions),
+			ylabel=ACDLP (Decisions),
+                        width=0.45\linewidth,
 			legend pos = north west,
 			%legend style={at={(0.8,0.15)},
 			%anchor=north,legend columns=-1 },
 			]
 \addplot [only marks,scatter,point meta=explicit symbolic,
-	scatter/classes={s={mark=square,mark size=2.5},u={mark=triangle*,blue,mark size=2.5}},] 
+	scatter/classes={s={mark=square,mark size=1.5},u={mark=triangle*,blue,mark size=1.5}},] 
 	table [meta=label] {plotdata/scatter-decision.dat};
 	\legend{Safe,Unsafe}
 \addplot [domain=.1:4000] {x};
@@ -26,17 +26,17 @@
 \end{loglogaxis}
 \end{tikzpicture}
  &
-\begin{tikzpicture}[scale=0.60]
+\begin{tikzpicture}[scale=1]
   \centering
-	\begin{loglogaxis} [xmin=.1,xmax=83000, ymin=.1, ymax=83000, xlabel=SAT
-    (Propagations),
+	\begin{loglogaxis} [xmin=.1,xmax=83000, ymin=.1, ymax=83000, xlabel=SAT (Propagations),
 			ylabel=ACDLP (Propagations),
+                        width=0.45\linewidth,
 			legend pos = north west,
       %legend style={at={(0.8,0.15)},
 			%anchor=north,legend columns=-1 },
 			]
 \addplot [only marks,scatter,point meta=explicit symbolic,
-	scatter/classes={s={mark=square,mark size=2.5},u={mark=triangle*,blue,mark size=2.5}},] 
+	scatter/classes={s={mark=square,mark size=1.5},u={mark=triangle*,blue,mark size=1.5}},] 
 	table [meta=label] {plotdata/scatter-propagation.dat};
 	\legend{Safe,Unsafe}
 \addplot [domain=.1:83000] {x};
@@ -51,6 +51,6 @@
 (a) & (b)
 \end{tabular}
 \caption{\label{fig:results}
-Comparison between SAT-based BMC and ACDLP: number of decisions and propagations}
+Comparing SAT-based BMC and ACDLP: number of decisions and propagations}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
