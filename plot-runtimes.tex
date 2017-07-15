@@ -1,17 +1,16 @@
 \begin{figure}[t]
   \centering
-  \begin{tikzpicture}[scale=0.60]
+  \begin{tikzpicture}[scale=1]
 
 \pgfplotscreateplotcyclelist{markstyles}{%
-solid, every mark/.append style={solid, fill=white}, mark=square*, mark size=2.5\\%
-solid, every mark/.append style={solid, blue}, mark=triangle*,mark size=2.5\\%
-solid, every mark/.append style={solid, fill=black}, mark=otimes*,, mark
-    size=2.5\\%
+solid, every mark/.append style={solid, fill=white}, mark=square*, mark size=1.5\\%
+solid, every mark/.append style={solid, blue}, mark=triangle*,mark size=1.5\\%
+solid, every mark/.append style={solid, fill=black}, mark=otimes*, mark size=1.5\\%
 }
     
  	%axis
   \begin{axis}[
-    width=\linewidth,
+    width=\linewidth, height=4.5cm,
     xlabel={Benchmark Number},
     ylabel={Time (seconds)},
     domain = 1:85,
@@ -19,11 +18,10 @@ solid, every mark/.append style={solid, fill=black}, mark=otimes*,, mark
     ymin=0, ymax=200,
     %ytick={0,20,...,200},
     xtick={1,5,10,...,85},
-    width=20cm, height= 7cm,
     ymode = log,
     %log basis x={2},
     %xticklabel=\pgfmathparse{2^\tick}\pgfmathprintnumber{\pgfmathresult},
-    legend pos = north west,
+    legend pos = south east,
     grid = major,
     major grid style={line width=.2pt,draw=gray!50},
     cycle list name=markstyles
